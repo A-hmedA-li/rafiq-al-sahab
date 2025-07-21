@@ -14,6 +14,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
 import Image from "next/image"
 
+
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
   animate: { opacity: 1, y: 0 },
@@ -78,7 +79,9 @@ const portfolioItems = [
 
 export default function HomePage() {
   return (
+
     <div className="min-h-screen bg-gradient-to-br from-white via-[#A5D5A9]/10 to-[#78C487]/20 dark:from-[#171717] dark:via-[#404544]/20 dark:to-[#78C487]/10 ">
+ 
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-20 pb-16 px-4">
         <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=1200')] opacity-5"></div>

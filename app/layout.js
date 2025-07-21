@@ -3,7 +3,7 @@ import "./globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
-
+import ChatButton from "@/components/chatButton"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata = {
@@ -33,6 +33,7 @@ export default function RootLayout({ children }) {
         >
           <Navigation />
           <main>{children}</main>
+          <ChatButton />
           <Footer />
         </ThemeProvider>
       </body>
