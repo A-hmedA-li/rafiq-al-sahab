@@ -241,6 +241,32 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-8"
           >
+
+             {/* Booking Widget */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-xl font-bold text-[#404544] dark:text-white">
+                  احجز استشارة مجانية
+                </CardTitle>
+                <p className="text-[#404544]/70 dark:text-white/70">
+                  30 دقيقة لمناقشة مشروعك
+                </p>
+              </CardHeader>
+              <CardContent>
+                <Button
+                  className="w-full bg-[#78C487] hover:bg-[#78C487]/90 text-white py-3"
+                  asChild
+                >
+                  <Link href="/booking">
+                    احجز موعدك الآن
+                    <Calendar className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <p className="text-xs text-[#404544]/60 dark:text-white/60 text-center mt-2">
+                  * الاستشارة مجانية تماماً
+                </p>
+              </CardContent>
+            </Card>
             {/* Contact Information */}
             <Card>
               <CardHeader>
@@ -359,31 +385,7 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-            {/* Booking Widget */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="text-xl font-bold text-[#404544] dark:text-white">
-                  احجز استشارة مجانية
-                </CardTitle>
-                <p className="text-[#404544]/70 dark:text-white/70">
-                  30 دقيقة لمناقشة مشروعك
-                </p>
-              </CardHeader>
-              <CardContent>
-                <Button
-                  className="w-full bg-[#78C487] hover:bg-[#78C487]/90 text-white py-3"
-                  asChild
-                >
-                  <Link href="#booking-calendar">
-                    احجز موعدك الآن
-                    <Calendar className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <p className="text-xs text-[#404544]/60 dark:text-white/60 text-center mt-2">
-                  * الاستشارة مجانية تماماً
-                </p>
-              </CardContent>
-            </Card>
+           
 
             {/* Map Placeholder */}
             <Card>

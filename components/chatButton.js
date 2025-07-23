@@ -18,7 +18,7 @@ export default function ChatButton() {
 
   function addMessage(who){
     
-    setMessageArr([...messageArr,  {text : message , time: GetMessageTimeNow() , server: false}])
+    setMessageArr([...messageArr,  {text : message , time: GetMessageTimeNow() , server: who?false:true}])
     
     setMessage("");
   }

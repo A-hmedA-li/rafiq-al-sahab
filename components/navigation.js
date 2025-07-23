@@ -14,7 +14,8 @@ const navItems = [
   { href: "/portfolio", label: "المشاريع" },
   { href: "/founders", label: "الفريق" },
   { href: "/about", label: "من نحن" },
-  { href: "/contact", label: "تواصل معنا" }
+  { href: "/booking", label: "احجز موعد" },
+  { href: "/contact", label: "تواصل معنا" },
 ]
 
 export function Navigation() {
@@ -34,9 +35,7 @@ export function Navigation() {
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/95 dark:bg-[#171717]/95 backdrop-blur-md shadow-lg"
-          : "bg-transparent"
+        scrolled ? "bg-white/95 dark:bg-[#171717]/95 backdrop-blur-md shadow-lg" : "bg-transparent"
       }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -60,14 +59,12 @@ export function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map(item => (
+            {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
                 className={`relative px-3 py-2 text-sm font-medium transition-colors hover:text-[#78C487] ${
-                  pathname === item.href
-                    ? "text-[#78C487]"
-                    : "text-[#404544] dark:text-white"
+                  pathname === item.href ? "text-[#78C487]" : "text-[#404544] dark:text-white"
                 }`}
               >
                 {item.label}
@@ -94,17 +91,8 @@ export function Navigation() {
               <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             </Button>
 
-            <Button
-              variant="ghost"
-              size="sm"
-              className="md:hidden p-2"
-              onClick={() => setIsOpen(!isOpen)}
-            >
-              {isOpen ? (
-                <X className="h-5 w-5" />
-              ) : (
-                <Menu className="h-5 w-5" />
-              )}
+            <Button variant="ghost" size="sm" className="md:hidden p-2" onClick={() => setIsOpen(!isOpen)}>
+              {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
         </div>
@@ -119,14 +107,12 @@ export function Navigation() {
               className="md:hidden border-t border-[#A5D5A9]/20 bg-white/95 dark:bg-[#171717]/95 backdrop-blur-md"
             >
               <div className="py-4 space-y-2">
-                {navItems.map(item => (
+                {navItems.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     className={`block px-4 py-2 text-sm font-medium transition-colors hover:text-[#78C487] hover:bg-[#78C487]/10 rounded-md ${
-                      pathname === item.href
-                        ? "text-[#78C487] bg-[#78C487]/10"
-                        : "text-[#404544] dark:text-white"
+                      pathname === item.href ? "text-[#78C487] bg-[#78C487]/10" : "text-[#404544] dark:text-white"
                     }`}
                     onClick={() => setIsOpen(false)}
                   >
