@@ -77,10 +77,10 @@ const now = new Date() ;
     now.getFullYear(),
   now.getMonth(),
   now.getDate(),
-  9,  // hours
-  0,  // minutes
-  0,  // seconds
-  0   // milliseconds
+  9,  
+  0,  
+  0,
+  0   
 ))
   const [calendarView, setCalendarView] = useState("month")
   const [selectedConsultation, setSelectedConsultation] = useState("")
@@ -94,7 +94,7 @@ const now = new Date() ;
   })
 
 
-
+  console.log(selectedDate);
   const disabled =  selectedDate.toISOString().split('T')[0];
 
     let bookedSlots = bookedDict[disabled]

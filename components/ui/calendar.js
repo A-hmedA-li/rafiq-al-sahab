@@ -41,18 +41,14 @@ const Calendar = React.forwardRef(
   ) => {
     const [currentDate, setCurrentDate] = React.useState(selected )
     const [selectedTime, setSelectedTime] = React.useState("")
-    const [error , setError ] = React.useState("");
+    
 
     const today = new Date()
     const currentMonth = currentDate.getMonth()
     const currentYear = currentDate.getFullYear()
 
 
-    if (selected > new Date(selected.setHours(17 , 0 , 0 ,0 ))
-      || selected < new Date(selected.setHours(9 , 0 ,0 , 0))){
-        
-        setError ('الموعد المحدد خارج مجال العمل')
-     }
+
   
     const monthNames = [
       "يناير",
@@ -164,12 +160,20 @@ const Calendar = React.forwardRef(
 
     const handleDateSelect = (date, time) => {
 
+
      
       if (time) {
         const [hours, minutes] = time.split(":").map(Number)
-        const selectedDateTime = new Date(date)
-        selectedDateTime.setHours(hours, minutes, 0, 0)
+        const selectedDateTime = new Date(date.getFullYear(),
+          date.getMonth(),
+          date.getDate(),
+          hours,  
+          minutes,  
+          0,  
+          0 )
+        // selectedDateTime.setHours(hours, minutes, 0, 0)s
         onSelect?.(selectedDateTime)
+        console.log('selectred' ,selected)
         setSelectedTime(time)
       } else {
         onSelect?.(date)
@@ -446,17 +450,17 @@ const Calendar = React.forwardRef(
               </span>
                
             </div>
-              {
+              {/* {
                 
                 
                 selected > new Date(selected.setHours(17 , 0 , 0 ,0 ))
-                    || selected < new Date(selected.setHours(9 , 0 ,0 , 0)) && 
+                    || selected < new Date(selected.setHours(8 , 0 ,0 , 0)) && 
                     <span className="text-[#dc3545] text-[0.876rem] inline-block p-3 items-center" > 
                   
                     الموعد المحدد خارج ساعات العمل
                     </span>
                 
-                }
+                } */}
 
           </div>
         )}
