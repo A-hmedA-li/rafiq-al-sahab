@@ -94,11 +94,11 @@ const now = new Date() ;
   })
 
 
-  console.log(selectedDate)
+
   const disabled =  selectedDate.toISOString().split('T')[0];
-    console.log(disabled)
+
     let bookedSlots = bookedDict[disabled]
-    console.log(bookedSlots)
+  
 
 
  

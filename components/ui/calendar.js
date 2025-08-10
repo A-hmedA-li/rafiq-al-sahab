@@ -94,23 +94,23 @@ const Calendar = React.forwardRef(
       // Previous month's days
       for (let i = startingDayOfWeek - 1; i >= 0; i--) {
         const prevDate = new Date(year, month, -i , 9 , 0 , 0 , 0 )
-        days.push({ date: prevDate, isCurrentMonth: false })
+        days.push({ date: prevDate, isCurrentMonth: today <= prevDate })
       }
 
       // Current month's days
       for (let day = 1; day <= daysInMonth; day++) {
 
-        const  dateToday = new Date(year, month, day , 9 , 0 , 0 , 0); 
-        const isCurrentMonth = today < dateToday;
-        days.push({ date: dateToday, isCurrentMonth: isCurrentMonth })
+        const  dateInthisMonth = new Date(year, month, day , 9 , 0 , 0 , 0); 
+        days.push({ date: dateInthisMonth, isCurrentMonth: today <= dateInthisMonth })
       }
 
       // Next month's days to fill the grid
       const remainingDays = 42 - days.length
       for (let day = 1; day <= remainingDays; day++) {
+        const dateInNextMonth = new Date(year, month + 1, day , 9 , 0 , 0 ,0)
         days.push({
-          date: new Date(year, month + 1, day , 9 , 0 , 0 ,0),
-          isCurrentMonth: true
+          date: dateInNextMonth,
+          isCurrentMonth: dateInNextMonth > today
         })
       }
 
@@ -450,9 +450,9 @@ const Calendar = React.forwardRef(
                 
                 
                 selected > new Date(selected.setHours(17 , 0 , 0 ,0 ))
-                    || selected < new Date(selected.setHours(9 , 0 ,0 , 0)) && <span className="text-[#dc3545] text-[0.876rem] inline-block p-3 items-center" > 
-                    
-                    
+                    || selected < new Date(selected.setHours(9 , 0 ,0 , 0)) && 
+                    <span className="text-[#dc3545] text-[0.876rem] inline-block p-3 items-center" > 
+                  
                     الموعد المحدد خارج ساعات العمل
                     </span>
                 
