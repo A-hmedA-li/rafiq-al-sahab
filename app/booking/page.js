@@ -14,7 +14,6 @@ export default async function SRBooking(){
     let date = bookedSlots[i].start.split('T')[0];
     let hourstart = bookedSlots[i].start.split('T')[1].split('+')[0].slice(0 , -3);
     let hourend = bookedSlots[i].end.split('T')[1].split('+')[0].slice(0 , -3);
-    // console.log( date, hourstart , hourend)
     dict[date].push(hourstart);
   }
   return (

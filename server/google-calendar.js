@@ -46,7 +46,7 @@ export async function get_all_events() {
 
 export async function book_an_event(event ){
 
-  console.log(event)
+ 
   try{
 
       await calendar.events.insert({

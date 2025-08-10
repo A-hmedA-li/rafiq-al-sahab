@@ -3,7 +3,7 @@ import { NextResponse } from 'next/server'
 import { google } from 'googleapis';
 
 export async function POST(req , res) {
-  console.log(res)
+  
   try {
 
     const event = await req.json();
