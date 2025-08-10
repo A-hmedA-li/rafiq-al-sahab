@@ -96,7 +96,7 @@ export default function HomePage() {
               <Image
                 src="/images/lgc.png"
                 alt="رفيق السحاب Logo"
-                width={300}
+                width={150}
                 height={120}
                 className="mx-auto mb-6"
               />
@@ -104,18 +104,20 @@ export default function HomePage() {
 
             <motion.h1
               variants={fadeInUp}
-              className="text-4xl md:text-6xl font-bold text-[#404544] dark:text-white mb-6"
+              className="text-4xl md:text-6xl font-bold text-[#404544] dark:text-white mb-6" 
             >
-              دعونا نبني السحابة معاً
+              رفيقك الموثوق 
+                
               <br />
-              <span className="text-[#78C487]">ولنحتفظ ببعض المرح!</span>
+              <br />
+              <span className="text-[#78C487]">برحلة التحول إلى WORK 2</span>
             </motion.h1>
 
             <motion.p
               variants={fadeInUp}
               className="text-xl md:text-2xl text-[#404544]/80 dark:text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed"
             >
-              رفيقك الخبير في حلول التكنولوجيا السحابية - نحول أفكارك إلى واقع
+               الخبير في حلول التكنولوجيا السحابية - نحول أفكارك إلى واقع
               رقمي بلا تعقيد
             </motion.p>
 
@@ -129,8 +131,9 @@ export default function HomePage() {
                 asChild
               >
                 <Link href="/contact">
+                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
                   احصل على استشارة مجانية
-                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  
                 </Link>
               </Button>
               <Button

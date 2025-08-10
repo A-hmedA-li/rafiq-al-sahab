@@ -39,13 +39,21 @@ const Calendar = React.forwardRef(
     },
     ref
   ) => {
-    const [currentDate, setCurrentDate] = React.useState(selected || new Date())
+    const [currentDate, setCurrentDate] = React.useState(selected )
     const [selectedTime, setSelectedTime] = React.useState("")
+    const [error , setError ] = React.useState("");
 
     const today = new Date()
     const currentMonth = currentDate.getMonth()
     const currentYear = currentDate.getFullYear()
 
+
+    if (selected > new Date(selected.setHours(17 , 0 , 0 ,0 ))
+      || selected < new Date(selected.setHours(9 , 0 ,0 , 0))){
+        
+        setError ('الموعد المحدد خارج مجال العمل')
+     }
+  
     const monthNames = [
       "يناير",
       "فبراير",
@@ -73,6 +81,7 @@ const Calendar = React.forwardRef(
     const dayNamesShort = ["أح", "إث", "ثل", "أر", "خم", "جم", "سب"]
 
     const getDaysInMonth = date => {
+      const today = new Date();
       const year = date.getFullYear()
       const month = date.getMonth()
       const firstDay = new Date(year, month, 1)
@@ -84,23 +93,27 @@ const Calendar = React.forwardRef(
 
       // Previous month's days
       for (let i = startingDayOfWeek - 1; i >= 0; i--) {
-        const prevDate = new Date(year, month, -i)
+        const prevDate = new Date(year, month, -i , 9 , 0 , 0 , 0 )
         days.push({ date: prevDate, isCurrentMonth: false })
       }
 
       // Current month's days
       for (let day = 1; day <= daysInMonth; day++) {
-        days.push({ date: new Date(year, month, day), isCurrentMonth: true })
+
+        const  dateToday = new Date(year, month, day , 9 , 0 , 0 , 0); 
+        const isCurrentMonth = today < dateToday;
+        days.push({ date: dateToday, isCurrentMonth: isCurrentMonth })
       }
 
       // Next month's days to fill the grid
       const remainingDays = 42 - days.length
       for (let day = 1; day <= remainingDays; day++) {
         days.push({
-          date: new Date(year, month + 1, day),
-          isCurrentMonth: false
+          date: new Date(year, month + 1, day , 9 , 0 , 0 ,0),
+          isCurrentMonth: true
         })
       }
+
 
       return days
     }
@@ -145,9 +158,12 @@ const Calendar = React.forwardRef(
       }
 
       setCurrentDate(newDate)
+        onSelect?.(newDate)
+      
     }
 
     const handleDateSelect = (date, time) => {
+
      
       if (time) {
         const [hours, minutes] = time.split(":").map(Number)
@@ -285,9 +301,13 @@ const Calendar = React.forwardRef(
 
           <div className="grid grid-cols-7 gap-1">
             {days.map((day, index) => (
+              
               <button
-                key={index}
-                onClick={() => day.isCurrentMonth && handleDateSelect(day.date)}
+                key={index }
+                onClick={() =>{
+                  onViewChange?.("day")
+                  return day.isCurrentMonth && handleDateSelect(day.date)
+                }}
                 disabled={!day.isCurrentMonth}
                 className={cn(
                   "aspect-square p-2 rounded-xl text-sm font-medium transition-all duration-200",
@@ -411,7 +431,7 @@ const Calendar = React.forwardRef(
           <div className="mt-6 p-4 bg-[#78C487]/5 rounded-2xl">
             <div className="flex items-center justify-center space-x-2 text-[#404544] dark:text-white">
               <CalendarIcon className="h-4 w-4 text-[#78C487]" />
-              <span className="font-medium">
+              <span className={`font-medium `}>
                 الموعد المحدد:{" "}
                 {selected.toLocaleDateString("ar-AE", {
                   weekday: "long",
@@ -421,8 +441,23 @@ const Calendar = React.forwardRef(
                   hour: "2-digit",
                   minute: "2-digit"
                 })}
+
+                
               </span>
+               
             </div>
+              {
+                
+                
+                selected > new Date(selected.setHours(17 , 0 , 0 ,0 ))
+                    || selected < new Date(selected.setHours(9 , 0 ,0 , 0)) && <span className="text-[#dc3545] text-[0.876rem] inline-block p-3 items-center" > 
+                    
+                    
+                    الموعد المحدد خارج ساعات العمل
+                    </span>
+                
+                }
+
           </div>
         )}
       </div>

@@ -1,22 +1,39 @@
-// app/api/calendar/route.js
+import { NextResponse } from 'next/server'
+
 import { google } from 'googleapis';
 
-export async function POST(request) {
-  const { accessToken, eventDetails } = await request.json();
-  
-  const oauth2Client = new google.auth.OAuth2();
-  oauth2Client.setCredentials({ access_token: accessToken });
-
-  const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
-
+export async function POST(req , res) {
+  console.log(res)
   try {
-    const event = await calendar.events.insert({
-      calendarId: 'primary',
-      resource: eventDetails,
-    });
 
-    return Response.json({ success: true, event: event.data });
+    const event = await req.json();
+    
+    const auth = new google.auth.GoogleAuth({
+      credentials: {
+        client_email: process.env.GOOGLE_CLIENT_EMAIL,
+        private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+        
+      },
+      scopes: ['https://www.googleapis.com/auth/calendar'],
+    });
+   
+
+    const calendar = google.calendar({ version: 'v3', auth });
+    
+
+
+
+    const response = await calendar.events.insert({
+      calendarId: process.env.TARGET_GOOGLE_CALENDAR,
+      resource: event,
+    
+    });
+ 
+
+    return NextResponse.json({message: "every thing is alright"},  {status: 200 })
   } catch (error) {
-    return Response.json({ success: false, error: error.message });
+    console.error('Error creating event:', error);
+    return NextResponse.json( {error : 'Error creating calendar event'} , {status: 500} )
   }
+
 }

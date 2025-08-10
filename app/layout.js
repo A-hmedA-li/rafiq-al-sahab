@@ -34,8 +34,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="ar" dir="rtl"    >
-      <body className={notoKufi.className}>
+    <html lang="ar" dir="rtl"   suppressHydrationWarning  >
+      
+      <body className={notoKufi.className} suppressHydrationWarning>
        
           <ThemeProvider
             attribute="class"
