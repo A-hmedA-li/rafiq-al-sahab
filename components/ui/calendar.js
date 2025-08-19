@@ -401,7 +401,7 @@ const Calendar = React.forwardRef(
           </div>
 
           {/* View Switcher */}
-          <div className="flex bg-[#78C487]/10 rounded-full p-1">
+          <div className="flex  lg:bg-[#78C487]/50 rounded-full p-1">
             {["day", "week", "month", "year"].map(viewType => (
               <button
                 key={viewType}

@@ -50,26 +50,30 @@ const consultationTypes = [
     name: "استشارة مجانية",
     duration: "30 دقيقة",
     price: "مجاناً",
-    description: "جلسة تعريفية لفهم احتياجاتك"
+    description: "جلسة تعريفية لفهم احتياجاتك",
+    timeInMinites: 30 
   },
   {
     id: "detailed",
     name: "استشارة مفصلة",
     duration: "60 دقيقة",
     price: "200 درهم",
-    description: "تحليل شامل ووضع خطة عمل"
+    description: "تحليل شامل ووضع خطة عمل",
+    timeInMinites: 60 
+
   },
   {
     id: "technical",
     name: "استشارة تقنية",
     duration: "90 دقيقة",
     price: "300 درهم",
-    description: "مراجعة تقنية متخصصة"
+    description: "مراجعة تقنية متخصصة",
+    timeInMinites: 90
+
   }
 ]
 
-// Mock booked slots - in real app, this would come from your backend
-// const bookedSlots = ["10:00", "14:30", "16:00"]
+
 
 export default function BookingPage({bookedDict}) {
 const now = new Date() ; 
@@ -84,7 +88,6 @@ const now = new Date() ;
 ))
   const [calendarView, setCalendarView] = useState("month")
   const [selectedConsultation, setSelectedConsultation] = useState("")
-    // const [today , setToday] = useState( new Date().toISOString())
   const [formData, setFormData] = useState({
     name: "aa",
     email: "a@a.com",
@@ -94,7 +97,6 @@ const now = new Date() ;
   })
 
 
-  console.log(selectedDate);
   const disabled =  selectedDate.toISOString().split('T')[0];
 
     let bookedSlots = bookedDict[disabled]
@@ -111,10 +113,12 @@ const now = new Date() ;
   }
 
   const bookOnGoogle = async () => {
-    
+    console.log(formData)
     const endDate = new Date(selectedDate); 
     const startMin = endDate.getMinutes() ; 
-    endDate.setMinutes(startMin + 30 );
+    endDate.setMinutes(startMin + selectedConsultationType.timeInMinites );
+    console.log(selectedConsultationType)
+    console.log(endDate)
     const event = {
       summary: formData.name,
       start: {
