@@ -16,11 +16,11 @@ export default async function SRBooking(){
     let hourend = bookedSlots[i].end.split('T')[1].split('+')[0].slice(0 , -3);
     
     for (let i =0 ; i < differenceInHalfs (hourstart , hourend) ; i ++){
-    console.log(hourstart)
+
 
       dict[date].push(hourstart);
       hourstart = addHalf(hourstart) ; 
-      console.log(hourstart)
+      
     }
   }
 

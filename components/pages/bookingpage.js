@@ -117,8 +117,7 @@ const now = new Date() ;
     const endDate = new Date(selectedDate); 
     const startMin = endDate.getMinutes() ; 
     endDate.setMinutes(startMin + selectedConsultationType.timeInMinites );
-    console.log(selectedConsultationType)
-    console.log(endDate)
+
     const event = {
       summary: formData.name,
       start: {
