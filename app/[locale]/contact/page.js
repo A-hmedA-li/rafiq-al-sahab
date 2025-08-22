@@ -23,6 +23,7 @@ import {
   SelectValue
 } from "@/components/ui/select"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -30,15 +31,8 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: "easeOut" }
 }
 
-const services = [
-  "نظام الحجز الإلكتروني والإدارة",
-  "المساعد الذكي المخصص وأنظمة الأتمتة",
-  "تكامل الرسائل الجماعية",
-  "التخصيص بالذكاء الاصطناعي",
-  "استشارة عامة"
-]
-
 export default function ContactPage() {
+  const t = useTranslations("ContactPage")
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -48,6 +42,14 @@ export default function ContactPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+
+  const services = [
+    t("services.bookingSystem"),
+    t("services.aiAssistant"),
+    t("services.bulkMessaging"),
+    t("services.aiCustomization"),
+    t("services.generalConsultation")
+  ]
 
   const handleSubmit = async e => {
     e.preventDefault()
@@ -81,11 +83,10 @@ export default function ContactPage() {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-5xl font-bold text-[#404544] dark:text-white mb-6">
-              تواصل معنا
+              {t("hero.title")}
             </h1>
             <p className="text-xl text-[#404544]/70 dark:text-white/70 max-w-3xl mx-auto leading-relaxed">
-              نحن هنا لمساعدتك في تحويل أفكارك إلى واقع رقمي. تواصل معنا اليوم
-              واحصل على استشارة مجانية
+              {t("hero.description")}
             </p>
           </motion.div>
         </div>
@@ -102,10 +103,10 @@ export default function ContactPage() {
             <Card className="shadow-xl">
               <CardHeader>
                 <CardTitle className="text-2xl font-bold text-[#404544] dark:text-white">
-                  أرسل لنا رسالة
+                  {t("form.title")}
                 </CardTitle>
                 <p className="text-[#404544]/70 dark:text-white/70">
-                  سنرد عليك خلال 24 ساعة
+                  {t("form.subtitle")}
                 </p>
               </CardHeader>
               <CardContent>
@@ -117,10 +118,10 @@ export default function ContactPage() {
                   >
                     <CheckCircle className="h-16 w-16 text-[#78C487] mx-auto mb-4" />
                     <h3 className="text-xl font-semibold text-[#404544] dark:text-white mb-2">
-                      تم إرسال رسالتك بنجاح!
+                      {t("form.success.title")}
                     </h3>
                     <p className="text-[#404544]/70 dark:text-white/70">
-                      سنتواصل معك قريباً
+                      {t("form.success.message")}
                     </p>
                   </motion.div>
                 ) : (
@@ -128,7 +129,7 @@ export default function ContactPage() {
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                          الاسم *
+                          {t("form.fields.name")} *
                         </label>
                         <Input
                           required
@@ -136,13 +137,13 @@ export default function ContactPage() {
                           onChange={e =>
                             handleInputChange("name", e.target.value)
                           }
-                          placeholder="اسمك الكامل"
+                          placeholder={t("form.placeholders.name")}
                           className="border-[#A5D5A9]/30 focus:border-[#78C487]"
                         />
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                          البريد الإلكتروني *
+                          {t("form.fields.email")} *
                         </label>
                         <Input
                           type="email"
@@ -151,7 +152,7 @@ export default function ContactPage() {
                           onChange={e =>
                             handleInputChange("email", e.target.value)
                           }
-                          placeholder="your@email.com"
+                          placeholder={t("form.placeholders.email")}
                           className="border-[#A5D5A9]/30 focus:border-[#78C487]"
                         />
                       </div>
@@ -159,7 +160,7 @@ export default function ContactPage() {
 
                     <div>
                       <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                        رقم الهاتف (اختياري)
+                        {t("form.fields.phone")}
                       </label>
                       <Input
                         type="tel"
@@ -167,14 +168,14 @@ export default function ContactPage() {
                         onChange={e =>
                           handleInputChange("phone", e.target.value)
                         }
-                        placeholder="+971 XX XXX XXXX"
+                        placeholder={t("form.placeholders.phone")}
                         className="border-[#A5D5A9]/30 focus:border-[#78C487]"
                       />
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                        الخدمة المطلوبة
+                        {t("form.fields.service")}
                       </label>
                       <Select
                         value={formData.service}
@@ -183,7 +184,7 @@ export default function ContactPage() {
                         }
                       >
                         <SelectTrigger className="border-[#A5D5A9]/30 focus:border-[#78C487]">
-                          <SelectValue placeholder="اختر الخدمة" />
+                          <SelectValue placeholder={t("form.placeholders.service")} />
                         </SelectTrigger>
                         <SelectContent>
                           {services.map((service, index) => (
@@ -197,7 +198,7 @@ export default function ContactPage() {
 
                     <div>
                       <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                        الرسالة *
+                        {t("form.fields.message")} *
                       </label>
                       <Textarea
                         required
@@ -205,7 +206,7 @@ export default function ContactPage() {
                         onChange={e =>
                           handleInputChange("message", e.target.value)
                         }
-                        placeholder="أخبرنا عن مشروعك أو استفسارك..."
+                        placeholder={t("form.placeholders.message")}
                         rows={5}
                         className="border-[#A5D5A9]/30 focus:border-[#78C487]"
                       />
@@ -219,11 +220,11 @@ export default function ContactPage() {
                       {isSubmitting ? (
                         <>
                           <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                          جاري الإرسال...
+                          {t("form.submitting")}
                         </>
                       ) : (
                         <>
-                          إرسال الرسالة
+                          {t("form.submit")}
                           <Send className="ml-2 h-4 w-4" />
                         </>
                       )}
@@ -246,10 +247,10 @@ export default function ContactPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-xl font-bold text-[#404544] dark:text-white">
-                  احجز استشارة مجانية
+                  {t("booking.title")}
                 </CardTitle>
                 <p className="text-[#404544]/70 dark:text-white/70">
-                  30 دقيقة لمناقشة مشروعك
+                  {t("booking.subtitle")}
                 </p>
               </CardHeader>
               <CardContent>
@@ -258,12 +259,12 @@ export default function ContactPage() {
                   asChild
                 >
                   <Link href="/booking">
-                    احجز موعدك الآن
+                    {t("booking.button")}
                     <Calendar className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
                 <p className="text-xs text-[#404544]/60 dark:text-white/60 text-center mt-2">
-                  * الاستشارة مجانية تماماً
+                  {t("booking.note")}
                 </p>
               </CardContent>
             </Card>
@@ -271,7 +272,7 @@ export default function ContactPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-xl font-bold text-[#404544] dark:text-white">
-                  معلومات التواصل
+                  {t("contactInfo.title")}
                 </CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -281,10 +282,10 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-medium text-[#404544] dark:text-white">
-                      البريد الإلكتروني
+                      {t("contactInfo.emailLabel")}
                     </p>
                     <p className="text-[#404544]/70 dark:text-white/70">
-                      info@rafiqalsahab.com
+                      {t("contactInfo.email")}
                     </p>
                   </div>
                 </div>
@@ -294,10 +295,10 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-medium text-[#404544] dark:text-white">
-                      الهاتف
+                      {t("contactInfo.phoneLabel")}
                     </p>
                     <p className="text-[#404544]/70 dark:text-white/70">
-                      +971 XX XXX XXXX
+                      {t("contactInfo.phone")}
                     </p>
                   </div>
                 </div>
@@ -307,10 +308,10 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-medium text-[#404544] dark:text-white">
-                      الموقع
+                      {t("contactInfo.locationLabel")}
                     </p>
                     <p className="text-[#404544]/70 dark:text-white/70">
-                      دولة الإمارات العربية المتحدة
+                      {t("contactInfo.location")}
                     </p>
                   </div>
                 </div>
@@ -320,10 +321,10 @@ export default function ContactPage() {
                   </div>
                   <div>
                     <p className="font-medium text-[#404544] dark:text-white">
-                      ساعات العمل
+                      {t("contactInfo.hoursLabel")}
                     </p>
                     <p className="text-[#404544]/70 dark:text-white/70">
-                      الأحد - الخميس: 9:00 - 18:00
+                      {t("contactInfo.hours")}
                     </p>
                   </div>
                 </div>
@@ -334,10 +335,10 @@ export default function ContactPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="text-xl font-bold text-[#404544] dark:text-white">
-                  تواصل سريع
+                  {t("quickContact.title")}
                 </CardTitle>
                 <p className="text-[#404544]/70 dark:text-white/70">
-                  للحصول على رد فوري
+                  {t("quickContact.subtitle")}
                 </p>
               </CardHeader>
               <CardContent className="space-y-4">
@@ -353,7 +354,7 @@ export default function ContactPage() {
                         WhatsApp
                       </p>
                       <p className="text-sm text-[#404544]/70 dark:text-white/70">
-                        رد فوري خلال دقائق
+                        {t("quickContact.whatsapp")}
                       </p>
                     </div>
                   </div>
@@ -374,7 +375,7 @@ export default function ContactPage() {
                         Telegram
                       </p>
                       <p className="text-sm text-[#404544]/70 dark:text-white/70">
-                        محادثة مباشرة
+                        {t("quickContact.telegram")}
                       </p>
                     </div>
                   </div>
@@ -385,13 +386,11 @@ export default function ContactPage() {
               </CardContent>
             </Card>
 
-           
-
             {/* Map Placeholder */}
             <Card>
               <CardHeader>
                 <CardTitle className="text-xl font-bold text-[#404544] dark:text-white">
-                  موقعنا
+                  {t("map.title")}
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -399,7 +398,7 @@ export default function ContactPage() {
                   <div className="text-center">
                     <MapPin className="h-8 w-8 text-[#78C487] mx-auto mb-2" />
                     <p className="text-[#404544]/70 dark:text-white/70">
-                      دولة الإمارات العربية المتحدة
+                      {t("contactInfo.location")}
                     </p>
                   </div>
                 </div>
@@ -419,34 +418,30 @@ export default function ContactPage() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-[#404544] dark:text-white mb-4">
-              أسئلة شائعة
+              {t("faq.title")}
             </h2>
             <p className="text-lg text-[#404544]/70 dark:text-white/70">
-              إجابات على أكثر الأسئلة تكراراً
+              {t("faq.subtitle")}
             </p>
           </motion.div>
 
           <div className="space-y-6">
             {[
               {
-                question: "كم يستغرق تطوير المشروع؟",
-                answer:
-                  "يعتمد على تعقيد المشروع، لكن معظم مشاريعنا تكتمل خلال 2-6 أسابيع."
+                question: t("faq.questions.0.question"),
+                answer: t("faq.questions.0.answer")
               },
               {
-                question: "هل تقدمون دعماً بعد التسليم؟",
-                answer:
-                  "نعم، نقدم دعماً فنياً مجانياً لمدة 3 أشهر، بالإضافة إلى خطط صيانة مدفوعة."
+                question: t("faq.questions.1.question"),
+                answer: t("faq.questions.1.answer")
               },
               {
-                question: "ما هي تكلفة الخدمات؟",
-                answer:
-                  "التكلفة تختلف حسب المشروع. نقدم عروض أسعار مخصصة بعد فهم احتياجاتك."
+                question: t("faq.questions.2.question"),
+                answer: t("faq.questions.2.answer")
               },
               {
-                question: "هل يمكنكم العمل مع الأنظمة الحالية؟",
-                answer:
-                  "بالطبع! نتخصص في تكامل الحلول الجديدة مع الأنظمة الموجودة."
+                question: t("faq.questions.3.question"),
+                answer: t("faq.questions.3.answer")
               }
             ].map((faq, index) => (
               <motion.div

@@ -1,0 +1,401 @@
+{
+  "Navigation": {
+    "companyName": "رفيق السحاب",
+    "home": "Home",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "team": "Team",
+    "about": "About Us",
+    "booking": "Book Appointment",
+    "contact": "Contact Us",
+    "toggleTheme": "Toggle dark mode",
+    "toggleMenu": "Toggle menu"
+  },
+  "HomePage": {
+    "hero": {
+      "logoAlt": "Rafiq Al Sahab Logo",
+      "title1": "Your Trusted Partner",
+      "title2": "in the Journey to WORK 2.0",
+      "description": "Experts in cloud technology solutions - we transform your ideas into digital reality without complexity",
+      "cta1": "Get a Free Consultation",
+      "cta2": "Explore Our Services"
+    },
+    "servicesSection": {
+      "title": "Our Featured Services",
+      "subtitle": "Advanced technical solutions specifically designed for your business growth",
+      "viewAll": "View All Services"
+    },
+    "services": [
+      {
+        "title": "Online Booking Setup & Management",
+        "description": "Smart appointment booking system that makes it easy for your customers to connect with you"
+      },
+      {
+        "title": "Custom AI Agent & Automation",
+        "description": "Custom AI assistant for your business that saves time and effort"
+      },
+      {
+        "title": "Mass Messaging Integration",
+        "description": "WhatsApp and Telegram integration for effective customer communication"
+      },
+      {
+        "title": "AI-Powered Personalization",
+        "description": "Customer experience personalization using artificial intelligence"
+      }
+    ],
+    "portfolioSection": {
+      "title": "Our Featured Projects",
+      "subtitle": "Samples of our work that have achieved outstanding success for our clients",
+      "viewAll": "View All Projects"
+    },
+    "portfolio": [
+      {
+        "title": "Smart Restaurant Booking System",
+        "description": "Smart booking system for restaurants with WhatsApp integration",
+        "tech": ["Next.js", "AI", "WhatsApp API"]
+      },
+      {
+        "title": "E-commerce AI Assistant",
+        "description": "Smart assistant for online stores that helps customers",
+        "tech": ["AI Agent", "Automation", "CRM"]
+      },
+      {
+        "title": "Healthcare Appointment System",
+        "description": "Medical appointment system with automatic reminders",
+        "tech": ["Booking System", "SMS", "Calendar"]
+      }
+    ],
+    "foundersSection": {
+      "title": "Meet Our Team",
+      "subtitle": "Experts specialized in cloud technology and artificial intelligence",
+      "founder1": {
+        "name": "Dr. Nazeeh Harfoosh",
+        "role": "Co-Founder & CTO",
+        "description": "Expert in artificial intelligence and automation, loves simplifying complex technology"
+      },
+      "founder2": {
+        "name": "Ahmad",
+        "role": "Co-Founder & CEO",
+        "description": "Specialized in developing cloud solutions and managing technical projects"
+      },
+      "cta": "Learn More About Them"
+    },
+    "ctaSection": {
+      "title": "Ready to Develop Your Business?",
+      "subtitle": "Get a free consultation and discover how we can help you",
+      "cta1": "Book Your Free Consultation",
+      "cta2": "Request a Service"
+    }
+  },
+  "ContactPage": {
+    "hero": {
+      "title": "Connect with AI Experts",
+      "description": "We're here to help you transform your business challenges into growth opportunities with integrated AI solutions. Contact us today for a free consultation"
+    },
+    "services": {
+      "bookingSystem": "Electronic Booking and Management System",
+      "aiAssistant": "Custom AI Assistant and Automation Systems",
+      "bulkMessaging": "Bulk Messaging Integration",
+      "aiCustomization": "AI-Powered Customization",
+      "generalConsultation": "General Consultation"
+    },
+    "form": {
+      "title": "Send Us a Message",
+      "subtitle": "We'll respond within 24 hours",
+      "fields": {
+        "name": "Name",
+        "email": "Email",
+        "phone": "Phone Number",
+        "service": "Required Service",
+        "message": "Message"
+      },
+      "placeholders": {
+        "name": "Your full name",
+        "email": "your@email.com",
+        "phone": "+971 XX XXX XXXX",
+        "service": "Select a service",
+        "message": "Tell us about your project or inquiry..."
+      },
+      "submitting": "Sending...",
+      "submit": "Send Message",
+      "success": {
+        "title": "Your message has been sent successfully!",
+        "message": "We'll contact you soon"
+      }
+    },
+    "booking": {
+      "title": "Or Book a Free Consultation",
+      "subtitle": "30 minutes to discuss your project",
+      "button": "Book Your Appointment Now",
+      "note": "* Consultation is completely free"
+    },
+    "contactInfo": {
+      "title": "Contact Information",
+      "emailLabel": "Email",
+      "email": "info@rafiqalsahab.com",
+      "phoneLabel": "Phone",
+      "phone": "+971 XX XXX XXXX",
+      "locationLabel": "Location",
+      "location": "United Arab Emirates",
+      "hoursLabel": "Working Hours",
+      "hours": "Sunday - Thursday: 9:00 AM - 6:00 PM"
+    },
+    "quickContact": {
+      "title": "Quick Contact",
+      "subtitle": "For immediate response",
+      "whatsapp": "Immediate response within minutes",
+      "telegram": "Direct chat"
+    },
+    "map": {
+      "title": "Our Location"
+    },
+    "faq": {
+      "title": "Browse Frequently Asked Questions",
+      "subtitle": "Answers to the most common questions",
+      "questions": [
+        {
+          "question": "How long does project development take?",
+          "answer": "It depends on the complexity of the project, but most of our projects are completed within 2-6 weeks."
+        },
+        {
+          "question": "Do you provide support after delivery?",
+          "answer": "Yes, we provide free technical support for 3 months, in addition to paid maintenance plans."
+        },
+        {
+          "question": "What is the cost of services?",
+          "answer": "Cost varies by project. We provide customized quotes after understanding your needs."
+        },
+        {
+          "question": "Can you work with existing systems?",
+          "answer": "Absolutely! We specialize in integrating new solutions with existing systems."
+        }
+      ]
+    }
+  }, 
+  "ServicesPage": {
+    "hero": {
+      "title": "Our Premium Services",
+      "description": "Advanced technical solutions specifically designed to grow your business and improve your customer experience"
+    },
+    "services": [
+      {
+        "title": "Online Booking Setup & Management",
+        "arabicTitle": "تركيب نظام حجز المواعيد الألكتروني",
+        "description": "Let your customers book with you easily",
+        "features": [
+          "Easy-to-use booking interface",
+          "Automatic customer reminders",
+          "Calendar integration",
+          "Appointment and cancellation management",
+          "Detailed reports"
+        ]
+      },
+      {
+        "title": "Custom AI Agent & Automation Systems",
+        "arabicTitle": "الوكيل الذكي الذي لا ينام",
+        "description": "We design your perfect smart employee who never sleeps to respond to your customers and follow up on inquiries, helping with sales processes and closing deals",
+        "features": [
+          "Advanced artificial intelligence",
+          "Speaks your business language and provides your expertise level but 24/7",
+          "Automation of routine tasks",
+          "Integration with your existing systems",
+          "Continuous performance improvement"
+        ]
+      },
+      {
+        "title": "Mass Messaging Integration",
+        "arabicTitle": "تكامل الرسائل الجماعية",
+        "description": "Connect WhatsApp and Telegram for effective customer communication and sending customized mass messages",
+        "features": [
+          "WhatsApp Business integration",
+          "Telegram Bot connection",
+          "Customized mass messages",
+          "Response automation",
+          "Open and interaction rate tracking"
+        ]
+      },
+      {
+        "title": "AI-Powered Personalization",
+        "arabicTitle": "التخصيص بالذكاء الاصطناعي",
+        "description": "Customize customer experience using artificial intelligence to increase sales and satisfaction",
+        "features": [
+          "Customer behavior analysis",
+          "Personalized recommendations",
+          "Dynamic user experience",
+          "Conversion rate optimization",
+          "Advanced analytical reports"
+        ]
+      },
+      {
+        "title": "custom_sms_mass_messaging",
+        "arabicTitle": "رسائل SMS مخصصة باسم أعمالك",
+        "description": "Setup and installation of a system that integrates with your business whatever its type to send short messages in your company name automatically",
+        "features": [
+          "Coverage for all types of businesses: from e-stores to administrative systems",
+          "Personalized recommendations",
+          "Dynamic user experience",
+          "Improving customer satisfaction rates and appointment reminders",
+          "Exclusively in the United Arab Emirates"
+        ]
+      },
+      {
+        "title": "ai_automation",
+        "arabicTitle": "لا تبيع السمك.. علم الـ AI كيف يصيد",
+        "description": "AI-powered system that manages operations and procedures on demand",
+        "features": [
+          "Converting repetitive tasks into automatically completed processes",
+          "Custom, unique and suitable for your tasks",
+          "Integration with email, WhatsApp and others",
+          "We learn from your data and accelerate the process"
+        ]
+      }
+    ],
+    "featuresTitle": "Key Features:",
+    "buttons": {
+      "requestService": "Request Service",
+      "freeConsultation": "Free Consultation"
+    },
+    "whyChooseUs": {
+      "title": "Why Choose Us?",
+      "subtitle": "We offer more than just technical services - we are your partners in success",
+      "items": [
+        {
+          "title": "Specialized Expertise",
+          "description": "A team of experts specialized in the latest technologies"
+        },
+        {
+          "title": "Custom Solutions",
+          "description": "Every solution is specifically designed for your unique business needs"
+        },
+        {
+          "title": "Continuous Support",
+          "description": "Continuous technical support and periodic maintenance to ensure optimal performance"
+        }
+      ]
+    },
+    "cta": {
+      "title": "Ready to Start Your Project?",
+      "description": "Contact us today and get a free consultation to discuss your needs",
+      "buttons": {
+        "consultation": "Get a Free Consultation",
+        "portfolio": "View Our Work"
+      }
+    }
+  },
+  "BookingPage": {
+    "hero": {
+      "title": "Book Your Free Consultation",
+      "description": "Choose the right time for you and get a customized consultation from our cloud technology experts"
+    },
+    "services": [
+      "Electronic Booking and Management System",
+      "Custom AI Assistant and Automation Systems",
+      "Mass Messaging Integration",
+      "AI-Powered Personalization",
+      "General Consultation",
+      "Website Development",
+      "Mobile App Development"
+    ],
+    "consultationTypes": [
+      {
+        "id": "free",
+        "name": "Free Consultation",
+        "duration": "30 minutes",
+        "price": "Free",
+        "description": "Introductory session to understand your needs",
+        "timeInMinites": 30
+      },
+      {
+        "id": "detailed",
+        "name": "Detailed Consultation",
+        "duration": "60 minutes",
+        "price": "200 AED",
+        "description": "Comprehensive analysis and action plan development",
+        "timeInMinites": 60
+      },
+      {
+        "id": "technical",
+        "name": "Technical Consultation",
+        "duration": "90 minutes",
+        "price": "300 AED",
+        "description": "Specialized technical review",
+        "timeInMinites": 90
+      }
+    ],
+    "calendar": {
+      "title": "Choose Date and Time"
+    },
+    "consultation": {
+      "title": "Consultation Type"
+    },
+    "form": {
+      "title": "Contact Information",
+      "fields": {
+        "name": "Full Name",
+        "email": "Email",
+        "phone": "Phone Number",
+        "service": "Required Service",
+        "message": "Additional Details"
+      },
+      "placeholders": {
+        "name": "Your full name",
+        "email": "your@email.com",
+        "phone": "+971 XX XXX XXXX",
+        "service": "Select a service",
+        "message": "Tell us more about your project or inquiry..."
+      },
+      "submitting": "Booking...",
+      "submit": "Confirm Booking"
+    },
+    "success": {
+      "title": "Your Booking Has Been Confirmed!",
+      "message": "Thank you {name}, your appointment has been successfully booked. You will receive a confirmation email.",
+      "detailsTitle": "Appointment Details",
+      "dateTime": "Date and Time",
+      "consultationType": "Consultation Type",
+      "duration": "Duration",
+      "anotherBooking": "Book Another Appointment",
+      "backToHome": "Back to Home"
+    },
+    "quickContact": {
+      "title": "Need Immediate Help?",
+      "subtitle": "Contact us directly for a quick response",
+      "whatsapp": "Immediate response within minutes",
+      "phoneTitle": "Direct Call"
+    }
+  },"Calendar": {
+    "monthNames": [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December"
+    ],
+    "dayNames": [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday"
+    ],
+    "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    "viewTypes": {
+      "day": "Day",
+      "week": "Week",
+      "month": "Month",
+      "year": "Year"
+    },
+    "selectedDate": "Selected Date"
+  }
+
+
+}

@@ -1,13 +1,8 @@
-import { Inter } from "next/font/google"
+import { NextIntlClientProvider, hasLocale } from "next-intl"
+import { getLocale } from "next-intl/server"
+
 import { Noto_Kufi_Arabic } from 'next/font/google';
 
-import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
-import { Navigation } from "@/components/navigation"
-import { Footer } from "@/components/footer"
-import ChatButton from "@/components/chatButton"
-import { SessionProvider } from "next-auth/react";
-const inter = Inter({ subsets: ["latin"] })
 
 const notoKufi = Noto_Kufi_Arabic({
   subsets: ['arabic'],
@@ -17,39 +12,20 @@ const notoKufi = Noto_Kufi_Arabic({
 });
 
 
-export const metadata = {
-  title: "Rafiq Al Sahab Technology L.L.C - رفيق السحاب",
-  description:
-    "رفيقك الخبير في حلول التكنولوجيا السحابية - نحول أفكارك إلى واقع رقمي بلا تعقيد",
-  keywords:
-    "AI automation, cloud solutions, booking systems, WhatsApp integration, custom AI agents, UAE technology",
-  authors: [{ name: "Rafiq Al Sahab Technology L.L.C" }],
-  openGraph: {
-    title: "Rafiq Al Sahab Technology L.L.C - رفيق السحاب",
-    description: "رفيقك الخبير في حلول التكنولوجيا السحابية",
-    type: "website",
-    locale: "ar_AE"
-  }
-}
+export default async function LocaleLayout({ children, params }) {
 
-export default function RootLayout({ children }) {
-  return (
-    <html lang="ar" dir="rtl"   suppressHydrationWarning  >
-      
-      <body className={notoKufi.className} suppressHydrationWarning>
-       
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navigation />
-            <main>{children}</main>
-            <ChatButton />
-            <Footer />
-          </ThemeProvider>
+  const locale = await getLocale();
+
   
+  let dir = 'ltr'; 
+  if (locale == "ar")
+      dir = 'rtl'
+
+ 
+  return (
+    <html lang={locale} dir={dir} >
+      <body className={notoKufi.className}>
+        <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>
   )

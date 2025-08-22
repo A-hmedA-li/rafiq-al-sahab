@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
 import Image from "next/image"
+import { useTranslations } from "next-intl"
 
 
 const fadeInUp = {
@@ -29,97 +30,103 @@ const staggerContainer = {
   }
 }
 
-const services = [
+export default function HomePage() {
+  const t = useTranslations("HomePage")
+
+  const services = [
   {
     icon: Calendar,
-    title: "Online Booking Setup & Management",
-    description: "نظام حجز مواعيد ذكي يسهل على عملائك التواصل معك",
+    title: t("services.0.title"),
+    description: t("services.0.description"),
     color: "text-[#78C487]"
   },
   {
     icon: Brain,
-    title: "Custom AI Agent & Automation",
-    description: "مساعد ذكي مخصص لأعمالك يوفر الوقت والجهد",
+    title: t("services.1.title"),
+    description: t("services.1.description"),
     color: "text-[#A5D5A9]"
   },
   {
     icon: MessageSquare,
-    title: "Mass Messaging Integration",
-    description: "ربط WhatsApp و Telegram لتواصل فعال مع العملاء",
+    title: t("services.2.title"),
+    description: t("services.2.description"),
     color: "text-[#78C487]"
   },
   {
     icon: Zap,
-    title: "AI-Powered Personalization",
-    description: "تخصيص تجربة العميل باستخدام الذكاء الاصطناعي",
+    title: t("services.3.title"),
+    description: t("services.3.description"),
     color: "text-[#A5D5A9]"
   }
 ]
 
 const portfolioItems = [
   {
-    title: "Smart Restaurant Booking System",
-    description: "نظام حجز ذكي لمطعم مع تكامل WhatsApp",
+    title: t("portfolio.0.title"),
+    description: t("portfolio.0.description"),
     image: "/images/lg.png",
-    tech: ["Next.js", "AI", "WhatsApp API"]
+    tech: [t("portfolio.0.tech.0"), t("portfolio.0.tech.1"), t("portfolio.0.tech.2")]
   },
   {
-    title: "E-commerce AI Assistant",
-    description: "مساعد ذكي لمتجر إلكتروني يساعد العملاء",
+    title: t("portfolio.1.title"),
+    description: t("portfolio.1.description"),
     image: "/images/lg.png",
-    tech: ["AI Agent", "Automation", "CRM"]
+    tech: [t("portfolio.1.tech.0"), t("portfolio.1.tech.1"), t("portfolio.1.tech.2")]
   },
   {
-    title: "Healthcare Appointment System",
-    description: "نظام مواعيد طبية مع تذكيرات تلقائية",
+    title: t("portfolio.2.title"),
+    description: t("portfolio.2.description"),
     image: "/images/lg.png",
-    tech: ["Booking System", "SMS", "Calendar"]
+    tech: [t("portfolio.2.tech.0"), t("portfolio.2.tech.1"), t("portfolio.2.tech.2")]
   }
 ]
 
-export default function HomePage() {
   return (
 
-    <div className="min-h-screen bg-gradient-to-br from-white via-[#A5D5A9]/10 to-[#78C487]/20 dark:from-[#171717] dark:via-[#404544]/20 dark:to-[#78C487]/10 ">
+    <div className="min-h-screen bg-gradient-to-br from-[#ddd] via-[#A5D5A9]/40 to-[#78C487]/20 dark:from-[#171717] dark:via-[#404544]/20 dark:to-[#78C487]/10 ">
  
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-20 pb-16 px-4">
-        <div className="absolute inset-0 bg-[url('/placeholder.svg?height=800&width=1200')] opacity-5"></div>
-        <div className="container mx-auto max-w-6xl relative z-10">
-          <motion.div
-            className="text-center"
-            initial="initial"
-            animate="animate"
-            variants={staggerContainer}
-          >
-            <motion.div variants={fadeInUp} className="mb-8">
-              <Image
-                src="/images/lgc.png"
-                alt="رفيق السحاب Logo"
-                width={150}
-                height={120}
-                className="mx-auto mb-6"
-              />
-            </motion.div>
-
-            <motion.h1
-              variants={fadeInUp}
-              className="text-4xl md:text-6xl font-bold text-[#404544] dark:text-white mb-6" 
+        <div className="absolute inset-0 bg-[url('/images/1.jpg')] opacity-15 bg-cover"></div>
+        <div className="container mx-auto max-w-8xl relative z-10">
+        
+            <motion.div
+              className="text-center"
+              initial="initial"
+              animate="animate"
+              variants={staggerContainer}
             >
-              رفيقك الموثوق 
+            <div className="md:flex w-full justify-between">
+              <div className="items-center">
+              <motion.h1
+                variants={fadeInUp}
+                className="text-4xl md:text-4xl/15 font-bold text-[#404544] dark:text-white  mt-15  " 
+              >
+                {t("hero.title1")}
                 
-              <br />
-              <br />
-              <span className="text-[#78C487]">برحلة التحول إلى WORK 2</span>
-            </motion.h1>
-
-            <motion.p
+                <br />
+                <span className="text-[#78C487]">{t("hero.title2")}</span>
+              </motion.h1>
+                 <motion.p
               variants={fadeInUp}
               className="text-xl md:text-2xl text-[#404544]/80 dark:text-white/80 mb-8 max-w-3xl mx-auto leading-relaxed"
             >
-               الخبير في حلول التكنولوجيا السحابية - نحول أفكارك إلى واقع
-              رقمي بلا تعقيد
+              {t("hero.description")}
             </motion.p>
+              </div>
+              <motion.div variants={fadeInUp} className="mb-8">
+                <Image
+                  src="/Web Designs/Rafiq Hero 1570_1000.gif"
+                  alt={t("hero.logoAlt")}
+                  width={1570/4}
+                  height={125}
+                  className="mx-auto px-6 "
+                />
+              </motion.div>
+              
+              
+            </div>
+         
 
             <motion.div
               variants={fadeInUp}
@@ -127,22 +134,21 @@ export default function HomePage() {
             >
               <Button
                 size="lg"
-                className="bg-[#78C487] hover:bg-[#78C487]/90 text-white px-8 py-4 text-lg group"
+                className="bg-[#78C487] hover:bg-[#78C487]/90 text-white px-8 py-4 text-lg group  drop-shadow-2xl"
                 asChild
               >
                 <Link href="/contact">
-                <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-                  احصل على استشارة مجانية
-                  
+                  <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                  {t("hero.cta1")}
                 </Link>
               </Button>
               <Button
                 variant="outline"
                 size="lg"
-                className="border-[#78C487] text-[#78C487] hover:bg-[#78C487] hover:text-white px-8 py-4 text-lg bg-transparent"
+                className="border-[#78C487] text-[#78C487] hover:bg-[#78C487] hover:text-white px-8 py-4 text-lg bg-transparent drop-shadow-2xl"
                 asChild
               >
-                <Link href="/services">استكشف خدماتنا</Link>
+                <Link href="/services">{t("hero.cta2")}</Link>
               </Button>
             </motion.div>
           </motion.div>
@@ -163,13 +169,13 @@ export default function HomePage() {
               variants={fadeInUp}
               className="text-3xl md:text-4xl font-bold text-[#404544] dark:text-white mb-4"
             >
-              خدماتنا المميزة
+              {t("servicesSection.title")}
             </motion.h2>
             <motion.p
               variants={fadeInUp}
               className="text-lg text-[#404544]/70 dark:text-white/70 max-w-2xl mx-auto"
             >
-              حلول تقنية متطورة مصممة خصيصاً لتنمية أعمالك
+              {t("servicesSection.subtitle")}
             </motion.p>
           </motion.div>
 
@@ -214,7 +220,7 @@ export default function HomePage() {
               asChild
             >
               <Link href="/services">
-                عرض جميع الخدمات
+                {t("servicesSection.viewAll")}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
@@ -236,13 +242,13 @@ export default function HomePage() {
               variants={fadeInUp}
               className="text-3xl md:text-4xl font-bold text-[#404544] dark:text-white mb-4"
             >
-              مشاريعنا المميزة
+              {t("portfolioSection.title")}
             </motion.h2>
             <motion.p
               variants={fadeInUp}
               className="text-lg text-[#404544]/70 dark:text-white/70 max-w-2xl mx-auto"
             >
-              نماذج من أعمالنا التي حققت نجاحاً باهراً لعملائنا
+              {t("portfolioSection.subtitle")}
             </motion.p>
           </motion.div>
 
@@ -300,9 +306,9 @@ export default function HomePage() {
               variant="outline"
               className="border-[#78C487] text-[#78C487] hover:bg-[#78C487] hover:text-white bg-transparent"
               asChild
-            >
+              >
               <Link href="/portfolio">
-                عرض جميع المشاريع
+                {t("portfolioSection.viewAll")}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
@@ -324,13 +330,13 @@ export default function HomePage() {
               variants={fadeInUp}
               className="text-3xl md:text-4xl font-bold text-[#404544] dark:text-white mb-4"
             >
-              تعرف على فريقنا
+              {t("foundersSection.title")}
             </motion.h2>
             <motion.p
               variants={fadeInUp}
               className="text-lg text-[#404544]/70 dark:text-white/70 mb-12 max-w-2xl mx-auto"
             >
-              خبراء متخصصون في التكنولوجيا السحابية والذكاء الاصطناعي
+              {t("foundersSection.subtitle")}
             </motion.p>
 
             <motion.div
@@ -340,39 +346,38 @@ export default function HomePage() {
               <Card className="p-8 text-center hover:shadow-lg transition-all duration-300">
                 <Image
                   src="/placeholder.svg?height=150&width=150"
-                  alt="Dr. Nazeeh Harfoosh"
+                  alt={t("foundersSection.founder1.name")}
                   width={150}
                   height={150}
                   className="rounded-full mx-auto mb-4 border-4 border-[#78C487]/20"
                 />
                 <h3 className="text-xl font-semibold text-[#404544] dark:text-white mb-2">
-                  Dr. Nazeeh Harfoosh
+                  {t("foundersSection.founder1.name")}
                 </h3>
                 <p className="text-[#78C487] font-medium mb-3">
-                  Co-Founder & CTO
+                  {t("foundersSection.founder1.role")}
                 </p>
                 <p className="text-[#404544]/70 dark:text-white/70 text-sm leading-relaxed">
-                  خبير في الذكاء الاصطناعي والأتمتة، يحب تبسيط التكنولوجيا
-                  المعقدة
+                  {t("foundersSection.founder1.description")}
                 </p>
               </Card>
 
               <Card className="p-8 text-center hover:shadow-lg transition-all duration-300">
                 <Image
                   src="/placeholder.svg?height=150&width=150"
-                  alt="Ahmad"
+                  alt={t("foundersSection.founder2.name")}
                   width={150}
                   height={150}
                   className="rounded-full mx-auto mb-4 border-4 border-[#A5D5A9]/20"
                 />
                 <h3 className="text-xl font-semibold text-[#404544] dark:text-white mb-2">
-                  Ahmad
+                  {t("foundersSection.founder2.name")}
                 </h3>
                 <p className="text-[#A5D5A9] font-medium mb-3">
-                  Co-Founder & CEO
+                  {t("foundersSection.founder2.role")}
                 </p>
                 <p className="text-[#404544]/70 dark:text-white/70 text-sm leading-relaxed">
-                  متخصص في تطوير الحلول السحابية وإدارة المشاريع التقنية
+                  {t("foundersSection.founder2.description")}
                 </p>
               </Card>
             </motion.div>
@@ -384,7 +389,7 @@ export default function HomePage() {
                 asChild
               >
                 <Link href="/founders">
-                  تعرف عليهم أكثر
+                  {t("foundersSection.cta")}
                   <Users className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
@@ -403,10 +408,10 @@ export default function HomePage() {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              جاهز لتطوير أعمالك؟
+              {t("ctaSection.title")}
             </h2>
             <p className="text-xl text-white/90 mb-8 leading-relaxed">
-              احصل على استشارة مجانية واكتشف كيف يمكننا مساعدتك
+              {t("ctaSection.subtitle")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -415,7 +420,7 @@ export default function HomePage() {
                 asChild
               >
                 <Link href="/contact">
-                  احجز استشارتك المجانية
+                  {t("ctaSection.cta1")}
                   <Calendar className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
@@ -426,7 +431,7 @@ export default function HomePage() {
                 asChild
               >
                 <Link href="/services">
-                  اطلب خدمة
+                  {t("ctaSection.cta2")}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>

@@ -7,22 +7,25 @@ import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-
-const navItems = [
-  { href: "/", label: "الرئيسية" },
-  { href: "/services", label: "الخدمات" },
-  { href: "/portfolio", label: "المشاريع" },
-  { href: "/founders", label: "الفريق" },
-  { href: "/about", label: "من نحن" },
-  { href: "/booking", label: "احجز موعد" },
-  { href: "/contact", label: "تواصل معنا" },
-]
+import { useTranslations } from "next-intl"
+import LanguageSwitcher from "./LanguageSwitcher" // Import the language switcher
 
 export function Navigation() {
+  const t = useTranslations("Navigation")
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const { theme, setTheme } = useTheme()
   const pathname = usePathname()
+
+  const navItems = [
+    { href: "/", label: t("home") },
+    { href: "/services", label: t("services") },
+    // { href: "/portfolio", label: t("portfolio") },
+    { href: "/founders", label: t("team") },
+    { href: "/about", label: t("about") },
+    { href: "/booking", label: t("booking") },
+    { href: "/contact", label: t("contact") },
+  ]
 
   useEffect(() => {
     const handleScroll = () => {
@@ -46,14 +49,14 @@ export function Navigation() {
           {/* Logo */}
           <Link href="/" className="flex items-center space-x-2 group">
             <motion.div
-              whileHover={{ rotate: 360 }}
-              transition={{ duration: 0.6 }}
-              className="p-2 bg-[#78C487] rounded-full"
+              whileHover={{ rotate: 3 }}
+              transition={{ duration: 0.2 }}
+              className="p-2  rounded-full"
             >
-              <Cloud className="h-6 w-6 text-white" />
+              <img src="/images/lgc.png"  className="w-30" />
             </motion.div>
             <span className="text-xl font-bold text-[#404544] dark:text-white group-hover:text-[#78C487] transition-colors">
-              رفيق السحاب
+              {t("companyName")}
             </span>
           </Link>
 
@@ -79,19 +82,31 @@ export function Navigation() {
             ))}
           </div>
 
-          {/* Theme Toggle & Mobile Menu */}
-          <div className="flex items-center space-x-4">
+          {/* Theme Toggle, Language Switcher & Mobile Menu */}
+          <div className="flex items-center space-x-2">
+            {/* Language Switcher */}
+            <LanguageSwitcher />
+            
+            {/* Theme Toggle */}
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               className="p-2"
+              aria-label={t("toggleTheme")}
             >
               <Sun className="h-4 w-4 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-4 w-4 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
             </Button>
 
-            <Button variant="ghost" size="sm" className="md:hidden p-2" onClick={() => setIsOpen(!isOpen)}>
+            {/* Mobile Menu Button */}
+            <Button 
+              variant="ghost" 
+              size="sm" 
+              className="md:hidden p-2" 
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label={t("toggleMenu")}
+            >
               {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
             </Button>
           </div>
@@ -119,6 +134,29 @@ export function Navigation() {
                     {item.label}
                   </Link>
                 ))}
+                
+                {/* Language switcher in mobile menu */}
+                <div className="px-4 py-2">
+                  <div className="flex space-x-2">
+                    {[
+                      { code: "ar", name: "العربية", flag: "🇸🇦" },
+                      { code: "en", name: "English", flag: "🇺🇸" }
+                    ].map((language) => (
+                      <Button
+                        key={language.code}
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          // Add language switching logic here
+                          setIsOpen(false)
+                        }}
+                        className="text-sm"
+                      >
+                        {language.flag} {language.name}
+                      </Button>
+                    ))}
+                  </div>
+                </div>
               </div>
             </motion.div>
           )}

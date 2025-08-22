@@ -1,5 +1,6 @@
 "use client"
 import { useSession, signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
 import { useState } from "react"
 import { motion } from "framer-motion"
 import {
@@ -27,6 +28,7 @@ import { Badge } from "@/components/ui/badge"
 import { Calendar as CalendarComponent } from "@/components/ui/calendar"
 import Link from "next/link"
 import { book_an_event, get_all_events } from "@/server/google-calendar";
+import { useTranslations } from "next-intl"
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -34,76 +36,33 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: "easeOut" }
 }
 
-const services = [
-  "نظام الحجز الإلكتروني والإدارة",
-  "المساعد الذكي المخصص وأنظمة الأتمتة",
-  "تكامل الرسائل الجماعية",
-  "التخصيص بالذكاء الاصطناعي",
-  "استشارة عامة",
-  "تطوير موقع إلكتروني",
-  "تطوير تطبيق جوال"
-]
-
-const consultationTypes = [
-  {
-    id: "free",
-    name: "استشارة مجانية",
-    duration: "30 دقيقة",
-    price: "مجاناً",
-    description: "جلسة تعريفية لفهم احتياجاتك",
-    timeInMinites: 30 
-  },
-  {
-    id: "detailed",
-    name: "استشارة مفصلة",
-    duration: "60 دقيقة",
-    price: "200 درهم",
-    description: "تحليل شامل ووضع خطة عمل",
-    timeInMinites: 60 
-
-  },
-  {
-    id: "technical",
-    name: "استشارة تقنية",
-    duration: "90 دقيقة",
-    price: "300 درهم",
-    description: "مراجعة تقنية متخصصة",
-    timeInMinites: 90
-
-  }
-]
-
-
-
 export default function BookingPage({bookedDict}) {
-const now = new Date() ; 
+  const t = useTranslations("BookingPage")
+  const now = new Date() ; 
   const [selectedDate, setSelectedDate] = useState(new Date(
     now.getFullYear(),
-  now.getMonth(),
-  now.getDate(),
-  9,  
-  0,  
-  0,
-  0   
-))
+    now.getMonth(),
+    now.getDate(),
+    9,  
+    0,  
+    0,
+    0   
+  ))
   const [calendarView, setCalendarView] = useState("month")
   const [selectedConsultation, setSelectedConsultation] = useState("")
   const [formData, setFormData] = useState({
-    name: "aa",
-    email: "a@a.com",
-    phone: "+99999",
+    name: "",
+    email: "",
+    phone: "",
     service: "",
     message: ""
   })
 
+  const services = t.raw("services")
+  const consultationTypes = t.raw("consultationTypes")
 
-  const disabled =  selectedDate.toISOString().split('T')[0];
-
-    let bookedSlots = bookedDict[disabled]
-  
-
-
- 
+  const disabled = selectedDate.toISOString().split('T')[0];
+  let bookedSlots = bookedDict[disabled]
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isBooked, setIsBooked] = useState(false)
@@ -113,10 +72,13 @@ const now = new Date() ;
   }
 
   const bookOnGoogle = async () => {
-    console.log(formData)
+    const selectedConsultationType = consultationTypes.find(
+      type => type.id === selectedConsultation
+    )
+    
     const endDate = new Date(selectedDate); 
     const startMin = endDate.getMinutes() ; 
-    endDate.setMinutes(startMin + selectedConsultationType.timeInMinites );
+    endDate.setMinutes(startMin + selectedConsultationType.timeInMinites);
 
     const event = {
       summary: formData.name,
@@ -130,13 +92,9 @@ const now = new Date() ;
       },
       summary: `Appointment with ${formData.name}`,
       description: "discription",
-   
     };
 
-
-
     return await book_an_event(event)
-
   };
 
   const handleBooking = async e => {
@@ -145,43 +103,29 @@ const now = new Date() ;
 
     setIsSubmitting(true)
     if (await bookOnGoogle()){
-    setIsSubmitting(false)
-    setIsBooked(true)
-    // Reset form after 5 seconds
-    setTimeout(() => {
+      setIsSubmitting(false)
+      setIsBooked(true)
+      // Reset form after 8 seconds
+      setTimeout(() => {
+        const router = useRouter();
+        router.refresh();
+        setSelectedConsultation("")
+        setFormData({ name: "", email: "", phone: "", service: "", message: "" })
+      }, 8000)
+    } else {
+      console.log("failed")
       setIsBooked(false)
-    
-      setSelectedConsultation("")
-      setFormData({ name: "", email: "", phone: "", service: "", message: "" })
-    }, 5000)
-}
-else{
-    console.log("failed")
-      setIsBooked(false)
-    setIsSubmitting(false)
-}
+      setIsSubmitting(false)
+    }
   }
 
   const selectedConsultationType = consultationTypes.find(
     type => type.id === selectedConsultation
   )
 
-
-// if (!session) {
-//     return (
-//       <div className="flex flex-col items-center justify-center min-h-screen">
-//         <h1 className="text-2xl mb-4">Booking System</h1>
-//         <Button onClick={() => signIn('google')}>
-//           Sign in with Google to Book
-//         </Button>
-//       </div>
-//     );
-//   }
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-[#A5D5A9]/10 to-[#78C487]/20 dark:from-[#171717] dark:via-[#404544]/20 dark:to-[#78C487]/10 pt-20">
+    <div className="min-h-screen bg-gradient-to-br from-[#ddd] via-[#A5D5A9]/10 to-[#78C487]/20 dark:from-[#171717] dark:via-[#404544]/20 dark:to-[#78C487]/10 pt-20">
       {/* Hero Section */}
-      {/* <a onClick={signOut('google')}> <img src={session.user.image} /> </a> */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl text-center">
           <motion.div
@@ -190,11 +134,10 @@ else{
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-5xl font-bold text-[#404544] dark:text-white mb-6">
-              احجز استشارتك المجانية
+              {t("hero.title")}
             </h1>
             <p className="text-xl text-[#404544]/70 dark:text-white/70 max-w-3xl mx-auto leading-relaxed">
-              اختر الوقت المناسب لك واحصل على استشارة مخصصة من خبرائنا في
-              التكنولوجيا السحابية
+              {t("hero.description")}
             </p>
           </motion.div>
         </div>
@@ -212,21 +155,20 @@ else{
               <CardContent className="p-0">
                 <CheckCircle className="h-20 w-20 text-[#78C487] mx-auto mb-6" />
                 <h2 className="text-3xl font-bold text-[#404544] dark:text-white mb-4">
-                  تم تأكيد حجزك بنجاح!
+                  {t("success.title")}
                 </h2>
                 <p className="text-lg text-[#404544]/70 dark:text-white/70 mb-6">
-                  شكراً لك {formData.name}، تم حجز موعدك بنجاح. ستصلك رسالة
-                  تأكيد على بريدك الإلكتروني.
+                  {t("success.message", { name: formData.name })}
                 </p>
 
                 <div className="bg-white dark:bg-[#404544] p-6 rounded-2xl mb-6">
                   <h3 className="text-lg font-semibold text-[#404544] dark:text-white mb-4">
-                    تفاصيل الموعد
+                    {t("success.detailsTitle")}
                   </h3>
                   <div className="space-y-3 text-right">
                     <div className="flex justify-between">
                       <span className="text-[#404544]/70 dark:text-white/70">
-                        التاريخ والوقت:
+                        {t("success.dateTime")}:
                       </span>
                       <span className="font-medium text-[#404544] dark:text-white">
                         {selectedDate?.toLocaleDateString("ar-AE", {
@@ -241,7 +183,7 @@ else{
                     </div>
                     <div className="flex justify-between">
                       <span className="text-[#404544]/70 dark:text-white/70">
-                        نوع الاستشارة:
+                        {t("success.consultationType")}:
                       </span>
                       <span className="font-medium text-[#404544] dark:text-white">
                         {selectedConsultationType?.name}
@@ -249,7 +191,7 @@ else{
                     </div>
                     <div className="flex justify-between">
                       <span className="text-[#404544]/70 dark:text-white/70">
-                        المدة:
+                        {t("success.duration")}:
                       </span>
                       <span className="font-medium text-[#404544] dark:text-white">
                         {selectedConsultationType?.duration}
@@ -263,11 +205,11 @@ else{
                     className="bg-[#78C487] hover:bg-[#78C487]/90 text-white"
                     onClick={() => window.location.reload()}
                   >
-                    حجز موعد آخر
+                    {t("success.anotherBooking")}
                     <Calendar className="ml-2 h-4 w-4" />
                   </Button>
                   <Button variant="outline" asChild>
-                    <Link href="/">العودة للرئيسية</Link>
+                    <Link href="/">{t("success.backToHome")}</Link>
                   </Button>
                 </div>
               </CardContent>
@@ -285,7 +227,7 @@ else{
                 <CardHeader>
                   <CardTitle className="text-2xl font-bold text-[#404544] dark:text-white flex items-center">
                     <Calendar className="h-6 w-6 mr-3 text-[#78C487]" />
-                    اختر التاريخ والوقت
+                    {t("calendar.title")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -313,7 +255,7 @@ else{
                 <CardHeader>
                   <CardTitle className="text-xl font-bold text-[#404544] dark:text-white flex items-center">
                     <Clock className="h-5 w-5 mr-3 text-[#78C487]" />
-                    نوع الاستشارة
+                    {t("consultation.title")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -358,7 +300,7 @@ else{
                 <CardHeader>
                   <CardTitle className="text-xl font-bold text-[#404544] dark:text-white flex items-center">
                     <User className="h-5 w-5 mr-3 text-[#78C487]" />
-                    معلومات التواصل
+                    {t("form.title")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -366,7 +308,7 @@ else{
                     <div className="grid md:grid-cols-2 gap-4">
                       <div>
                         <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                          الاسم الكامل *
+                          {t("form.fields.name")} *
                         </label>
                         <Input
                           required
@@ -374,23 +316,22 @@ else{
                           onChange={e =>
                             handleInputChange("name", e.target.value)
                           }
-                          placeholder="اسمك الكامل"
+                          placeholder={t("form.placeholders.name")}
                           className="border-[#A5D5A9]/30 focus:border-[#78C487]"
                         />
                       </div>
                       <div>
                         <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                          البريد الإلكتروني *
+                          {t("form.fields.email")} *
                         </label>
                         <Input
                           type="email"
                           required
-                         // value={session.user.email}
-                            value={formData.email}
+                          value={formData.email}
                           onChange={e =>
                             handleInputChange("email", e.target.value)
                           }
-                          placeholder="your@email.com"
+                          placeholder={t("form.placeholders.email")}
                           className="border-[#A5D5A9]/30 focus:border-[#78C487]"
                         />
                       </div>
@@ -398,7 +339,7 @@ else{
 
                     <div>
                       <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                        رقم الهاتف *
+                        {t("form.fields.phone")} *
                       </label>
                       <Input
                         type="tel"
@@ -407,14 +348,14 @@ else{
                         onChange={e =>
                           handleInputChange("phone", e.target.value)
                         }
-                        placeholder="+971 XX XXX XXXX"
+                        placeholder={t("form.placeholders.phone")}
                         className="border-[#A5D5A9]/30 focus:border-[#78C487]"
                       />
                     </div>
 
                     <div>
                       <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                        الخدمة المطلوبة
+                        {t("form.fields.service")}
                       </label>
                       <Select
                         value={formData.service}
@@ -423,7 +364,7 @@ else{
                         }
                       >
                         <SelectTrigger className="border-[#A5D5A9]/30 focus:border-[#78C487]">
-                          <SelectValue placeholder="اختر الخدمة" />
+                          <SelectValue placeholder={t("form.placeholders.service")} />
                         </SelectTrigger>
                         <SelectContent>
                           {services.map((service, index) => (
@@ -437,14 +378,14 @@ else{
 
                     <div>
                       <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                        تفاصيل إضافية
+                        {t("form.fields.message")}
                       </label>
                       <Textarea
                         value={formData.message}
                         onChange={e =>
                           handleInputChange("message", e.target.value)
                         }
-                        placeholder="أخبرنا المزيد عن مشروعك أو استفسارك..."
+                        placeholder={t("form.placeholders.message")}
                         rows={4}
                         className="border-[#A5D5A9]/30 focus:border-[#78C487]"
                       />
@@ -460,11 +401,11 @@ else{
                       {isSubmitting ? (
                         <>
                           <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                          جاري الحجز...
+                          {t("form.submitting")}
                         </>
                       ) : (
                         <>
-                          تأكيد الحجز
+                          {t("form.submit")}
                           <CalendarCheck className="ml-2 h-5 w-5" />
                         </>
                       )}
@@ -488,10 +429,10 @@ else{
               className="text-center mb-8"
             >
               <h2 className="text-3xl font-bold text-[#404544] dark:text-white mb-4">
-                تحتاج مساعدة فورية؟
+                {t("quickContact.title")}
               </h2>
               <p className="text-lg text-[#404544]/70 dark:text-white/70">
-                تواصل معنا مباشرة للحصول على رد سريع
+                {t("quickContact.subtitle")}
               </p>
             </motion.div>
 
@@ -510,7 +451,7 @@ else{
                       WhatsApp
                     </h3>
                     <p className="text-sm text-[#404544]/70 dark:text-white/70">
-                      رد فوري خلال دقائق
+                      {t("quickContact.whatsapp")}
                     </p>
                   </div>
                 </div>
@@ -527,7 +468,7 @@ else{
                   </div>
                   <div>
                     <h3 className="font-semibold text-[#404544] dark:text-white">
-                      اتصال مباشر
+                      {t("quickContact.phoneTitle")}
                     </h3>
                     <p className="text-sm text-[#404544]/70 dark:text-white/70">
                       +971 XX XXX XXXX

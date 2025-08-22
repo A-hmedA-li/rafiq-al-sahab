@@ -14,6 +14,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
 import Image from "next/image"
+import { useTranslations } from "next-intl"
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -21,133 +22,96 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: "easeOut" }
 }
 
-const services = [
-  {
-    id: "booking",
-    icon: Calendar,
-    title: "Online Booking Setup & Management",
-    arabicTitle: "تركيب نظام حجز المواعيد الألكتروني",
-    description:
-      "دع عملائك يحجزون لديك بسهولة",
-    features: [
-      "واجهة حجز سهلة الاستخدام",
-      "تذكيرات تلقائية للعملاء",
-      "تكامل مع التقويم",
-      "إدارة المواعيد والإلغاءات",
-      "تقارير مفصلة"
-    ],
-    image: "/images/lg.png",
-    color: "text-[#78C487]",
-    bgColor: "bg-[#78C487]/10"
-  },
-  {
-    id: "ai-agent",
-    icon: Brain,
-    title: "Custom AI Agent & Automation Systems",
-    arabicTitle: "الوكيل الذكي الذي لا ينام",
-    description:
-      "نصمم لك موظفك الذكي المثالي الذي لا ينام للرد على عملائك ومتابعة استفساراتهم يساعد في عمليات البيع وإغلاق الصفقات",
-    features: [
-      "ذكاء اصطناعي متقدم",
-      "يتحدث بلغة أعمالك ويقدم مستوى خبرتك ولكن على مدار الساعة",
-      "أتمتة المهام الروتينية",
-      "تكامل مع أنظمتك الحالية",
-      "تحسين مستمر للأداء"
-    ],
-    image: "/images/lg.png",
-    color: "text-[#A5D5A9]",
-    bgColor: "bg-[#A5D5A9]/10"
-  },
-  {
-    id: "messaging",
-    icon: MessageSquare,
-    title: "Mass Messaging Integration",
-    arabicTitle: "تكامل الرسائل الجماعية",
-    description:
-      "ربط WhatsApp و Telegram لتواصل فعال مع العملاء وإرسال رسائل جماعية مخصصة",
-    features: [
-      "تكامل WhatsApp Business",
-      "ربط Telegram Bot",
-      "رسائل جماعية مخصصة",
-      "أتمتة الردود",
-      "تتبع معدلات الفتح والتفاعل"
-    ],
-    image: "/images/lg.png",
-    color: "text-[#78C487]",
-    bgColor: "bg-[#78C487]/10"
-  },
-  {
-    id: "personalization",
-    icon: Zap,
-    title: "AI-Powered Personalization",
-    arabicTitle: "التخصيص بالذكاء الاصطناعي",
-    description:
-      "تخصيص تجربة العميل باستخدام الذكاء الاصطناعي لزيادة المبيعات والرضا",
-    features: [
-      "تحليل سلوك العملاء",
-      "توصيات مخصصة",
-      "تجربة مستخدم ديناميكية",
-      "تحسين معدلات التحويل",
-      "تقارير تحليلية متقدمة"
-    ],
-    image: "/images/lg.png",
-    color: "text-[#A5D5A9]",
-    bgColor: "bg-[#A5D5A9]/10"
-  },
-    {
-    id: "custom_sms",
-    icon: Zap,
-    title: "custom_sms_mass_messaging",
-    arabicTitle: "رسائل SMS مخصصة باسم أعمالك",
-    description:
-      "إعداد وتركيب نظام يتكامل مع عملك مهما كان نوعه لإرسال رسائل قصيرة  باسم شركتك وبشكل تلقائي",
-    features: [
-      "تغطية لجميع أنواع الأعمال: من المتاجر الإلكترونية إلى الأنظمة الإدارية",
-      "توصيات مخصصة",
-      "تجربة مستخدم ديناميكية",
-      "تحسين معدلات رضى العملاء والتذكير بالمواعيد",
-      "حصرا في دولة الإمارات العربية المتحدة"
-    ],
-    image: "/images/lg.png",
-    color: "text-[#A5D5A9]",
-    bgColor: "bg-[#A5D5A9]/10"
-  },
-    {
-    id: "ai_automation",
-    icon: Zap,
-    title: "ai_automation",
-    arabicTitle: "لا تبيع السمك.. علم الـ AI كيف يصيد",
-    description:
-      "نظام مدعوم بالذكاء الإصطناعي يدير العمليات والإجرائيات حسب الطلب",
-    features: [
-      "تحويل المهام المكررة إلى عمليات يتم إنجازها تلقائيا",
-      "مخصص وفريد ومناسب لمهامك",
-      "دمج مع البريد الإليكتروني و Whatsapp وغيرها",
-      "نتعلم من بياناتك ومنسرع العملية",
-     
-    ],
-    image: "/images/lg.png",
-    color: "text-[#A5D5A9]",
-    bgColor: "bg-[#A5D5A9]/10"
-  }
-]
-
 export default function ServicesPage() {
+  const t = useTranslations("ServicesPage")
+
+  const services = [
+    {
+      id: "booking",
+      icon: Calendar,
+      title: t("services.0.title"),
+      arabicTitle: t("services.0.arabicTitle"),
+      description: t("services.0.description"),
+      features: [...Array(5)].map((_, i) => t(`services.0.features.${i}`)),
+      image: "/images/lg.png",
+      color: "text-[#78C487]",
+      bgColor: "bg-[#78C487]/10"
+    },
+    {
+      id: "ai-agent",
+      icon: Brain,
+      title: t("services.1.title"),
+      arabicTitle: t("services.1.arabicTitle"),
+      description: t("services.1.description"),
+      features: [...Array(5)].map((_, i) => t(`services.1.features.${i}`)),
+      image: "/images/lg.png",
+      color: "text-[#A5D5A9]",
+      bgColor: "bg-[#A5D5A9]/10"
+    },
+    {
+      id: "messaging",
+      icon: MessageSquare,
+      title: t("services.2.title"),
+      arabicTitle: t("services.2.arabicTitle"),
+      description: t("services.2.description"),
+      features: [...Array(5)].map((_, i) => t(`services.2.features.${i}`)),
+      image: "/images/lg.png",
+      color: "text-[#78C487]",
+      bgColor: "bg-[#78C487]/10"
+    },
+    {
+      id: "personalization",
+      icon: Zap,
+      title: t("services.3.title"),
+      arabicTitle: t("services.3.arabicTitle"),
+      description: t("services.3.description"),
+      features: [...Array(5)].map((_, i) => t(`services.3.features.${i}`)),
+      image: "/images/lg.png",
+      color: "text-[#A5D5A9]",
+      bgColor: "bg-[#A5D5A9]/10"
+    },
+    {
+      id: "custom_sms",
+      icon: Zap,
+      title: t("services.4.title"),
+      arabicTitle: t("services.4.arabicTitle"),
+      description: t("services.4.description"),
+      features: [...Array(5)].map((_, i) => t(`services.4.features.${i}`)),
+      image: "/images/lg.png",
+      color: "text-[#A5D5A9]",
+      bgColor: "bg-[#A5D5A9]/10"
+    },
+    {
+      id: "ai_automation",
+      icon: Zap,
+      title: t("services.5.title"),
+      arabicTitle: t("services.5.arabicTitle"),
+      description: t("services.5.description"),
+      features: [...Array(5)].map((_, i) => t(`services.5.features.${i}`)),
+
+      
+      image: "/images/lg.png",
+      color: "text-[#A5D5A9]",
+      bgColor: "bg-[#A5D5A9]/10"
+    }
+  ]
+
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-white via-[#A5D5A9]/10 to-[#78C487]/20 dark:from-[#171717] dark:via-[#404544]/20 dark:to-[#78C487]/10 pt-20">
+    <div className="min-h-screen bg-gradient-to-br from-[#ddd] via-[#A5D5A9]/30 to-[#78C487]/20 dark:from-[#171717] dark:via-[#404544]/20 dark:to-[#78C487]/10 pt-20">
       {/* Hero Section */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl text-center">
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity:0.5, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-5xl font-bold text-[#404544] dark:text-white mb-6">
-              خدماتنا المتميزة
+              {t("hero.title")}
             </h1>
             <p className="text-xl text-[#404544]/70 dark:text-white/70 max-w-3xl mx-auto leading-relaxed">
-              حلول تقنية متطورة مصممة خصيصاً لتنمية أعمالك وتحسين تجربة عملائك
+              {t("hero.description")}
             </p>
           </motion.div>
         </div>
@@ -156,14 +120,16 @@ export default function ServicesPage() {
       {/* Services Grid */}
       <section className="py-16 px-4">
         <div className="container mx-auto max-w-6xl">
-          <div className="space-y-16">
+          <div className="space-y-16 ">
             {services.map((service, index) => (
               <motion.div
                 key={service.id}
-                initial={{ opacity: 0, y: 60 }}
+                initial={{ opacity: 0.3, y: 60 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
+                transition={{ duration: 0.3, delay: index * 0.1 }}
+
+                className="bg-[#A5D5A9]/20 dark:bg-black"
               >
                 <Card className="overflow-hidden hover:shadow-xl transition-all duration-300">
                   <div
@@ -186,7 +152,7 @@ export default function ServicesPage() {
                           />
                         </div>
                         <CardTitle className="text-2xl font-bold text-[#404544] dark:text-white mb-2">
-                          {service.arabicTitle}
+                          {service.title}
                         </CardTitle>
                         <p className="text-[#404544]/70 dark:text-white/70 leading-relaxed">
                           {service.description}
@@ -196,7 +162,7 @@ export default function ServicesPage() {
                       <CardContent className="p-0">
                         <div className="mb-6">
                           <h4 className="text-lg font-semibold text-[#404544] dark:text-white mb-4">
-                            المميزات الرئيسية:
+                            {t("featuresTitle")}
                           </h4>
                           <ul className="space-y-3">
                             {service.features.map((feature, featureIndex) => (
@@ -225,7 +191,7 @@ export default function ServicesPage() {
                             asChild
                           >
                             <Link href={`/contact?service=${service.id}`}>
-                              اطلب الخدمة
+                              {t("buttons.requestService")}
                               <ArrowRight className="ml-2 h-4 w-4" />
                             </Link>
                           </Button>
@@ -234,7 +200,7 @@ export default function ServicesPage() {
                             className={`border-current ${service.color} hover:bg-current hover:text-white`}
                             asChild
                           >
-                            <Link href="/contact">استشارة مجانية</Link>
+                            <Link href="/booking">{t("buttons.freeConsultation")}</Link>
                           </Button>
                         </div>
                       </CardContent>
@@ -275,31 +241,15 @@ export default function ServicesPage() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-[#404544] dark:text-white mb-4">
-              لماذا تختارنا؟
+              {t("whyChooseUs.title")}
             </h2>
             <p className="text-lg text-[#404544]/70 dark:text-white/70 max-w-2xl mx-auto">
-              نحن نقدم أكثر من مجرد خدمات تقنية - نحن شركاؤك في النجاح
+              {t("whyChooseUs.subtitle")}
             </p>
           </motion.div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[
-              {
-                icon: Star,
-                title: "خبرة متخصصة",
-                description: "فريق من الخبراء المتخصصين في أحدث التقنيات"
-              },
-              {
-                icon: CheckCircle,
-                title: "حلول مخصصة",
-                description: "كل حل مصمم خصيصاً لاحتياجات عملك الفريدة"
-              },
-              {
-                icon: MessageSquare,
-                title: "دعم مستمر",
-                description: "دعم فني متواصل وصيانة دورية لضمان الأداء الأمثل"
-              }
-            ].map((item, index) => (
+            {t.raw("whyChooseUs.items").map((item, index) => (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 30 }}
@@ -309,7 +259,7 @@ export default function ServicesPage() {
               >
                 <Card className="text-center p-6 h-full hover:shadow-lg transition-all duration-300">
                   <div className="inline-flex p-3 rounded-full bg-[#78C487]/10 mb-4">
-                    <item.icon className="h-8 w-8 text-[#78C487]" />
+                    <Star className="h-8 w-8 text-[#78C487]" />
                   </div>
                   <h3 className="text-xl font-semibold text-[#404544] dark:text-white mb-3">
                     {item.title}
@@ -333,10 +283,10 @@ export default function ServicesPage() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-[#404544] dark:text-white mb-4">
-              جاهز لبدء مشروعك؟
+              {t("cta.title")}
             </h2>
             <p className="text-xl text-[#404544]/70 dark:text-white/70 mb-8 leading-relaxed">
-              تواصل معنا اليوم واحصل على استشارة مجانية لمناقشة احتياجاتك
+              {t("cta.description")}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
@@ -345,7 +295,7 @@ export default function ServicesPage() {
                 asChild
               >
                 <Link href="/contact">
-                  احصل على استشارة مجانية
+                  {t("cta.buttons.consultation")}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
@@ -355,7 +305,7 @@ export default function ServicesPage() {
                 className="border-[#78C487] text-[#78C487] hover:bg-[#78C487] hover:text-white px-8 py-4 text-lg bg-transparent"
                 asChild
               >
-                <Link href="/portfolio">شاهد أعمالنا</Link>
+                <Link href="/portfolio">{t("cta.buttons.portfolio")}</Link>
               </Button>
             </div>
           </motion.div>

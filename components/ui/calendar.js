@@ -4,6 +4,7 @@ import * as React from "react"
 import { ChevronRight, ChevronLeft, CalendarIcon, Clock } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { useTranslations } from "next-intl"
 
 const timeSlots = [
   "09:00",
@@ -39,42 +40,17 @@ const Calendar = React.forwardRef(
     },
     ref
   ) => {
-    const [currentDate, setCurrentDate] = React.useState(selected )
+    const t = useTranslations("Calendar")
+    const [currentDate, setCurrentDate] = React.useState(selected)
     const [selectedTime, setSelectedTime] = React.useState("")
-    
 
     const today = new Date()
     const currentMonth = currentDate.getMonth()
     const currentYear = currentDate.getFullYear()
 
-
-
-  
-    const monthNames = [
-      "يناير",
-      "فبراير",
-      "مارس",
-      "أبريل",
-      "مايو",
-      "يونيو",
-      "يوليو",
-      "أغسطس",
-      "سبتمبر",
-      "أكتوبر",
-      "نوفمبر",
-      "ديسمبر"
-    ]
-
-    const dayNames = [
-      "الأحد",
-      "الاثنين",
-      "الثلاثاء",
-      "الأربعاء",
-      "الخميس",
-      "الجمعة",
-      "السبت"
-    ]
-    const dayNamesShort = ["أح", "إث", "ثل", "أر", "خم", "جم", "سب"]
+    const monthNames = t.raw("monthNames")
+    const dayNames = t.raw("dayNames")
+    const dayNamesShort = t.raw("dayNamesShort")
 
     const getDaysInMonth = date => {
       const today = new Date();
@@ -89,27 +65,25 @@ const Calendar = React.forwardRef(
 
       // Previous month's days
       for (let i = startingDayOfWeek - 1; i >= 0; i--) {
-        const prevDate = new Date(year, month, -i , 9 , 0 , 0 , 0 )
+        const prevDate = new Date(year, month, -i, 9, 0, 0, 0)
         days.push({ date: prevDate, isCurrentMonth: today <= prevDate })
       }
 
       // Current month's days
       for (let day = 1; day <= daysInMonth; day++) {
-
-        const  dateInthisMonth = new Date(year, month, day , 9 , 0 , 0 , 0); 
+        const dateInthisMonth = new Date(year, month, day, 9, 0, 0, 0); 
         days.push({ date: dateInthisMonth, isCurrentMonth: today <= dateInthisMonth })
       }
 
       // Next month's days to fill the grid
       const remainingDays = 42 - days.length
       for (let day = 1; day <= remainingDays; day++) {
-        const dateInNextMonth = new Date(year, month + 1, day , 9 , 0 , 0 ,0)
+        const dateInNextMonth = new Date(year, month + 1, day, 9, 0, 0, 0)
         days.push({
           date: dateInNextMonth,
           isCurrentMonth: dateInNextMonth > today
         })
       }
-
 
       return days
     }
@@ -133,7 +107,6 @@ const Calendar = React.forwardRef(
     }
 
     const navigateDate = direction => {
-      
       const newDate = new Date(currentDate)
 
       switch (view) {
@@ -154,26 +127,20 @@ const Calendar = React.forwardRef(
       }
 
       setCurrentDate(newDate)
-        onSelect?.(newDate)
-      
+      onSelect?.(newDate)
     }
 
     const handleDateSelect = (date, time) => {
-
-
-     
       if (time) {
         const [hours, minutes] = time.split(":").map(Number)
         const selectedDateTime = new Date(date.getFullYear(),
           date.getMonth(),
           date.getDate(),
-          hours,  
-          minutes,  
-          0,  
-          0 )
-        // selectedDateTime.setHours(hours, minutes, 0, 0)s
+          hours,
+          minutes,
+          0,
+          0)
         onSelect?.(selectedDateTime)
-        console.log('selectred' ,selected)
         setSelectedTime(time)
       } else {
         onSelect?.(date)
@@ -305,9 +272,8 @@ const Calendar = React.forwardRef(
 
           <div className="grid grid-cols-7 gap-1">
             {days.map((day, index) => (
-              
               <button
-                key={index }
+                key={index}
                 onClick={() =>{
                   onViewChange?.("day")
                   return day.isCurrentMonth && handleDateSelect(day.date)
@@ -401,7 +367,7 @@ const Calendar = React.forwardRef(
           </div>
 
           {/* View Switcher */}
-          <div className="flex  lg:bg-[#78C487]/50 rounded-full p-1">
+          <div className="flex lg:bg-[#78C487]/50 rounded-full p-1">
             {["day", "week", "month", "year"].map(viewType => (
               <button
                 key={viewType}
@@ -413,10 +379,7 @@ const Calendar = React.forwardRef(
                     : "text-[#404544] hover:bg-[#78C487]/20 dark:text-white"
                 )}
               >
-                {viewType === "day" && "يوم"}
-                {viewType === "week" && "أسبوع"}
-                {viewType === "month" && "شهر"}
-                {viewType === "year" && "سنة"}
+                {t(`viewTypes.${viewType}`)}
               </button>
             ))}
           </div>
@@ -435,8 +398,8 @@ const Calendar = React.forwardRef(
           <div className="mt-6 p-4 bg-[#78C487]/5 rounded-2xl">
             <div className="flex items-center justify-center space-x-2 text-[#404544] dark:text-white">
               <CalendarIcon className="h-4 w-4 text-[#78C487]" />
-              <span className={`font-medium `}>
-                الموعد المحدد:{" "}
+              <span className="font-medium">
+                {t("selectedDate")}:{" "}
                 {selected.toLocaleDateString("ar-AE", {
                   weekday: "long",
                   year: "numeric",
@@ -445,23 +408,8 @@ const Calendar = React.forwardRef(
                   hour: "2-digit",
                   minute: "2-digit"
                 })}
-
-                
               </span>
-               
             </div>
-              {/* {
-                
-                
-                selected > new Date(selected.setHours(17 , 0 , 0 ,0 ))
-                    || selected < new Date(selected.setHours(8 , 0 ,0 , 0)) && 
-                    <span className="text-[#dc3545] text-[0.876rem] inline-block p-3 items-center" > 
-                  
-                    الموعد المحدد خارج ساعات العمل
-                    </span>
-                
-                } */}
-
           </div>
         )}
       </div>
@@ -471,5 +419,4 @@ const Calendar = React.forwardRef(
 
 Calendar.displayName = "Calendar"
 
-
-export {Calendar}
+export { Calendar }
