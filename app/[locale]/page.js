@@ -35,25 +35,25 @@ export default function HomePage() {
 
   const services = [
   {
-    icon: Calendar,
+    image:"Rafiq Booking.gif",
     title: t("services.0.title"),
     description: t("services.0.description"),
     color: "text-[#78C487]"
   },
   {
-    icon: Brain,
+    image: "Smart Chatbot For Business.gif",
     title: t("services.1.title"),
     description: t("services.1.description"),
     color: "text-[#A5D5A9]"
   },
   {
-    icon: MessageSquare,
+    image: "Rafiq website.gif",
     title: t("services.2.title"),
     description: t("services.2.description"),
     color: "text-[#78C487]"
   },
   {
-    icon: Zap,
+    image: "Rafiq Ai Automation Final.gif",
     title: t("services.3.title"),
     description: t("services.3.description"),
     color: "text-[#A5D5A9]"
@@ -188,12 +188,18 @@ const portfolioItems = [
           >
             {services.map((service, index) => (
               <motion.div key={index} variants={fadeInUp}>
-                <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-2 border-[#A5D5A9]/30 group cursor-pointer">
+                <Card className="h-full hover:shadow-lg transition-all duration-300 hover:-translate-y-2 border-[#A5D5A9]/30 group cursor-pointer ">
                   <CardContent className="p-6 text-center">
                     <div
-                      className={`inline-flex p-3 rounded-full bg-[#78C487]/10 mb-4 group-hover:scale-110 transition-transform`}
+                      className={`  mb-4 group-hover:scale-110 transition-transform`}
                     >
-                      <service.icon className={`h-8 w-8 ${service.color}`} />
+                     <Image
+                      src={"/Web Designs/" + service.image}
+                      alt="service GIF"
+                      width={1570}
+                      height={1000}
+                      
+                    />
                     </div>
                     <h3 className="text-lg font-semibold text-[#404544] dark:text-white mb-3">
                       {service.title}
