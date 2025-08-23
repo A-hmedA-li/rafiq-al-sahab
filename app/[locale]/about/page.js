@@ -14,6 +14,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -21,64 +22,20 @@ const fadeInUp = {
   transition: { duration: 0.6, ease: "easeOut" }
 }
 
-const values = [
-  {
-    icon: Heart,
-    title: "من القلب إلى القلب",
-    description:
-      "نتعامل مع عملائنا كأصدقاء، نفهم احتياجاتهم ونقدم لهم الحلول بصدق وشفافية",
-    color: "text-[#78C487]"
-  },
-  {
-    icon: Lightbulb,
-    title: "الابتكار المستمر",
-    description:
-      "نسعى دائماً لاستخدام أحدث التقنيات وتطوير حلول مبتكرة تواكب العصر",
-    color: "text-[#A5D5A9]"
-  },
-  {
-    icon: CheckCircle,
-    title: "الجودة أولاً",
-    description:
-      "نلتزم بأعلى معايير الجودة في كل مشروع، لأن رضا عملائنا هو أولويتنا",
-    color: "text-[#78C487]"
-  },
-  {
-    icon: Users,
-    title: "العمل الجماعي",
-    description: "نؤمن بقوة الفريق ونعمل معاً لتحقيق أفضل النتائج لعملائنا",
-    color: "text-[#A5D5A9]"
-  }
-]
-
-const milestones = [
-  {
-    year: "2024",
-    title: "تأسيس الشركة",
-    description: "بداية رحلة رفيق السحاب مع رؤية واضحة لتبسيط التكنولوجيا",
-    icon: Award
-  },
-  {
-    year: "2024",
-    title: "أول 10 عملاء",
-    description: "نجحنا في خدمة أول 10 عملاء وتحقيق نتائج مميزة لهم",
-    icon: Users
-  },
-  {
-    year: "2024",
-    title: "توسيع الخدمات",
-    description: "أضفنا خدمات جديدة في الذكاء الاصطناعي والأتمتة",
-    icon: Lightbulb
-  },
-  {
-    year: "2025",
-    title: "التوسع الإقليمي",
-    description: "خطط للتوسع في دول الخليج العربي",
-    icon: Target
-  }
-]
-
 export default function AboutPage() {
+  const t = useTranslations("AboutPage")
+
+  const values = t.raw("values").values.map((value, index) => ({
+    ...value,
+    icon: [Heart, Lightbulb, CheckCircle, Users][index],
+    color: index % 2 === 0 ? "text-[#78C487]" : "text-[#A5D5A9]"
+  }))
+
+  const milestones = t.raw("milestones").map((milestone, index) => ({
+    ...milestone,
+    icon: [Award, Users, Lightbulb, Target][index]
+  }))
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-[#A5D5A9]/10 to-[#78C487]/20 dark:from-[#171717] dark:via-[#404544]/20 dark:to-[#78C487]/10 pt-20">
       {/* Hero Section */}
@@ -90,11 +47,10 @@ export default function AboutPage() {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl md:text-5xl font-bold text-[#404544] dark:text-white mb-6">
-              من نحن
+              {t("hero.title")}
             </h1>
             <p className="text-xl text-[#404544]/70 dark:text-white/70 max-w-3xl mx-auto leading-relaxed">
-              نحن رفيق السحاب - شركة تقنية متخصصة في تطوير الحلول السحابية
-              والذكاء الاصطناعي
+              {t("hero.description")}
             </p>
           </motion.div>
         </div>
@@ -111,25 +67,12 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
             >
               <h2 className="text-3xl md:text-4xl font-bold text-[#404544] dark:text-white mb-6">
-                قصتنا
+                {t("story.title")}
               </h2>
               <div className="space-y-4 text-[#404544]/80 dark:text-white/80 leading-relaxed">
-                <p>
-                  بدأت فكرة رفيق السحاب من إيماننا العميق بأن التكنولوجيا يجب أن
-                  تكون في خدمة الإنسان، وليس العكس. رأينا كيف تعاني الشركات
-                  الصغيرة والمتوسطة من تعقيدات التكنولوجيا، وقررنا أن نكون الجسر
-                  الذي يربط بين أحلامهم والواقع الرقمي.
-                </p>
-                <p>
-                  اسم "رفيق السحاب" يعكس فلسفتنا - نحن لسنا مجرد مقدمي خدمات، بل
-                  رفقاء في رحلة التحول الرقمي. نقف بجانب عملائنا، نفهم تحدياتهم،
-                  ونقدم لهم الحلول التي تناسب احتياجاتهم الفريدة.
-                </p>
-                <p>
-                  منذ تأسيسنا، نجحنا في مساعدة العشرات من الشركات في تحقيق
-                  أهدافها الرقمية، وما زلنا نسعى لتوسيع دائرة تأثيرنا الإيجابي
-                  في المنطقة.
-                </p>
+                {t.raw("story.paragraphs").map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
               </div>
             </motion.div>
 
@@ -141,7 +84,7 @@ export default function AboutPage() {
             >
               <Image
                 src="/images/lg.png"
-                alt="قصة رفيق السحاب"
+                alt={t("story.imageAlt")}
                 width={500}
                 height={400}
                 className="rounded-lg shadow-xl"
@@ -161,7 +104,7 @@ export default function AboutPage() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-[#404544] dark:text-white mb-4">
-              رؤيتنا ورسالتنا
+              {t("visionMission.title")}
             </h2>
           </motion.div>
 
@@ -178,14 +121,12 @@ export default function AboutPage() {
                     <Eye className="h-8 w-8 text-[#78C487]" />
                   </div>
                   <CardTitle className="text-2xl font-bold text-[#404544] dark:text-white">
-                    رؤيتنا
+                    {t("visionMission.vision.title")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-[#404544]/80 dark:text-white/80 leading-relaxed text-lg">
-                    أن نكون الشريك التقني الأول للشركات الصغيرة والمتوسطة في
-                    المنطقة، ونساهم في تحويل أفكارهم إلى حلول رقمية ناجحة تدفع
-                    بأعمالهم نحو المستقبل.
+                    {t("visionMission.vision.description")}
                   </p>
                 </CardContent>
               </Card>
@@ -203,14 +144,12 @@ export default function AboutPage() {
                     <Target className="h-8 w-8 text-[#A5D5A9]" />
                   </div>
                   <CardTitle className="text-2xl font-bold text-[#404544] dark:text-white">
-                    رسالتنا
+                    {t("visionMission.mission.title")}
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
                   <p className="text-[#404544]/80 dark:text-white/80 leading-relaxed text-lg">
-                    نقدم حلولاً تقنية مبتكرة ومخصصة تساعد عملاءنا على تحقيق
-                    أهدافهم بكفاءة وفعالية، مع التركيز على البساطة والجودة
-                    والدعم المستمر.
+                    {t("visionMission.mission.description")}
                   </p>
                 </CardContent>
               </Card>
@@ -229,10 +168,10 @@ export default function AboutPage() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-[#404544] dark:text-white mb-4">
-              قيمنا الأساسية
+              {t("values.title")}
             </h2>
             <p className="text-lg text-[#404544]/70 dark:text-white/70">
-              المبادئ التي توجه عملنا وتشكل هويتنا
+              {t("values.subtitle")}
             </p>
           </motion.div>
 
@@ -276,10 +215,10 @@ export default function AboutPage() {
             className="text-center mb-12"
           >
             <h2 className="text-3xl md:text-4xl font-bold text-[#404544] dark:text-white mb-4">
-              رحلتنا عبر الزمن
+              {t("milestonesSection.title")}
             </h2>
             <p className="text-lg text-[#404544]/70 dark:text-white/70">
-              المحطات المهمة في مسيرة رفيق السحاب
+              {t("milestonesSection.subtitle")}
             </p>
           </motion.div>
 
@@ -339,50 +278,63 @@ export default function AboutPage() {
             viewport={{ once: true }}
           >
             <h2 className="text-3xl md:text-4xl font-bold text-[#404544] dark:text-white mb-4">
-              فريق العمل
+              {t("team.title")}
             </h2>
             <p className="text-lg text-[#404544]/70 dark:text-white/70 mb-8">
-              خبراء متخصصون يعملون بشغف لتحقيق أهدافك
+              {t("team.subtitle")}
             </p>
 
             <Card className="p-8 bg-gradient-to-br from-[#78C487]/10 to-[#A5D5A9]/10">
               <CardContent className="p-0">
-                <div className="grid md:grid-cols-2 gap-8">
+                <div className="grid md:grid-cols-3 gap-8">
                   <div className="text-center">
-                    <Image
-                      src="/placeholder.svg?height=120&width=120"
-                      alt="Dr. Nazeeh Harfoosh"
-                      width={120}
-                      height={120}
-                      className="rounded-full mx-auto mb-4 border-4 border-[#78C487]/20"
-                    />
+                      <Image
+                          src="/people/Nazeeh.jpg"
+                          alt={"photo Nazeeh"}
+                          width={150}
+                          height={150}
+                          className="rounded-full mx-auto mb-4 border-4 border-[#78C487]/20 object-cover w-[100%] h-[50%]"
+                        />
                     <h3 className="text-lg font-semibold text-[#404544] dark:text-white mb-1">
-                      د. نزيه حرفوش
+                      {t("team.founder1.name")}
                     </h3>
-                    <p className="text-[#78C487] font-medium mb-2">
-                      الشريك المؤسس والمدير التقني
-                    </p>
+                    <br />
                     <p className="text-sm text-[#404544]/70 dark:text-white/70">
-                      خبير في الذكاء الاصطناعي والأتمتة
+                      {t("team.founder1.description")}
                     </p>
                   </div>
 
                   <div className="text-center">
-                    <Image
-                      src="/placeholder.svg?height=120&width=120"
-                      alt="Ahmad"
-                      width={120}
-                      height={120}
-                      className="rounded-full mx-auto mb-4 border-4 border-[#A5D5A9]/20"
-                    />
+                       <Image
+                          src="/people/Ahmad.jpg"
+                          alt={"photo Ahmad"}
+                          width={150}
+                          height={150}
+                          className="rounded-full mx-auto mb-4 border-4 border-[#78C487]/20 object-cover w-[100%] h-[50%]"
+                        />
                     <h3 className="text-lg font-semibold text-[#404544] dark:text-white mb-1">
-                      أحمد
+                      {t("team.founder2.name")}
                     </h3>
-                    <p className="text-[#A5D5A9] font-medium mb-2">
-                      الشريك المؤسس والمدير التنفيذي
-                    </p>
+                      <br />
                     <p className="text-sm text-[#404544]/70 dark:text-white/70">
-                      متخصص في الحلول السحابية وإدارة المشاريع
+                      {t("team.founder2.description")}
+                    </p>
+                  </div>
+                  <div className="text-center">
+                       <Image
+                          src="/people/Arados Software.png"
+                          alt={'photo Arados'}
+                          width={150}
+                          height={150}
+                          className="rounded-full mx-auto mb-4 border-4 border-[#78C487]/20 object-cover w-[100%] h-[50%]"
+                        />
+                    <h3 className="text-lg font-semibold text-[#404544] dark:text-white mb-1">
+                      {t("team.founder3.name")}
+                    </h3>
+                      <br />
+                    <p className="text-sm text-[#404544]/70 dark:text-white/70">
+                      {t("team.founder3.description")}
+
                     </p>
                   </div>
                 </div>
@@ -393,7 +345,7 @@ export default function AboutPage() {
                     asChild
                   >
                     <Link href="/founders">
-                      تعرف على الفريق بالتفصيل
+                      {t("team.cta")}
                       <Users className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>

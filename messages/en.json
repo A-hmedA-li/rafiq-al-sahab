@@ -65,6 +65,33 @@
         "tech": ["Booking System", "SMS", "Calendar"]
       }
     ],
+  "HowWeWork": {
+    "title": "How We Work?",
+    "subtitle": "Our Journey with the Client:",
+    "milestones": [
+      {
+        "year": "1",
+        "title": "Needs Discovery",
+        "description": "The beginning of the journey to find the simplest and most elegant solution"
+      },
+      {
+        "year": "2",
+        "title": "Designing the Right Solution",
+        "description": "We transform ideas into a well-studied plan and customized solution that fits your business goals and technical environment."
+      },
+      {
+        "year": "3",
+        "title": "Rapid Building + Testing",
+        "description": "We added new services in artificial intelligence and automation"
+      },
+      {
+        "year": "4",
+        "title": "Launch and Optimization",
+        "description": "We launch the solution and work on continuously monitoring and improving it to achieve the best long-term performance"
+      }
+    ]
+  },
+ 
     "foundersSection": {
       "title": "Meet Our Team",
       "subtitle": "Experts specialized in cloud technology and artificial intelligence",
@@ -77,6 +104,12 @@
         "name": "Ahmad",
         "role": "Co-Founder & CEO",
         "description": "Specialized in developing cloud solutions and managing technical projects"
+      },
+      
+      "founder3": {
+        "name": "Arados Software Company",
+        "role": "Co-Founder & CEO",
+        "description": "Technological partner for business management support. Committed to supporting our clients in facing information technology challenges."
       },
       "cta": "Learn More About Them"
     },
@@ -395,7 +428,136 @@
       "year": "Year"
     },
     "selectedDate": "Selected Date"
+  },
+  "Footer": {
+    "companyName": "Rafiq Al Sahab",
+    "description": "Your expert partner in cloud technology solutions. We transform your ideas into digital reality without complexity, from heart to heart.",
+    "contact": {
+      "email": "info@rafiqalsahab.com",
+      "phone": "+971 50 974 1123",
+      "location": "United Arab Emirates"
+    },
+    "sections": {
+      "services": "Our Services",
+      "company": "Company"
+    },
+    "links": {
+      "services": [
+        "Electronic Booking System",
+        "Custom AI Assistant",
+        "Mass Messaging Integration",
+        "AI-Powered Personalization"
+      ],
+      "company": [
+        "About Us",
+        "Our Team",
+        "Projects",
+        "Contact Us"
+      ]
+    },
+    "quickContact": {
+      "title": "Contact Us Now",
+      "subtitle": "We'll respond within 24 hours"
+    },
+    "copyright": "© 2024 Rafiq Al Sahab Technology L.L.C. All rights reserved"
+  },
+  
+  "AboutPage": {
+    "hero": {
+      "title": "About Us",
+      "description": "We are Rafiq Al Sahab - a technology company specialized in developing cloud solutions and artificial intelligence"
+    },
+    "story": {
+      "title": "Our Story",
+      "paragraphs": [
+        "The idea of Rafiq Al Sahab started from our deep belief that technology should serve humans, not the other way around. We saw how small and medium businesses suffer from technological complexities, and we decided to be the bridge that connects their dreams with digital reality.",
+        "The name 'Rafiq Al Sahab' reflects our philosophy - we are not just service providers, but companions in the digital transformation journey. We stand by our clients, understand their challenges, and provide them with solutions that suit their unique needs.",
+        "Since our establishment, we have successfully helped dozens of companies achieve their digital goals, and we continue to expand our positive impact in the region."
+      ],
+      "imageAlt": "Rafiq Al Sahab Story"
+    },
+    "visionMission": {
+      "title": "Our Vision & Mission",
+      "vision": {
+        "title": "Our Vision",
+        "description": "To be the primary technology partner for small and medium businesses in the region, and contribute to transforming their ideas into successful digital solutions that drive their businesses toward the future."
+      },
+      "mission": {
+        "title": "Our Mission",
+        "description": "We provide innovative and customized technological solutions that help our clients achieve their goals efficiently and effectively, with a focus on simplicity, quality, and continuous support."
+      }
+    },
+    "values": {
+      "title": "Our Core Values",
+      "subtitle": "The principles that guide our work and shape our identity",
+      "values": [
+        {
+          "title": "From Heart to Heart",
+          "description": "We treat our clients as friends, understand their needs, and provide them with solutions with honesty and transparency"
+        },
+        {
+          "title": "Continuous Innovation",
+          "description": "We always strive to use the latest technologies and develop innovative solutions that keep up with the times"
+        },
+        {
+          "title": "Quality First",
+          "description": "We commit to the highest quality standards in every project, because our clients' satisfaction is our priority"
+        },
+        {
+          "title": "Teamwork",
+          "description": "We believe in the power of the team and work together to achieve the best results for our clients"
+        }
+      ]
+    },
+    "milestonesSection": {
+      "title": "Our Journey Through Time",
+      "subtitle": "The important milestones in Rafiq Al Sahab's journey"
+    },
+    "milestones": [
+      {
+        "year": "2024",
+        "title": "Company Establishment",
+        "description": "The beginning of Rafiq Al Sahab's journey with a clear vision to simplify technology"
+      },
+      {
+        "year": "2024",
+        "title": "First 10 Clients",
+        "description": "We successfully served the first 10 clients and achieved outstanding results for them"
+      },
+      {
+        "year": "2024",
+        "title": "Service Expansion",
+        "description": "We added new services in artificial intelligence and automation"
+      },
+      {
+        "year": "2025",
+        "title": "Regional Expansion",
+        "description": "Plans to expand in the Gulf Arab countries"
+      }
+    ],
+    "team": {
+      "title": "Our Team",
+      "subtitle": "Specialized experts working with passion to achieve your goals",
+      "founder1": {
+        "name": "Dr. Nazeeh Harfoosh",
+        "role": "Co-Founder & CTO",
+        "description": "Expert in artificial intelligence and automation, loves simplifying complex technology"
+      },
+      "founder2": {
+        "name": "Ahmad",
+        "role": "Co-Founder & CEO",
+        "description": "Specialized in developing cloud solutions and managing technical projects"
+      },
+      
+      "founder3": {
+        "name": "Arados Software Company",
+        "role": "Co-Founder & CEO",
+        "description": "Technological partner for business management support. Committed to supporting our clients in facing information technology challenges."
+      },
+      "cta": "Meet the Team in Detail"
+    }
   }
+
 
 
 }

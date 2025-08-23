@@ -21,7 +21,7 @@ export function Navigation() {
     { href: "/", label: t("home") },
     { href: "/services", label: t("services") },
     // { href: "/portfolio", label: t("portfolio") },
-    { href: "/founders", label: t("team") },
+    // { href: "/founders", label: t("team") },
     { href: "/about", label: t("about") },
     { href: "/booking", label: t("booking") },
     { href: "/contact", label: t("contact") },

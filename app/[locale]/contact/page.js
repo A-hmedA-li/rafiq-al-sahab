@@ -186,9 +186,9 @@ export default function ContactPage() {
                         <SelectTrigger className="border-[#A5D5A9]/30 focus:border-[#78C487]">
                           <SelectValue placeholder={t("form.placeholders.service")} />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="bg-white">
                           {services.map((service, index) => (
-                            <SelectItem key={index} value={service}>
+                            <SelectItem key={index} value={service} className="hover:bg-[#78C487]">
                               {service}
                             </SelectItem>
                           ))}
@@ -297,8 +297,8 @@ export default function ContactPage() {
                     <p className="font-medium text-[#404544] dark:text-white">
                       {t("contactInfo.phoneLabel")}
                     </p>
-                    <p className="text-[#404544]/70 dark:text-white/70">
-                      {t("contactInfo.phone")}
+                    <p className="text-[#404544]/70  dark:text-white/70" dir="ltr">
+                      +971 50 974 1123
                     </p>
                   </div>
                 </div>
@@ -343,7 +343,7 @@ export default function ContactPage() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <Link
-                  href="https://wa.me/971XXXXXXXX"
+                  href="https://wa.me/971509741123"
                   target="_blank"
                   className="flex items-center justify-between p-4 bg-[#25D366]/10 hover:bg-[#25D366]/20 rounded-lg transition-colors group"
                 >

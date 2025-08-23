@@ -33,7 +33,7 @@ export default function ServicesPage() {
       arabicTitle: t("services.0.arabicTitle"),
       description: t("services.0.description"),
       features: [...Array(5)].map((_, i) => t(`services.0.features.${i}`)),
-      image: "/images/lg.png",
+      image: "/Web Designs/Rafiq Booking.gif",
       color: "text-[#78C487]",
       bgColor: "bg-[#78C487]/10"
     },
@@ -44,7 +44,7 @@ export default function ServicesPage() {
       arabicTitle: t("services.1.arabicTitle"),
       description: t("services.1.description"),
       features: [...Array(5)].map((_, i) => t(`services.1.features.${i}`)),
-      image: "/images/lg.png",
+      image: "/Web Designs/Rafiq Ai Automation Final.gif",
       color: "text-[#A5D5A9]",
       bgColor: "bg-[#A5D5A9]/10"
     },
@@ -55,7 +55,7 @@ export default function ServicesPage() {
       arabicTitle: t("services.2.arabicTitle"),
       description: t("services.2.description"),
       features: [...Array(5)].map((_, i) => t(`services.2.features.${i}`)),
-      image: "/images/lg.png",
+      image: "/Web Designs/Rafiq website.gif",
       color: "text-[#78C487]",
       bgColor: "bg-[#78C487]/10"
     },
@@ -216,8 +216,8 @@ export default function ServicesPage() {
                         src={service.image || "/placeholder.svg"}
                         alt={service.arabicTitle}
                         width={400}
-                        height={300}
-                        className="w-full h-full object-cover"
+                        height={400}
+                        className=" w-full "
                       />
                       <div
                         className={`absolute inset-0 ${service.bgColor} opacity-20`}
@@ -294,7 +294,7 @@ export default function ServicesPage() {
                 className="bg-[#78C487] hover:bg-[#78C487]/90 text-white px-8 py-4 text-lg"
                 asChild
               >
-                <Link href="/contact">
+                <Link href="/booking">
                   {t("cta.buttons.consultation")}
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>

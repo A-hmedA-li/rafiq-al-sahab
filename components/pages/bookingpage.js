@@ -363,12 +363,12 @@ export default function BookingPage({bookedDict}) {
                           handleInputChange("service", value)
                         }
                       >
-                        <SelectTrigger className="border-[#A5D5A9]/30 focus:border-[#78C487]">
+                        <SelectTrigger className=" border-[#A5D5A9]/30 focus:border-[#78C487]">
                           <SelectValue placeholder={t("form.placeholders.service")} />
                         </SelectTrigger>
-                        <SelectContent>
+                        <SelectContent className="bg-white dark:text-black">
                           {services.map((service, index) => (
-                            <SelectItem key={index} value={service}>
+                            <SelectItem key={index} value={service} className="hover:bg-[#A5D5A9] dark:text-black">
                               {service}
                             </SelectItem>
                           ))}
@@ -438,7 +438,7 @@ export default function BookingPage({bookedDict}) {
 
             <div className="grid md:grid-cols-2 gap-6">
               <Link
-                href="https://wa.me/971XXXXXXXX"
+                href="https://wa.me/971509741123"
                 target="_blank"
                 className="flex items-center justify-between p-6 bg-white dark:bg-[#404544] rounded-2xl hover:shadow-lg transition-all duration-300 group"
               >
@@ -458,7 +458,7 @@ export default function BookingPage({bookedDict}) {
                 <ArrowRight className="h-5 w-5 text-[#25D366] group-hover:translate-x-1 transition-transform" />
               </Link>
 
-              <Link
+              {/* <Link
                 href="tel:+971XXXXXXXX"
                 className="flex items-center justify-between p-6 bg-white dark:bg-[#404544] rounded-2xl hover:shadow-lg transition-all duration-300 group"
               >
@@ -471,12 +471,12 @@ export default function BookingPage({bookedDict}) {
                       {t("quickContact.phoneTitle")}
                     </h3>
                     <p className="text-sm text-[#404544]/70 dark:text-white/70">
-                      +971 XX XXX XXXX
+                      +971 50 974 1123
                     </p>
                   </div>
                 </div>
                 <ArrowRight className="h-5 w-5 text-[#78C487] group-hover:translate-x-1 transition-transform" />
-              </Link>
+              </Link> */}
             </div>
           </div>
         </section>

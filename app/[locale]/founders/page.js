@@ -30,7 +30,7 @@ const founders = [
     arabicName: "د. نزيه حرفوش",
     role: "Co-Founder & CTO",
     arabicRole: "الشريك المؤسس والمدير التقني",
-    image: "/images/lg.png",
+    image: "/people/Nazeeh.jpg",
     bio:
       "خبير في الذكاء الاصطناعي والأتمتة مع أكثر من 10 سنوات من الخبرة في تطوير الحلول التقنية المبتكرة. يحب تبسيط التكنولوجيا المعقدة وجعلها في متناول الجميع.",
     expertise: [
@@ -63,7 +63,7 @@ const founders = [
     arabicName: "أحمد",
     role: "Co-Founder & CEO",
     arabicRole: "الشريك المؤسس والمدير التنفيذي",
-    image: "/images/lg.png",
+    image: "/people/Ahmad.jpg",
     bio:
       "متخصص في تطوير الحلول السحابية وإدارة المشاريع التقنية. يتمتع بخبرة واسعة في قيادة الفرق وتحويل الأفكار إلى منتجات ناجحة.",
     expertise: [

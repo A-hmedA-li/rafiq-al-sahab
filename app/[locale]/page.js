@@ -7,7 +7,10 @@ import {
   MessageSquare,
   Brain,
   Users,
-  Calendar
+  Calendar,
+  Award,
+  Lightbulb,
+  Target
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -80,6 +83,16 @@ const portfolioItems = [
     tech: [t("portfolio.2.tech.0"), t("portfolio.2.tech.1"), t("portfolio.2.tech.2")]
   }
 ]
+
+const milestones = [...Array(4)].map((item, i)=>{
+  return {
+    year: t('HowWeWork.milestones.' + i + '.year' ),
+    title:t('HowWeWork.milestones.' + i + '.title' ),
+    description : t('HowWeWork.milestones.' + i + '.description')
+  }
+}) 
+
+
 
   return (
 
@@ -198,7 +211,7 @@ const portfolioItems = [
                       alt="service GIF"
                       width={1570}
                       height={1000}
-                      
+                      className="mb-4"
                     />
                     </div>
                     <h3 className="text-lg font-semibold text-[#404544] dark:text-white mb-3">
@@ -320,7 +333,72 @@ const portfolioItems = [
             </Button>
           </motion.div>
         </div>
+
+        {/* How do we work */}
       </section>
+         <section className="py-16 px-4 bg-[#78C487]/5 dark:bg-[#404544]/20">
+              <div className="container mx-auto max-w-6xl">
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  className="text-center mb-12"
+                >
+                  <h2 className="text-3xl md:text-4xl font-bold text-[#404544] dark:text-white mb-4">
+                    {t('HowWeWork.title')}
+                  </h2>
+                  <p className="text-lg text-[#404544]/70 dark:text-white/70">
+                    {t('HowWeWork.subtitle')}
+                    
+                  </p>
+                </motion.div>
+      
+                <div className="relative">
+                  <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-[#78C487]/20"></div>
+                  <div className="space-y-12">
+                    {milestones.map((milestone, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: index % 2 === 0 ? -30 : 30 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        className={`flex items-center ${
+                          index % 2 === 0 ? "flex-row" : "flex-row-reverse"
+                        }`}
+                      >
+                        <div
+                          className={`w-1/2 ${
+                            index % 2 === 0 ? "pr-8 text-left" : "pl-8 text-right"
+                          }`}
+                        >
+                          <Card className="hover:shadow-lg transition-shadow">
+                            <CardContent className="p-6">
+                              <div className="flex items-center mb-3">
+                                <div className="p-2 bg-[#78C487]/10 rounded-full mr-3 ">
+                               
+                                </div>
+                                <span className="text-2xl font-bold text-[#78C487]">
+                                  {milestone.year}
+                                </span>
+                              </div>
+                              <h3 className="text-lg font-semibold text-[#404544] dark:text-white mb-2">
+                                {milestone.title}
+                              </h3>
+                              <p className="text-[#404544]/70 dark:text-white/70">
+                                {milestone.description}
+                              </p>
+                            </CardContent>
+                          </Card>
+                        </div>
+                        <div className="w-4 h-4 bg-[#78C487] rounded-full border-4 border-white shadow-lg z-10"></div>
+                        <div className="w-1/2"></div>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </section>
 
       {/* Founders Teaser */}
       <section className="py-16 px-4">
@@ -347,22 +425,20 @@ const portfolioItems = [
 
             <motion.div
               variants={fadeInUp}
-              className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+              className="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto"
             >
               <Card className="p-8 text-center hover:shadow-lg transition-all duration-300">
                 <Image
-                  src="/placeholder.svg?height=150&width=150"
+                  src="/people/Nazeeh.jpg"
                   alt={t("foundersSection.founder1.name")}
                   width={150}
                   height={150}
-                  className="rounded-full mx-auto mb-4 border-4 border-[#78C487]/20"
+                  className="rounded-full mx-auto mb-4 border-4 border-[#78C487]/20 object-cover w-[100%] h-[50%]"
                 />
                 <h3 className="text-xl font-semibold text-[#404544] dark:text-white mb-2">
                   {t("foundersSection.founder1.name")}
                 </h3>
-                <p className="text-[#78C487] font-medium mb-3">
-                  {t("foundersSection.founder1.role")}
-                </p>
+                <br />
                 <p className="text-[#404544]/70 dark:text-white/70 text-sm leading-relaxed">
                   {t("foundersSection.founder1.description")}
                 </p>
@@ -370,20 +446,35 @@ const portfolioItems = [
 
               <Card className="p-8 text-center hover:shadow-lg transition-all duration-300">
                 <Image
-                  src="/placeholder.svg?height=150&width=150"
+                  src="/people/Ahmad.jpg"
                   alt={t("foundersSection.founder2.name")}
                   width={150}
                   height={150}
-                  className="rounded-full mx-auto mb-4 border-4 border-[#A5D5A9]/20"
+                  className="rounded-full mx-auto mb-4 border-4 border-[#A5D5A9]/20 w-[100%] h-[50%] object-cover"
                 />
                 <h3 className="text-xl font-semibold text-[#404544] dark:text-white mb-2">
                   {t("foundersSection.founder2.name")}
                 </h3>
-                <p className="text-[#A5D5A9] font-medium mb-3">
-                  {t("foundersSection.founder2.role")}
-                </p>
+                <br />
                 <p className="text-[#404544]/70 dark:text-white/70 text-sm leading-relaxed">
                   {t("foundersSection.founder2.description")}
+                </p>
+              </Card>
+
+                    <Card className="p-8 text-center hover:shadow-lg transition-all duration-300 ">
+                <Image
+                  src="/people/Arados Software.png"
+                  alt={t("foundersSection.founder3.name")}
+                  width={150}
+                  height={150}
+                  className="rounded-full mx-auto mb-4 border-4 border-[#A5D5A9]/20 w-full"
+                />
+                <h3 className="text-xl font-semibold text-[#404544] dark:text-white mb-2">
+                  {t("foundersSection.founder3.name")}  
+                </h3>
+                <br />
+                <p className="text-[#404544]/70 dark:text-white/70 text-sm leading-relaxed">
+                  {t("foundersSection.founder3.description")}
                 </p>
               </Card>
             </motion.div>
@@ -425,7 +516,7 @@ const portfolioItems = [
                 className="bg-white text-[#78C487] hover:bg-white/90 px-8 py-4 text-lg font-semibold"
                 asChild
               >
-                <Link href="/contact">
+                <Link href="/booking">
                   {t("ctaSection.cta1")}
                   <Calendar className="ml-2 h-5 w-5" />
                 </Link>
