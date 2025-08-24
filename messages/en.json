@@ -132,6 +132,22 @@
       "aiCustomization": "AI-Powered Customization",
       "generalConsultation": "General Consultation"
     },
+
+    "companySize": {
+      "lessthan10": "1-10 employees",
+      "lessthan50": "11-50 employees",
+      "lessthan100": "51-100 employees",
+      "lessthan500": "101-500 employees",
+      "morethan500": "500+ employees"
+    },
+
+    "revenue": {
+      "less1": "Less than $1M"
+    },
+
+    "budget":{
+      "less1":"less than $20K"
+    },
     "form": {
       "title": "Send Us a Message",
       "subtitle": "We'll respond within 24 hours",
@@ -140,17 +156,30 @@
         "email": "Email",
         "phone": "Phone Number",
         "service": "Required Service",
-        "message": "Message"
+        "message": "Message",
+        "role": "Your Role within Organization",
+        "companyName" : "Company Name",
+        "companySize" : "Company Size",
+        "website":"WebSite (Optional)",
+        "revenue": "Annual Revenue (Optional)", 
+        "budget":"Project budget"
       },
       "placeholders": {
         "name": "Your full name",
+        "role": "e g., CTO, Project Manager, etc.",
         "email": "your@email.com",
         "phone": "+971 XX XXX XXXX",
         "service": "Select a service",
-        "message": "Tell us about your project or inquiry..."
+        "message": "Tell us about your project or inquiry...", 
+        "companyName": "Your Company Name", 
+        "companySize": "Select company size",
+        "website": "https://yourcompany.com",
+        "revenue": "Select annual revenue",
+        "budget": "Select project budget"
       },
       "submitting": "Sending...",
       "submit": "Send Message",
+      "confirmbooking": "Confirm Booking",
       "success": {
         "title": "Your message has been sent successfully!",
         "message": "We'll contact you soon"
@@ -165,9 +194,7 @@
     "contactInfo": {
       "title": "Contact Information",
       "emailLabel": "Email",
-      "email": "info@rafiqalsahab.com",
       "phoneLabel": "Phone",
-      "phone": "+971 XX XXX XXXX",
       "locationLabel": "Location",
       "location": "United Arab Emirates",
       "hoursLabel": "Working Hours",
@@ -317,7 +344,7 @@
   },
   "BookingPage": {
     "hero": {
-      "title": "Book Your Free Consultation",
+      "title": "Book Your Consultation",
       "description": "Choose the right time for you and get a customized consultation from our cloud technology experts"
     },
     "services": [
@@ -337,23 +364,8 @@
         "price": "Free",
         "description": "Introductory session to understand your needs",
         "timeInMinites": 30
-      },
-      {
-        "id": "detailed",
-        "name": "Detailed Consultation",
-        "duration": "60 minutes",
-        "price": "200 AED",
-        "description": "Comprehensive analysis and action plan development",
-        "timeInMinites": 60
-      },
-      {
-        "id": "technical",
-        "name": "Technical Consultation",
-        "duration": "90 minutes",
-        "price": "300 AED",
-        "description": "Specialized technical review",
-        "timeInMinites": 90
       }
+
     ],
     "calendar": {
       "title": "Choose Date and Time"

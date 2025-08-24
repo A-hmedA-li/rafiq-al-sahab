@@ -24,6 +24,7 @@ import {
 } from "@/components/ui/select"
 import Link from "next/link"
 import { useTranslations } from "next-intl"
+import SubmitForm from "@/components/SubmitForm"
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -32,28 +33,21 @@ const fadeInUp = {
 }
 
 export default function ContactPage() {
-  const t = useTranslations("ContactPage")
-  const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState({
     name: "",
     email: "",
     phone: "",
     service: "",
-    message: ""
+    message: "", 
+    
   })
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [isSubmitted, setIsSubmitted] = useState(false)
 
-  const services = [
-    t("services.bookingSystem"),
-    t("services.aiAssistant"),
-    t("services.bulkMessaging"),
-    t("services.aiCustomization"),
-    t("services.generalConsultation")
-  ]
 
-  const handleSubmit = async e => {
+  
+    const handleSubmit = async e => {
     e.preventDefault()
     setIsSubmitting(true)
+
 
     // Simulate form submission
     await new Promise(resolve => setTimeout(resolve, 2000))
@@ -67,10 +61,8 @@ export default function ContactPage() {
       setFormData({ name: "", email: "", phone: "", service: "", message: "" })
     }, 3000)
   }
+  const t = useTranslations("ContactPage")
 
-  const handleInputChange = (field, value) => {
-    setFormData(prev => ({ ...prev, [field]: value }))
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-white via-[#A5D5A9]/10 to-[#78C487]/20 dark:from-[#171717] dark:via-[#404544]/20 dark:to-[#78C487]/10 pt-20">
@@ -93,148 +85,10 @@ export default function ContactPage() {
       </section>
 
       <div className="container mx-auto max-w-6xl px-4 pb-16">
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <Card className="shadow-xl">
-              <CardHeader>
-                <CardTitle className="text-2xl font-bold text-[#404544] dark:text-white">
-                  {t("form.title")}
-                </CardTitle>
-                <p className="text-[#404544]/70 dark:text-white/70">
-                  {t("form.subtitle")}
-                </p>
-              </CardHeader>
-              <CardContent>
-                {isSubmitted ? (
-                  <motion.div
-                    initial={{ opacity: 0, scale: 0.8 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="text-center py-8"
-                  >
-                    <CheckCircle className="h-16 w-16 text-[#78C487] mx-auto mb-4" />
-                    <h3 className="text-xl font-semibold text-[#404544] dark:text-white mb-2">
-                      {t("form.success.title")}
-                    </h3>
-                    <p className="text-[#404544]/70 dark:text-white/70">
-                      {t("form.success.message")}
-                    </p>
-                  </motion.div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-6">
-                    <div className="grid md:grid-cols-2 gap-4">
-                      <div>
-                        <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                          {t("form.fields.name")} *
-                        </label>
-                        <Input
-                          required
-                          value={formData.name}
-                          onChange={e =>
-                            handleInputChange("name", e.target.value)
-                          }
-                          placeholder={t("form.placeholders.name")}
-                          className="border-[#A5D5A9]/30 focus:border-[#78C487]"
-                        />
-                      </div>
-                      <div>
-                        <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                          {t("form.fields.email")} *
-                        </label>
-                        <Input
-                          type="email"
-                          required
-                          value={formData.email}
-                          onChange={e =>
-                            handleInputChange("email", e.target.value)
-                          }
-                          placeholder={t("form.placeholders.email")}
-                          className="border-[#A5D5A9]/30 focus:border-[#78C487]"
-                        />
-                      </div>
-                    </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                        {t("form.fields.phone")}
-                      </label>
-                      <Input
-                        type="tel"
-                        value={formData.phone}
-                        onChange={e =>
-                          handleInputChange("phone", e.target.value)
-                        }
-                        placeholder={t("form.placeholders.phone")}
-                        className="border-[#A5D5A9]/30 focus:border-[#78C487]"
-                      />
-                    </div>
 
-                    <div>
-                      <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                        {t("form.fields.service")}
-                      </label>
-                      <Select
-                        value={formData.service}
-                        onValueChange={value =>
-                          handleInputChange("service", value)
-                        }
-                      >
-                        <SelectTrigger className="border-[#A5D5A9]/30 focus:border-[#78C487]">
-                          <SelectValue placeholder={t("form.placeholders.service")} />
-                        </SelectTrigger>
-                        <SelectContent className="bg-white">
-                          {services.map((service, index) => (
-                            <SelectItem key={index} value={service} className="hover:bg-[#78C487]">
-                              {service}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                        {t("form.fields.message")} *
-                      </label>
-                      <Textarea
-                        required
-                        value={formData.message}
-                        onChange={e =>
-                          handleInputChange("message", e.target.value)
-                        }
-                        placeholder={t("form.placeholders.message")}
-                        rows={5}
-                        className="border-[#A5D5A9]/30 focus:border-[#78C487]"
-                      />
-                    </div>
-
-                    <Button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full bg-[#78C487] hover:bg-[#78C487]/90 text-white py-3 text-lg"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
-                          {t("form.submitting")}
-                        </>
-                      ) : (
-                        <>
-                          {t("form.submit")}
-                          <Send className="ml-2 h-4 w-4" />
-                        </>
-                      )}
-                    </Button>
-                  </form>
-                )}
-              </CardContent>
-            </Card>
-          </motion.div>
-
+        <SubmitForm sendMes="form.submit" formData={formData} setFormData={setFormData} handleSubmit={handleSubmit}/>
+         
           {/* Contact Info & Quick Actions */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
@@ -242,7 +96,7 @@ export default function ContactPage() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="space-y-8"
           >
-
+               <div className="grid lg:grid-cols-2 gap-12">
              {/* Booking Widget */}
             <Card>
               <CardHeader>
@@ -285,7 +139,7 @@ export default function ContactPage() {
                       {t("contactInfo.emailLabel")}
                     </p>
                     <p className="text-[#404544]/70 dark:text-white/70">
-                      {t("contactInfo.email")}
+                      info@rafiqsahab.com
                     </p>
                   </div>
                 </div>
@@ -404,8 +258,9 @@ export default function ContactPage() {
                 </div>
               </CardContent>
             </Card>
+              </div>
           </motion.div>
-        </div>
+      
       </div>
 
       {/* FAQ Section */}
@@ -469,3 +324,5 @@ export default function ContactPage() {
     </div>
   )
 }
+
+

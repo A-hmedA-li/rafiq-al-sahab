@@ -11,7 +11,8 @@ import {
   Phone,
   MessageSquare,
   CheckCircle,
-  ArrowRight
+  ArrowRight,
+  Send
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -29,6 +30,7 @@ import { Calendar as CalendarComponent } from "@/components/ui/calendar"
 import Link from "next/link"
 import { book_an_event, get_all_events } from "@/server/google-calendar";
 import { useTranslations } from "next-intl"
+import SubmitForm from "../SubmitForm";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
@@ -99,6 +101,7 @@ export default function BookingPage({bookedDict}) {
 
   const handleBooking = async e => {
     e.preventDefault()
+    console.log(e);
     if (!selectedDate || !selectedConsultation) return
 
     setIsSubmitting(true)
@@ -136,9 +139,9 @@ export default function BookingPage({bookedDict}) {
             <h1 className="text-4xl md:text-5xl font-bold text-[#404544] dark:text-white mb-6">
               {t("hero.title")}
             </h1>
-            <p className="text-xl text-[#404544]/70 dark:text-white/70 max-w-3xl mx-auto leading-relaxed">
+            {/* <p className="text-xl text-[#404544]/70 dark:text-white/70 max-w-3xl mx-auto leading-relaxed">
               {t("hero.description")}
-            </p>
+            </p> */}
           </motion.div>
         </div>
       </section>
@@ -294,9 +297,9 @@ export default function BookingPage({bookedDict}) {
                   ))}
                 </CardContent>
               </Card>
-
+              <SubmitForm sendMes="form.confirmbooking" formData={formData} setFormData={setFormData} handleSubmit={handleBooking}/>
               {/* Contact Form */}
-              <Card className="shadow-xl">
+              {/* <Card className="shadow-xl">
                 <CardHeader>
                   <CardTitle className="text-xl font-bold text-[#404544] dark:text-white flex items-center">
                     <User className="h-5 w-5 mr-3 text-[#78C487]" />
@@ -412,7 +415,7 @@ export default function BookingPage({bookedDict}) {
                     </Button>
                   </form>
                 </CardContent>
-              </Card>
+              </Card> */}
             </motion.div>
           </div>
         )}
@@ -449,6 +452,28 @@ export default function BookingPage({bookedDict}) {
                   <div>
                     <h3 className="font-semibold text-[#404544] dark:text-white">
                       WhatsApp
+                    </h3>
+                    <p className="text-sm text-[#404544]/70 dark:text-white/70">
+                      {t("quickContact.whatsapp")}
+                    </p>
+                  </div>
+                </div>
+                <ArrowRight className="h-5 w-5 text-[#25D366] group-hover:translate-x-1 transition-transform" />
+              </Link>
+
+
+                        <Link
+                href="https://te.me/rafiqalsahab"
+                target="_blank"
+                className="flex items-center justify-between p-6 bg-white dark:bg-[#404544] rounded-2xl hover:shadow-lg transition-all duration-300 group"
+              >
+                <div className="flex items-center space-x-4">
+                  <div className="p-3 bg-[#25D366]/10 rounded-full">
+                      <Send className="h-6 w-6 text-[#0088cc]" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-[#404544] dark:text-white">
+                      Telegram
                     </h3>
                     <p className="text-sm text-[#404544]/70 dark:text-white/70">
                       {t("quickContact.whatsapp")}

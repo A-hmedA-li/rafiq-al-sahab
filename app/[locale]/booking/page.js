@@ -1,6 +1,6 @@
 import BookingPage from "@/components/pages/bookingpage"
 import { get_all_events } from "@/server/google-calendar"
-import { CoinsIcon } from "lucide-react";
+
 
 
 export default async function SRBooking(){
