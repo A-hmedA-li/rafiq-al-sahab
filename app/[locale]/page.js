@@ -96,7 +96,7 @@ const milestones = [...Array(4)].map((item, i)=>{
 
   return (
 
-    <div className="min-h-screen  bg-white dark:from-[#171717] dark:via-[#404544]/20 dark:to-[#78C487]/10 ">
+    <div className="min-h-screen  bg-white dark:bg-[#171717] dark:to-[#78C487]/10 ">
  
       {/* Hero Section */}
       <section className="relative overflow-hidden pt-20 pb-16 px-4">
