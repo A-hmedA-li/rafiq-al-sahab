@@ -3,6 +3,7 @@ import { getLocale } from "next-intl/server"
 
 import { Noto_Kufi_Arabic } from 'next/font/google';
 
+import "./globals.css"
 
 const notoKufi = Noto_Kufi_Arabic({
   subsets: ['arabic'],
