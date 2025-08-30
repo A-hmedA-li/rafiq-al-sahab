@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Moon, Sun, Cloud } from "lucide-react"
+import { Menu, X, Moon, Sun, Cloud, User, LogIn } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
 import Link from "next/link"
@@ -53,7 +53,7 @@ export function Navigation() {
               transition={{ duration: 0.2 }}
               className="p-2  rounded-full"
             >
-              <img src="/images/lgc.png"  className="w-30" />
+              <img src="/images/lgc.png"  className="w-25" />
             </motion.div>
             <span className="text-xl font-bold text-[#404544] dark:text-white group-hover:text-[#78C487] transition-colors">
               {t("companyName")}
@@ -80,6 +80,25 @@ export function Navigation() {
                 )}
               </Link>
             ))}
+          </div>
+
+          <div className="hidden lg:flex items-center space-x-4">
+            <Link href="/signin">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="text-[#404544] dark:text-white hover:text-[#78C487] hover:bg-[#78C487]/10"
+              >
+                <LogIn className="h-4 w-4 ml-2" />
+                تسجيل الدخول
+              </Button>
+            </Link>
+            <Link href="/signup">
+              <Button size="sm" className="bg-[#78C487] hover:bg-[#78C487]/90 text-white">
+                <User className="h-4 w-4 ml-2" />
+                إنشاء حساب
+              </Button>
+            </Link>
           </div>
 
           {/* Theme Toggle, Language Switcher & Mobile Menu */}
@@ -134,29 +153,26 @@ export function Navigation() {
                     {item.label}
                   </Link>
                 ))}
+
+                <div className="border-t border-[#A5D5A9]/20 pt-4 space-y-2">
+                <Link href="/signin" onClick={() => setIsOpen(false)}>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start text-[#404544] dark:text-white hover:text-[#78C487] hover:bg-[#78C487]/10"
+                  >
+                    <LogIn className="h-4 w-4 ml-2" />
+                    تسجيل الدخول
+                  </Button>
+                </Link>
+                <Link href="/signup" onClick={() => setIsOpen(false)}>
+                  <Button className="w-full bg-[#78C487] hover:bg-[#78C487]/90 text-white">
+                    <User className="h-4 w-4 ml-2" />
+                    إنشاء حساب
+                  </Button>
+                </Link>
+              </div>
                 
-                {/* Language switcher in mobile menu */}
-                <div className="px-4 py-2">
-                  <div className="flex space-x-2">
-                    {[
-                      { code: "ar", name: "العربية", flag: "🇸🇦" },
-                      { code: "en", name: "English", flag: "🇺🇸" }
-                    ].map((language) => (
-                      <Button
-                        key={language.code}
-                        variant="outline"
-                        size="sm"
-                        onClick={() => {
-                          // Add language switching logic here
-                          setIsOpen(false)
-                        }}
-                        className="text-sm"
-                      >
-                        {language.flag} {language.name}
-                      </Button>
-                    ))}
-                  </div>
-                </div>
+                
               </div>
             </motion.div>
           )}

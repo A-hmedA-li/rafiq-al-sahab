@@ -13,14 +13,14 @@ export default function middleware(req){
 
   
  const authMiddleware = withAuth(
-  function middleware(req) {
+  function middleware() {
     return NextResponse.next()
   },
   {
     callbacks: {
       authorized: ({ token }) => {
        console.log(token)
-       return true;
+       
         return token?.role === 'admin'
       }
     }
