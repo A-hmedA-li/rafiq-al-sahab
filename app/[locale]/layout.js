@@ -1,46 +1,33 @@
+
 import { Inter } from "next/font/google"
 
 import { ThemeProvider } from "@/components/theme-provider"
 import { Navigation } from "@/components/navigation"
 import { Footer } from "@/components/footer"
 import ChatButton from "@/components/chatButton"
-import { SessionProvider } from "next-auth/react";
+
 const inter = Inter({ subsets: ["latin"] })
 
 
 
-export const metadata = {
-  title: "Rafiq Al Sahab Technology L.L.C - رفيق السحاب",
-  description:
-    "رفيقك الخبير في حلول التكنولوجيا السحابية - نحول أفكارك إلى واقع رقمي بلا تعقيد",
-  keywords:
-    "AI automation, cloud solutions, booking systems, WhatsApp integration, custom AI agents, UAE technology",
-  authors: [{ name: "Rafiq Al Sahab Technology L.L.C" }],
-  openGraph: {
-    title: "Rafiq Al Sahab Technology L.L.C - رفيق السحاب",
-    description: "رفيقك الخبير في حلول التكنولوجيا السحابية",
-    type: "website",
-    locale: "ar_AE"
-  }
-}
+
 
 export default async function RootLayout({ children }) {
-
-
+ 
   return (
-
-        
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="light"
-            enableSystem
-            disableTransitionOnChange
-          >
-            <Navigation />
-            <main>{children}</main>
-            <ChatButton />
-            <Footer />
-          </ThemeProvider>
+      
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="light"
+              enableSystem
+              disableTransitionOnChange
+            >
+              <Navigation />
+                <main>{children}</main>
+              <ChatButton />
+              <Footer />
+            </ThemeProvider>
+                   
   
    
   )

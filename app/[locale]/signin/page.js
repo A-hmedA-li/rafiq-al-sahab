@@ -1,11 +1,13 @@
 "use client"
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Eye, EyeOff, Mail, Lock, Cloud, ArrowRight } from "lucide-react"
+import { Eye, EyeOff, Mail, Lock, Cloud, ArrowRight, Chrome } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
+
+import { signIn } from "next-auth/react"
 
 export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false)
@@ -145,6 +147,30 @@ export default function SignInPage() {
                   </>
                 )}
               </Button>
+
+              <div className="mt-6">
+                <div className="relative">
+                  <div className="absolute inset-0 flex items-center">
+                    <div className="w-full border-t border-[#A5D5A9]/30" />
+                  </div>
+                  <div className="relative flex justify-center text-sm">
+                    <span className="px-4 bg-white text-[#404544]/70">أو</span>
+                  </div>
+                </div>
+
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full h-12 mt-4 border-[#A5D5A9]/30 hover:border-[#78C487] rounded-xl font-medium transition-all duration-200 flex items-center justify-center space-x-3 bg-transparent"
+                  onClick={() => {
+                    signIn('google'); 
+                   
+                  }}
+                >
+                  <Chrome className="h-5 w-5 text-[#4285F4]" />
+                  <span className="text-[#404544]">تسجيل الدخول بواسطة Google</span>
+                </Button>
+              </div>
             </form>
 
             <div className="mt-8 text-center">

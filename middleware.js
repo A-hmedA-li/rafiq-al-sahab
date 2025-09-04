@@ -18,9 +18,10 @@ export default function middleware(req){
   },
   {
     callbacks: {
-      authorized: ({ token }) => {
-       console.log(token)
-       
+      authorized: (token) => {
+ 
+       if (token)
+          return true 
         return token?.role === 'admin'
       }
     }
@@ -34,7 +35,7 @@ export default function middleware(req){
     if (isProtected)
         break;
   }
-  console.log(isProtected)
+
   if (isProtected)
       return authMiddleware(req) ;
   else 

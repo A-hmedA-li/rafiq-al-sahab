@@ -2,13 +2,14 @@
 
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { Menu, X, Moon, Sun, Cloud, User, LogIn } from "lucide-react"
+import { Menu, X, Moon, Sun, Cloud, User, LogIn, LogOut } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useTheme } from "next-themes"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useTranslations } from "next-intl"
 import LanguageSwitcher from "./LanguageSwitcher" // Import the language switcher
+import { signIn, signOut, useSession } from "next-auth/react"
 
 export function Navigation() {
   const t = useTranslations("Navigation")
@@ -16,6 +17,8 @@ export function Navigation() {
   const [scrolled, setScrolled] = useState(false)
   const { theme, setTheme } = useTheme()
   const pathname = usePathname()
+  
+
 
   const navItems = [
     { href: "/", label: t("home") },
@@ -35,6 +38,10 @@ export function Navigation() {
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
+
+  const transition = {
+    'signIn': t('signIn') 
+  }
   return (
     <motion.nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -80,27 +87,12 @@ export function Navigation() {
                 )}
               </Link>
             ))}
+
+
+            <UserAuth translation={transition} />
           </div>
 
-          <div className="hidden lg:flex items-center space-x-4">
-            <Link href="/signin">
-              <Button
-                variant="ghost"
-                size="sm"
-                className="text-[#404544] dark:text-white hover:text-[#78C487] hover:bg-[#78C487]/10"
-              >
-                <LogIn className="h-4 w-4 ml-2" />
-                تسجيل الدخول
-              </Button>
-            </Link>
-            <Link href="/signup">
-              <Button size="sm" className="bg-[#78C487] hover:bg-[#78C487]/90 text-white">
-                <User className="h-4 w-4 ml-2" />
-                إنشاء حساب
-              </Button>
-            </Link>
-          </div>
-
+         
           {/* Theme Toggle, Language Switcher & Mobile Menu */}
           <div className="flex items-center space-x-2">
             {/* Language Switcher */}
@@ -179,5 +171,66 @@ export function Navigation() {
         </AnimatePresence>
       </div>
     </motion.nav>
+  )
+}
+
+
+
+
+function UserAuth({translation}) {
+  const { data: session, status } = useSession()
+
+  if (status === 'loading') {
+    return (
+      <div className="flex items-center space-x-2">
+        <div className="w-8 h-8 bg-gray-200 rounded-full animate-pulse"></div>
+      </div>
+    )
+  }
+
+  if (!session) {
+    return (
+      <Button 
+        onClick={() => signIn('google')}
+        variant="outline"
+        className="border-[#78C487] text-[#78C487] hover:bg-[#78C487] hover:text-white"
+      >
+        {translation.signIn}
+      </Button>
+    )
+  }
+
+  return (
+    <div className="flex items-center space-x-3 text-gray-700 dark:text-gray-300  p-2 rounded-2xl ">
+      <div className="flex items-center space-x-2">
+        <div className="w-10">
+    
+          {session.user?.image ? (
+            <img
+              src={session.user.image}
+              alt={session.user.name || 'User avatar'}
+          
+              className="rounded-full "
+            />
+          ) : (
+            <div className="w-8 h-8 bg-[#78C487] rounded-full flex items-center justify-center">
+              <User className="h-5 w-5 text-white" />
+            </div>
+          )}
+
+        </div>
+        <span className="hidden xl:block text-sm font-medium ">
+          {session.user?.name}
+        </span>
+      </div>
+      <Button
+        onClick={() => signOut()}
+        variant="ghost"
+        size="sm"
+        className="text-gray-500 hover:text-white hover:bg-red-600"
+      >
+        <LogOut className="h-4 w-4" />
+      </Button>
+    </div>
   )
 }

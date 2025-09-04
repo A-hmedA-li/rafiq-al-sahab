@@ -41,6 +41,8 @@ const colorOptions = [
   { value: "text-purple-500", label: "بنفسجي", bg: "bg-purple-500/10" }
 ]
 
+
+import { CreateService, deleteService } from "@/server/services"
 const initialServices = [
   {
     id: "1",
@@ -58,7 +60,7 @@ const initialServices = [
     icon: "Calendar",
     color: "text-[#78C487]",
     bgColor: "bg-[#78C487]/10",
-    isActive: true,
+    isActive: false,
     createdAt: "2024-01-15",
     updatedAt: "2024-01-20"
   },
@@ -84,8 +86,28 @@ const initialServices = [
   }
 ]
 
-export function ServicesManager() {
-  const [services, setServices] = useState(initialServices)
+export function ServicesManager({servicesGot}) {
+
+  for (let i in servicesGot){
+
+    servicesGot[i].id = servicesGot[i].id.toString() ;
+    servicesGot[i].icon = "Brain";
+    servicesGot[i].color = "text-[#A5D5A9]";
+    servicesGot[i].createdAt = servicesGot[i].createdAt.toString() ;
+    servicesGot[i].updatedAt = servicesGot[i].updatedAt.toString();
+
+    servicesGot[i].bgColor = "bg-[#123412]/10"; 
+
+
+  } 
+ 
+
+  let ren = [] ; 
+  for (let i in servicesGot){
+    ren.push(servicesGot[i]); 
+  }
+
+  const [services, setServices] = useState(ren)
   const [editingService, setEditingService] = useState(null)
   const [isCreating, setIsCreating] = useState(false)
   const [searchTerm, setSearchTerm] = useState("")
@@ -110,11 +132,20 @@ export function ServicesManager() {
       createdAt: new Date().toISOString().split("T")[0],
       updatedAt: new Date().toISOString().split("T")[0]
     }
+
+   
     setEditingService(newService)
     setIsCreating(true)
   }
 
-  const handleSave = service => {
+  const handleSave = async service => {
+    const res = await CreateService(service); 
+
+    if (!res.success){
+      console.log('EEEEEEEEEEEEEEeeeeerro'); 
+      return 
+
+    }
     if (isCreating) {
       setServices([...services, service])
       setIsCreating(false)
@@ -130,7 +161,15 @@ export function ServicesManager() {
     setEditingService(null)
   }
 
-  const handleDelete = id => {
+  const handleDelete = async id => {
+    try{
+      const res = await deleteService(parseInt(id)); 
+      console.log(res)
+    }
+    catch(e){
+      console.log('eeeeeeeeeeeeeroro')
+      return 
+    }
     setServices(services.filter(s => s.id !== id))
   }
 
@@ -380,11 +419,12 @@ export function ServicesManager() {
                       onValueChange={value =>
                         setEditingService({ ...editingService, icon: value })
                       }
+        
                     >
                       <SelectTrigger>
                         <SelectValue />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className="bg-white">
                         {iconOptions.map(option => (
                           <SelectItem key={option.value} value={option.value}>
                             <div className="flex items-center space-x-2">

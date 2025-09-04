@@ -9,7 +9,8 @@
     "booking": "احجز موعد",
     "contact": "تواصل معنا",
     "toggleTheme": "تبديل الوضع الليلي",
-    "toggleMenu": "تبديل القائمة"
+    "toggleMenu": "تبديل القائمة",
+     "signIn": "تسجيل الدخول"
   },
   "HomePage": {
     "hero": {

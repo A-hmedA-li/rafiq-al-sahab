@@ -1,10 +1,10 @@
-
+// prisma/schema.prisma
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "postgresql" // or "mysql", "sqlite", "sqlserver"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -21,8 +21,7 @@ model Account {
   scope             String?
   id_token          String? @db.Text
   session_state     String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@unique([provider, providerAccountId])
 }
@@ -40,14 +39,11 @@ model User {
   name          String?
   email         String    @unique
   emailVerified DateTime?
-  password      String?
   image         String?
-  role          String    @default("user") // Add custom role field
+  accounts      Account[]
+  sessions      Session[]
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
-
-  accounts Account[]
-  sessions Session[]
 }
 
 model VerificationToken {
@@ -56,4 +52,19 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+
+model Service{
+
+  id          Int  @id @default(autoincrement())
+  title       String?
+  arabicTitle String?
+  description String?
+  features    String[]
+  image       String?
+  isActive    Boolean
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
 }

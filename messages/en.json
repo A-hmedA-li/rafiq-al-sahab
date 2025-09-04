@@ -9,7 +9,8 @@
     "booking": "Book Appointment",
     "contact": "Contact Us",
     "toggleTheme": "Toggle dark mode",
-    "toggleMenu": "Toggle menu"
+    "toggleMenu": "Toggle menu", 
+    "signIn": "Sign In"
   },
   "HomePage": {
     "hero": {
