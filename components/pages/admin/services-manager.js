@@ -42,7 +42,7 @@ const colorOptions = [
 ]
 
 
-import { CreateService, deleteService } from "@/server/services"
+import { CreateORUpdateService, deleteService } from "@/server/services"
 const initialServices = [
   {
     id: "1",
@@ -120,7 +120,7 @@ export function ServicesManager({servicesGot}) {
 
   const handleCreate = () => {
     const newService = {
-      id: Date.now().toString(),
+     
       title: "",
       arabicTitle: "",
       description: "",
@@ -129,8 +129,8 @@ export function ServicesManager({servicesGot}) {
       color: "text-[#78C487]",
       bgColor: "bg-[#78C487]/10",
       isActive: true,
-      createdAt: new Date().toISOString().split("T")[0],
-      updatedAt: new Date().toISOString().split("T")[0]
+      createdAt:'sasd',
+      updatedAt:'asa'
     }
 
    
@@ -139,7 +139,13 @@ export function ServicesManager({servicesGot}) {
   }
 
   const handleSave = async service => {
-    const res = await CreateService(service); 
+    if (service['id'])
+      service.id = parseInt(service.id)
+
+    delete service['createdAt']
+    delete service['updatedAt']
+
+    const res = await CreateORUpdateService(service); 
 
     if (!res.success){
       console.log('EEEEEEEEEEEEEEeeeeerro'); 
@@ -164,7 +170,7 @@ export function ServicesManager({servicesGot}) {
   const handleDelete = async id => {
     try{
       const res = await deleteService(parseInt(id)); 
-      console.log(res)
+   
     }
     catch(e){
       console.log('eeeeeeeeeeeeeroro')

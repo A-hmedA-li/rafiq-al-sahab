@@ -3,26 +3,40 @@
 
 import prisma from "@/lib/prisma"
 
-export async function CreateService(FormData) {
+import { addServiceToTranslation } from "@/lib/translationUtil";
+
+export async function CreateORUpdateService(service) {
+
+
+   
+    let data ; 
     try{
 
-        const {  title , arabicTitle ,
-            description , features  , color , bgColor, isActive } = FormData;
-
-        const submission = await prisma.service.create({
-                data: {
-                    title:title, 
-                    arabicTitle:arabicTitle, 
-                    description:description,
-                    features:features,
-
-                    // BE CAREFULL
-                    isActive: isActive,
-                   
-                }
+        if (service['id']){
+            data = await prisma.service.update({
+                where: {id : service.id }, 
+                data: service
             })
 
-            return { success: true, data: submission }
+        }
+        else{
+
+            data = await prisma.service.create({ 
+                    data: service
+                })
+
+                
+        }
+
+       let translation = {} 
+       translation.title = data.title ; 
+       translation.arabicTitle = data.arabicTitle; 
+       translation.description = data.description; 
+        translation.features = data.features ; 
+
+        const translationResult = await addServiceToTranslation (data.id , translation) ;
+        console.log(translationResult)
+        return { success: true, data: data }
 
     }catch(e){
         console.log(e); 
@@ -55,4 +69,9 @@ export async function deleteService(id) {
         return { success: false, e: e.message }
         
     }
+}
+
+export async function updateService(service) {
+
+    
 }

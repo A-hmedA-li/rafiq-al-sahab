@@ -101,7 +101,7 @@ export default function BookingPage({bookedDict}) {
 
   const handleBooking = async e => {
     e.preventDefault()
-    console.log(e);
+   
     if (!selectedDate || !selectedConsultation) return
 
     setIsSubmitting(true)

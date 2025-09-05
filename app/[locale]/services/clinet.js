@@ -27,73 +27,27 @@ const fadeInUp = {
 export function ServicesPage({servicesGot}) {
   const t = useTranslations("ServicesPage")
    let services = []
-   let services1 = [
-    {
+  //  let services1 = [
+  //   {
       
-      id: "booking",
-      icon: Calendar,
-      title: t("services.0.title"),
-      arabicTitle: t("services.0.arabicTitle"),
-      description: t("services.0.description"),
-      features: [...Array(5)].map((_, i) => t(`services.0.features.${i}`)),
-      image: "/Web Designs/Rafiq Booking.gif",
-      color: "text-[#78C487]",
-      bgColor: "bg-[#78C487]/10"
-    },
-    {
-      id: "ai-agent",
-      icon: Brain,
-      title: t("services.1.title"),
-      arabicTitle: t("services.1.arabicTitle"),
-      description: t("services.1.description"),
-      features: [...Array(5)].map((_, i) => t(`services.1.features.${i}`)),
-      image: "/Web Designs/Rafiq Ai Automation Final.gif",
-      color: "text-[#A5D5A9]",
-      bgColor: "bg-[#A5D5A9]/10"
-    },
-    {
-      id: "messaging",
-      icon: MessageSquare,
-      title: t("services.2.title"),
-      arabicTitle: t("services.2.arabicTitle"),
-      description: t("services.2.description"),
-      features: [...Array(5)].map((_, i) => t(`services.2.features.${i}`)),
-      image: "/Web Designs/Rafiq website.gif",
-      color: "text-[#78C487]",
-      bgColor: "bg-[#78C487]/10"
-    },
-    {
-      id: "personalization",
-      icon: Zap,
-      title: t("services.3.title"),
-      arabicTitle: t("services.3.arabicTitle"),
-      description: t("services.3.description"),
-      features: [...Array(5)].map((_, i) => t(`services.3.features.${i}`)),
-      image: "/images/lg.png",
-      color: "text-[#A5D5A9]",
-      bgColor: "bg-[#A5D5A9]/10"
-    },
-    {
-      id: "custom_sms",
-      icon: Zap,
-      title: t("services.4.title"),
-      arabicTitle: t("services.4.arabicTitle"),
-      description: t("services.4.description"),
-      features: [...Array(5)].map((_, i) => t(`services.4.features.${i}`)),
-      image: "/images/lg.png",
-      color: "text-[#A5D5A9]",
-      bgColor: "bg-[#A5D5A9]/10"
-    },
-
-
-  ]
+  //     id: "booking",
+  //     icon: Calendar,
+  //     title: t("services.0.title"),
+  //     arabicTitle: t("services.0.arabicTitle"),
+  //     description: t("services.0.description"),
+  //     features: [...Array(5)].map((_, i) => t(`services.0.features.${i}`)),
+  //     image: "/Web Designs/Rafiq Booking.gif",
+  //     color: "text-[#78C487]",
+  //     bgColor: "bg-[#78C487]/10"
+  //   },
+  // ]
   servicesGot.forEach(item => {
     services.push({
         id:item.id, 
-        title:item.title, 
-        arabicTitle:item.arabicTitle,
-        description:item.description, 
-        features: item.features, 
+        title:t(`services.${item.id}.title`), 
+        arabicTitle:t(`services.${item.id}.arabicTitle`),
+        description:t(`services.${item.id}.description`), 
+        features: [...Array(item.features.length  )].map((_, i) => t(`services.${item.id}.features.${i}`)), 
         icon:Zap, 
         image: "/images/lg.png",
     })

@@ -22,11 +22,25 @@ export default function SignInPage() {
     e.preventDefault()
     setIsLoading(true)
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    try{
+      const res = await signIn('credentials' , {
+        redirect:false, 
+        email: formData.email, 
+        password: formData.password, 
+        rememberMe: formData.rememberMe
+      })
+
+      setIsLoading(false)
+
+      window.location.href = '/admin'
+    }
+    catch(e){
+      console.log('error in Sign in ') ; 
+      console.log(e) ;
+    }
 
     // Redirect to admin panel
-    window.location.href = "/admin"
+    // window.location.href = "/admin"
   }
 
   const handleInputChange = e => {

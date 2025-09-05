@@ -39,6 +39,7 @@ model User {
   name          String?
   email         String    @unique
   emailVerified DateTime?
+  role          String?
   image         String?
   accounts      Account[]
   sessions      Session[]
@@ -64,6 +65,9 @@ model Service{
   features    String[]
   image       String?
   isActive    Boolean
+  icon        String?
+  color       String?
+  bgColor     String?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 

@@ -9,7 +9,7 @@
     "booking": "Book Appointment",
     "contact": "Contact Us",
     "toggleTheme": "Toggle dark mode",
-    "toggleMenu": "Toggle menu", 
+    "toggleMenu": "Toggle menu",
     "signIn": "Sign In"
   },
   "HomePage": {
@@ -53,46 +53,57 @@
       {
         "title": "Smart Restaurant Booking System",
         "description": "Smart booking system for restaurants with WhatsApp integration",
-        "tech": ["Next.js", "AI", "WhatsApp API"]
+        "tech": [
+          "Next.js",
+          "AI",
+          "WhatsApp API"
+        ]
       },
       {
         "title": "E-commerce AI Assistant",
         "description": "Smart assistant for online stores that helps customers",
-        "tech": ["AI Agent", "Automation", "CRM"]
+        "tech": [
+          "AI Agent",
+          "Automation",
+          "CRM"
+        ]
       },
       {
         "title": "Healthcare Appointment System",
         "description": "Medical appointment system with automatic reminders",
-        "tech": ["Booking System", "SMS", "Calendar"]
+        "tech": [
+          "Booking System",
+          "SMS",
+          "Calendar"
+        ]
       }
     ],
-  "HowWeWork": {
-    "title": "How We Work?",
-    "subtitle": "Our Journey with the Client:",
-    "milestones": [
-      {
-        "year": "1",
-        "title": "Needs Discovery",
-        "description": "The beginning of the journey to find the simplest and most elegant solution"
-      },
-      {
-        "year": "2",
-        "title": "Designing the Right Solution",
-        "description": "We transform ideas into a well-studied plan and customized solution that fits your business goals and technical environment."
-      },
-      {
-        "year": "3",
-        "title": "Rapid Building + Testing",
-        "description": "We added new services in artificial intelligence and automation"
-      },
-      {
-        "year": "4",
-        "title": "Launch and Optimization",
-        "description": "We launch the solution and work on continuously monitoring and improving it to achieve the best long-term performance"
-      }
-    ]
-  },
- 
+    "HowWeWork": {
+      "title": "How We Work?",
+      "subtitle": "Our Journey with the Client:",
+      "milestones": [
+        {
+          "year": "1",
+          "title": "Needs Discovery",
+          "description": "The beginning of the journey to find the simplest and most elegant solution"
+        },
+        {
+          "year": "2",
+          "title": "Designing the Right Solution",
+          "description": "We transform ideas into a well-studied plan and customized solution that fits your business goals and technical environment."
+        },
+        {
+          "year": "3",
+          "title": "Rapid Building + Testing",
+          "description": "We added new services in artificial intelligence and automation"
+        },
+        {
+          "year": "4",
+          "title": "Launch and Optimization",
+          "description": "We launch the solution and work on continuously monitoring and improving it to achieve the best long-term performance"
+        }
+      ]
+    },
     "foundersSection": {
       "title": "Meet Our Team",
       "subtitle": "Experts specialized in cloud technology and artificial intelligence",
@@ -106,7 +117,6 @@
         "role": "Co-Founder & CEO",
         "description": "Specialized in developing cloud solutions and managing technical projects"
       },
-      
       "founder3": {
         "name": "Arados Software Company",
         "role": "Co-Founder & CEO",
@@ -133,7 +143,6 @@
       "aiCustomization": "AI-Powered Customization",
       "generalConsultation": "General Consultation"
     },
-
     "companySize": {
       "lessthan10": "1-10 employees",
       "lessthan50": "11-50 employees",
@@ -141,13 +150,11 @@
       "lessthan500": "101-500 employees",
       "morethan500": "500+ employees"
     },
-
     "revenue": {
       "less1": "Less than $1M"
     },
-
-    "budget":{
-      "less1":"less than $20K"
+    "budget": {
+      "less1": "less than $20K"
     },
     "form": {
       "title": "Send Us a Message",
@@ -159,11 +166,11 @@
         "service": "Required Service",
         "message": "Message",
         "role": "Your Role within Organization",
-        "companyName" : "Company Name",
-        "companySize" : "Company Size",
-        "website":"WebSite (Optional)",
-        "revenue": "Annual Revenue (Optional)", 
-        "budget":"Project budget"
+        "companyName": "Company Name",
+        "companySize": "Company Size",
+        "website": "WebSite (Optional)",
+        "revenue": "Annual Revenue (Optional)",
+        "budget": "Project budget"
       },
       "placeholders": {
         "name": "Your full name",
@@ -171,8 +178,8 @@
         "email": "your@email.com",
         "phone": "+971 XX XXX XXXX",
         "service": "Select a service",
-        "message": "Tell us about your project or inquiry...", 
-        "companyName": "Your Company Name", 
+        "message": "Tell us about your project or inquiry...",
+        "companyName": "Your Company Name",
         "companySize": "Select company size",
         "website": "https://yourcompany.com",
         "revenue": "Select annual revenue",
@@ -232,85 +239,23 @@
         }
       ]
     }
-  }, 
+  },
   "ServicesPage": {
     "hero": {
       "title": "Our Premium Services",
       "description": "Advanced technical solutions specifically designed to grow your business and improve your customer experience"
     },
-    "services": [
-      {
-        "title": "Online Booking Setup & Management",
-        "arabicTitle": "تركيب نظام حجز المواعيد الألكتروني",
-        "description": "Let your customers book with you easily",
+    "services": {
+      "13": {
+        "title": "First service with translation",
+        "arabicTitle": "أول خدمة مع ترجمة",
+        "description": "the description is self expainatory .. this is the first service with translation",
         "features": [
-          "Easy-to-use booking interface",
-          "Automatic customer reminders",
-          "Calendar integration",
-          "Appointment and cancellation management",
-          "Detailed reports"
-        ]
-      },
-      {
-        "title": "Custom AI Agent & Automation Systems",
-        "arabicTitle": "الوكيل الذكي الذي لا ينام",
-        "description": "We design your perfect smart employee who never sleeps to respond to your customers and follow up on inquiries, helping with sales processes and closing deals",
-        "features": [
-          "Advanced artificial intelligence",
-          "Speaks your business language and provides your expertise level but 24/7",
-          "Automation of routine tasks",
-          "Integration with your existing systems",
-          "Continuous performance improvement"
-        ]
-      },
-      {
-        "title": "Mass Messaging Integration",
-        "arabicTitle": "تكامل الرسائل الجماعية",
-        "description": "Connect WhatsApp and Telegram for effective customer communication and sending customized mass messages",
-        "features": [
-          "WhatsApp Business integration",
-          "Telegram Bot connection",
-          "Customized mass messages",
-          "Response automation",
-          "Open and interaction rate tracking"
-        ]
-      },
-      {
-        "title": "AI-Powered Personalization",
-        "arabicTitle": "التخصيص بالذكاء الاصطناعي",
-        "description": "Customize customer experience using artificial intelligence to increase sales and satisfaction",
-        "features": [
-          "Customer behavior analysis",
-          "Personalized recommendations",
-          "Dynamic user experience",
-          "Conversion rate optimization",
-          "Advanced analytical reports"
-        ]
-      },
-      {
-        "title": "custom_sms_mass_messaging",
-        "arabicTitle": "رسائل SMS مخصصة باسم أعمالك",
-        "description": "Setup and installation of a system that integrates with your business whatever its type to send short messages in your company name automatically",
-        "features": [
-          "Coverage for all types of businesses: from e-stores to administrative systems",
-          "Personalized recommendations",
-          "Dynamic user experience",
-          "Improving customer satisfaction rates and appointment reminders",
-          "Exclusively in the United Arab Emirates"
-        ]
-      },
-      {
-        "title": "ai_automation",
-        "arabicTitle": "لا تبيع السمك.. علم الـ AI كيف يصيد",
-        "description": "AI-powered system that manages operations and procedures on demand",
-        "features": [
-          "Converting repetitive tasks into automatically completed processes",
-          "Custom, unique and suitable for your tasks",
-          "Integration with email, WhatsApp and others",
-          "We learn from your data and accelerate the process"
+          "First service with translation",
+          "no thing more"
         ]
       }
-    ],
+    },
     "featuresTitle": "Key Features:",
     "buttons": {
       "requestService": "Request Service",
@@ -366,7 +311,6 @@
         "description": "Introductory session to understand your needs",
         "timeInMinites": 30
       }
-
     ],
     "calendar": {
       "title": "Choose Date and Time"
@@ -409,7 +353,8 @@
       "whatsapp": "Immediate response within minutes",
       "phoneTitle": "Direct Call"
     }
-  },"Calendar": {
+  },
+  "Calendar": {
     "monthNames": [
       "January",
       "February",
@@ -433,7 +378,15 @@
       "Friday",
       "Saturday"
     ],
-    "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    "dayNamesShort": [
+      "Sun",
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat"
+    ],
     "viewTypes": {
       "day": "Day",
       "week": "Week",
@@ -474,7 +427,6 @@
     },
     "copyright": "© 2024 Rafiq Al Sahab Technology L.L.C. All rights reserved"
   },
-  
   "AboutPage": {
     "hero": {
       "title": "About Us",
@@ -561,7 +513,6 @@
         "role": "Co-Founder & CEO",
         "description": "Specialized in developing cloud solutions and managing technical projects"
       },
-      
       "founder3": {
         "name": "Arados Software Company",
         "role": "Co-Founder & CEO",
@@ -570,7 +521,4 @@
       "cta": "Meet the Team in Detail"
     }
   }
-
-
-
 }

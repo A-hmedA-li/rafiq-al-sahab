@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
+import { useSession , signOut} from "next-auth/react"
 
 const adminNavItems = [
   {
@@ -83,6 +84,8 @@ export function AdminNavbar({ onTabChange, activeTab }) {
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [expandedItems, setExpandedItems] = useState([])
   const pathname = usePathname()
+  const session = useSession() ;
+
 
   const toggleExpanded = itemId => {
     setExpandedItems(prev =>
@@ -229,12 +232,20 @@ export function AdminNavbar({ onTabChange, activeTab }) {
           <div className="flex items-center justify-between">
             {!isCollapsed && (
               <div className="flex items-center space-x-3">
+
+                {
+                  session.data?.user?.image? 
+                    <img src={session.data.user.image} className="rounded-full w-10"/>
+                  :
+
                 <div className="w-8 h-8 bg-[#78C487] rounded-full flex items-center justify-center">
                   <span className="text-white text-sm font-semibold">ن</span>
                 </div>
+
+                } 
                 <div>
                   <p className="text-sm font-medium text-[#404544] dark:text-white">
-                    د. نزيه حرفوش
+                    {session.data?.user?.name}
                   </p>
                   <p className="text-xs text-[#404544]/70 dark:text-white/70">
                     مدير النظام
@@ -245,6 +256,7 @@ export function AdminNavbar({ onTabChange, activeTab }) {
             <Button
               variant="ghost"
               size="sm"
+              onClick={()=>{signOut()}}
               className="p-2 text-red-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20"
             >
               <LogOut className="h-4 w-4" />
