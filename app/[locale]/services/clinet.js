@@ -27,20 +27,7 @@ const fadeInUp = {
 export function ServicesPage({servicesGot}) {
   const t = useTranslations("ServicesPage")
    let services = []
-  //  let services1 = [
-  //   {
-      
-  //     id: "booking",
-  //     icon: Calendar,
-  //     title: t("services.0.title"),
-  //     arabicTitle: t("services.0.arabicTitle"),
-  //     description: t("services.0.description"),
-  //     features: [...Array(5)].map((_, i) => t(`services.0.features.${i}`)),
-  //     image: "/Web Designs/Rafiq Booking.gif",
-  //     color: "text-[#78C487]",
-  //     bgColor: "bg-[#78C487]/10"
-  //   },
-  // ]
+
   servicesGot.forEach(item => {
     services.push({
         id:item.id, 
@@ -48,8 +35,9 @@ export function ServicesPage({servicesGot}) {
         arabicTitle:t(`services.${item.id}.arabicTitle`),
         description:t(`services.${item.id}.description`), 
         features: [...Array(item.features.length  )].map((_, i) => t(`services.${item.id}.features.${i}`)), 
-        icon:Zap, 
-        image: "/images/lg.png",
+        icon:item.icon, 
+        color: item.color, 
+        image: "/Web Designs/Assistant Integration.gif",
     })
   });
 

@@ -247,13 +247,33 @@
       "description": "حلول تقنية متطورة مصممة خصيصاً لتنمية أعمالك وتحسين تجربة عملائك"
     },
     "services": {
-      "13": {
-        "title": "أول خدمة مع ترجمة",
-        "arabicTitle": "أول خدمة مع ترجمة",
-        "description": "الخدمة شارحة نفسيها .. هيي أول خدمة مع ترجمة",
+      "16": {
+        "title": "First Service",
+        "arabicTitle": "أول خدمة معلم",
+        "description": "A realy important descreption of the service",
         "features": [
-          "أول خدمة مع ترجمة ",
-          "ما في شي زيادة "
+          "شيس",
+          "شسي",
+          "يشيشسيشسيش"
+        ]
+      },
+      "17": {
+        "title": "asd",
+        "arabicTitle": "asd",
+        "description": "asd",
+        "features": [
+          "asd",
+          "asd"
+        ]
+      },
+      "18": {
+        "title": "asd",
+        "arabicTitle": "ads",
+        "description": "asd",
+        "features": [
+          "asd",
+          "asdas",
+          "asdas"
         ]
       }
     },

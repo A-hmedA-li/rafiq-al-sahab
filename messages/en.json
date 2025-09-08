@@ -246,13 +246,33 @@
       "description": "Advanced technical solutions specifically designed to grow your business and improve your customer experience"
     },
     "services": {
-      "13": {
-        "title": "First service with translation",
-        "arabicTitle": "أول خدمة مع ترجمة",
-        "description": "the description is self expainatory .. this is the first service with translation",
+      "16": {
+        "title": "First Service",
+        "arabicTitle": "أول خدمة معلم",
+        "description": "A realy important descreption of the service",
         "features": [
-          "First service with translation",
-          "no thing more"
+          "شيس",
+          "شسي",
+          "يشيشسيشسيش"
+        ]
+      },
+      "17": {
+        "title": "asd",
+        "arabicTitle": "asd",
+        "description": "asd",
+        "features": [
+          "asd",
+          "asd"
+        ]
+      },
+      "18": {
+        "title": "asd",
+        "arabicTitle": "ads",
+        "description": "asd",
+        "features": [
+          "asd",
+          "asdas",
+          "asdas"
         ]
       }
     },

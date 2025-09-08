@@ -68,6 +68,7 @@ model Service{
   icon        String?
   color       String?
   bgColor     String?
+  isOnMainPage Boolean
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 

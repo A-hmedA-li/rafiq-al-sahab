@@ -3,13 +3,18 @@
 
 import prisma from "@/lib/prisma"
 
-import { addServiceToTranslation } from "@/lib/translationUtil";
-
+import { addServiceToTranslation , DeleteServiceFromTranslation } from "@/lib/translationUtil";
+import { saveImageFile, deleteImageFile } from "@/lib/images";
 export async function CreateORUpdateService(service) {
 
 
-   
+
+    delete service['createdAt']
+    delete service['updatedAt']
     let data ; 
+
+    service.image = saveImageFile(service.image, service.title , 'services' )
+    console.log(service.image)
     try{
 
         if (service['id']){
@@ -34,8 +39,9 @@ export async function CreateORUpdateService(service) {
        translation.description = data.description; 
         translation.features = data.features ; 
 
-        const translationResult = await addServiceToTranslation (data.id , translation) ;
-        console.log(translationResult)
+        const translationResult =  addServiceToTranslation (data.id , translation) ;
+        console.log(translationResult) ; 
+    
         return { success: true, data: data }
 
     }catch(e){
@@ -60,6 +66,8 @@ export async function deleteService(id) {
                 id: id
             }, 
         })
+
+        DeleteServiceFromTranslation(id )
 
         return { success: true}
 
