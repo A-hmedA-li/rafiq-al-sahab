@@ -178,7 +178,9 @@ export function Navigation() {
 
 
 function UserAuth({translation}) {
-  const { data: session, status } = useSession()
+  let { data: session, status } = useSession()
+
+  
 
   if (status === 'loading') {
     return (

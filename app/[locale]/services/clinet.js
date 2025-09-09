@@ -28,6 +28,8 @@ export function ServicesPage({servicesGot}) {
   const t = useTranslations("ServicesPage")
    let services = []
 
+   console.log(servicesGot);
+
   servicesGot.forEach(item => {
     services.push({
         id:item.id, 
@@ -37,7 +39,7 @@ export function ServicesPage({servicesGot}) {
         features: [...Array(item.features.length  )].map((_, i) => t(`services.${item.id}.features.${i}`)), 
         icon:item.icon, 
         color: item.color, 
-        image: "/Web Designs/Assistant Integration.gif",
+        image: item.image, 
     })
   });
 

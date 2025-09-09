@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl"
 import { motion } from "framer-motion"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { useState } from "react"
+
 
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -27,13 +27,10 @@ import {
 import { Button } from "@/components/ui/button"
 
 
-export default function SubmitForm({sendMes="form.submit" , formData , handleSubmit , setFormData}){
+export default function SubmitForm({sendMes="form.submit" , formData , handleSubmit , setFormData, handleSubEvents}){
 
     
 
-    const [isSubmitting, setIsSubmitting] = useState(false)
-
-    const [isSubmitted, setIsSubmitted] = useState(false)
     const t = useTranslations("ContactPage");
     const handleInputChange = (field, value) => {
     setFormData(prev => ({ ...prev, [field]: value }))
@@ -94,7 +91,7 @@ export default function SubmitForm({sendMes="form.submit" , formData , handleSub
                 </p>
               </CardHeader>
               <CardContent>
-                {isSubmitted ? (
+                {handleSubEvents.isSubmitted ? (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.8 }}
                     animate={{ opacity: 1, scale: 1 }}
@@ -148,9 +145,9 @@ export default function SubmitForm({sendMes="form.submit" , formData , handleSub
                       </label>
                       <Input
                         required
-                        value={formData.role}
+                        value={formData.roleInOrg}
                         onChange={e =>
-                          handleInputChange("role", e.target.value)
+                          handleInputChange("roleInOrg", e.target.value)
                         }
                         placeholder={t("form.placeholders.role")}
                         className="border-[#A5D5A9]/30 focus:border-[#78C487]"
@@ -241,9 +238,9 @@ export default function SubmitForm({sendMes="form.submit" , formData , handleSub
                         {t("form.fields.revenue")}
                       </label>
                       <Select
-                        value={formData.revenue}
+                        value={formData.annualRevenue}
                         onValueChange={value =>
-                          handleInputChange("revenue", value)
+                          handleInputChange("annualRevenue", value)
                         }
                       >
                         <SelectTrigger className="border-[#A5D5A9]/30 focus:border-[#78C487]">
@@ -264,9 +261,9 @@ export default function SubmitForm({sendMes="form.submit" , formData , handleSub
                         {t("form.fields.budget")} *
                       </label>
                       <Select
-                        value={formData.budget}
+                        value={formData.projectBudget}
                         onValueChange={value =>
-                          handleInputChange("budget", value)
+                          handleInputChange("projectBudget", value)
                         }
                       >
                         <SelectTrigger className="border-[#A5D5A9]/30 focus:border-[#78C487]">
@@ -303,10 +300,10 @@ export default function SubmitForm({sendMes="form.submit" , formData , handleSub
 
                     <Button
                       type="submit"
-                      disabled={isSubmitting}
+                      disabled={handleSubEvents.isSubmitting}
                       className="w-full bg-[#78C487] hover:bg-[#78C487]/90 text-white py-3 text-lg"
                     >
-                      {isSubmitting ? (
+                      {handleSubEvents.isSubmitting ? (
                         <>
                           <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white mr-2"></div>
                           {t("form.submitting")}

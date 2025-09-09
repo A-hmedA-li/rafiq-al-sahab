@@ -29,7 +29,10 @@ import {
   SelectValue
 } from "@/components/ui/select"
 
-const initialMessages = [
+import { deleteMessage , CreateMaessageOrUpdate  } from "@/server/contactUs"
+
+
+let initialMessages = [
   {
     id: "1",
     name: "أحمد محمد",
@@ -121,8 +124,18 @@ const priorityOptions = [
   { value: "low", label: "منخفضة", color: "text-green-600" }
 ]
 
-export function MessagesManager() {
-  const [messages, setMessages] = useState(initialMessages)
+export function MessagesManager({messagesGot}) {
+
+
+  initialMessages = []
+  
+    messagesGot.forEach(item =>{
+
+     item.service= "cola"
+     item.tags = ["CRM", "تسويق", "رسائل جماعية"]
+     return item; 
+  })
+  const [messages, setMessages] = useState(messagesGot)
   const [selectedMessage, setSelectedMessage] = useState(null)
   const [searchTerm, setSearchTerm] = useState("")
   const [statusFilter, setStatusFilter] = useState("all")
@@ -143,14 +156,23 @@ export function MessagesManager() {
     return matchesSearch && matchesStatus && matchesPriority
   })
 
-  const handleStatusChange = (messageId, newStatus) => {
-    setMessages(
-      messages.map(msg =>
-        msg.id === messageId
-          ? { ...msg, status: newStatus, updatedAt: new Date().toISOString() }
-          : msg
-      )
-    )
+  const handleStatusChange = async (messageId, newStatus) => {
+    let change; 
+    setMessages( messages.map(msg =>{
+        if (msg.id === messageId){
+
+          change =  { ...msg, status: newStatus, updatedAt: new Date() }
+          return change ; 
+        }
+          else 
+            return msg
+    }))
+   
+    
+  
+
+    const res = await CreateMaessageOrUpdate (change); 
+    console.log(res);
   }
 
   const handleStarToggle = messageId => {
@@ -160,7 +182,7 @@ export function MessagesManager() {
           ? {
               ...msg,
               isStarred: !msg.isStarred,
-              updatedAt: new Date().toISOString()
+              updatedAt: new Date()
             }
           : msg
       )
@@ -172,6 +194,7 @@ export function MessagesManager() {
     if (selectedMessage?.id === messageId) {
       setSelectedMessage(null)
     }
+    deleteMessage(messageId) ; 
   }
 
   const handleReply = () => {

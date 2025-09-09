@@ -13,8 +13,8 @@ export async function CreateORUpdateService(service) {
     delete service['updatedAt']
     let data ; 
 
-    service.image = saveImageFile(service.image, service.title , 'services' )
-    console.log(service.image)
+    if (!typeof(service.image) == 'string')
+        service.image = await saveImageFile(service.image, service.title , 'services' )
     try{
 
         if (service['id']){
@@ -40,7 +40,7 @@ export async function CreateORUpdateService(service) {
         translation.features = data.features ; 
 
         const translationResult =  addServiceToTranslation (data.id , translation) ;
-        console.log(translationResult) ; 
+
     
         return { success: true, data: data }
 
@@ -61,13 +61,20 @@ export async function getServices() {
 
 export async function deleteService(id) {
     try{
+        const service = await prisma.service.findUnique({where: {id:id}})
+
+
+        deleteImageFile(service.image) ; 
+
+
         await prisma.service.delete({
             where: {
                 id: id
             }, 
         })
 
-        DeleteServiceFromTranslation(id )
+        DeleteServiceFromTranslation(id)
+        
 
         return { success: true}
 

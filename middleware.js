@@ -17,9 +17,10 @@ const protectedRoutes = ['/admin']
   {
     callbacks: {
       authorized: async (req ) => {
-     
-        const token = req.token
         
+        const token = req.token
+     
+       
        if (token)
         return token?.role === 'admin'
       return false

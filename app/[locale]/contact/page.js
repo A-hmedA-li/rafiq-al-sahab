@@ -25,22 +25,40 @@ import {
 import Link from "next/link"
 import { useTranslations } from "next-intl"
 import SubmitForm from "@/components/SubmitForm"
-
+import { CreateMaessageOrUpdate } from "@/server/contactUs"
 const fadeInUp = {
   initial: { opacity: 0, y: 60 },
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.6, ease: "easeOut" }
 }
 
+import { deleteMessage } from "@/server/contactUs"
+
 export default function ContactPage() {
     const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    service: "",
-    message: "", 
+    name: "a",
+    email: "a@a.com",
+    phone: "+79256602397",
+    message: "This is the Voice",
+    roleInOrg:"cola",
+    companyName: 'cola company', 
+    website:"https://cola.com", 
+    
     
   })
+ 
+
+    const [isSubmitting, setIsSubmitting] = useState(false)
+
+    const [isSubmitted, setIsSubmitted] = useState(false)
+    const handleSubEvents = {
+      isSubmitted: isSubmitted, 
+      isSubmitting: isSubmitting, 
+      setIsSubmitted: setIsSubmitted, 
+      setIsSubmitting: setIsSubmitting
+    }
+
+
 
 
   
@@ -48,9 +66,9 @@ export default function ContactPage() {
     e.preventDefault()
     setIsSubmitting(true)
 
-
-    // Simulate form submission
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    const s = await deleteMessage('cmfcsh2nm00005ib9t3g14876')
+    console.log(s);
+    const res = CreateMaessageOrUpdate(formData);
 
     setIsSubmitting(false)
     setIsSubmitted(true)
@@ -58,7 +76,7 @@ export default function ContactPage() {
     // Reset form after 3 seconds
     setTimeout(() => {
       setIsSubmitted(false)
-      setFormData({ name: "", email: "", phone: "", service: "", message: "" })
+      // setFormData({ name: "", email: "", phone: "", service: "", message: "" })
     }, 3000)
   }
   const t = useTranslations("ContactPage")
@@ -87,7 +105,7 @@ export default function ContactPage() {
       <div className="container mx-auto max-w-6xl px-4 pb-16">
 
 
-        <SubmitForm sendMes="form.submit" formData={formData} setFormData={setFormData} handleSubmit={handleSubmit}/>
+        <SubmitForm sendMes="form.submit" formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} handleSubEvents={handleSubEvents}/>
          
           {/* Contact Info & Quick Actions */}
           <motion.div

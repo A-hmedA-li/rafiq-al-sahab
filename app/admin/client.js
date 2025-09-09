@@ -13,6 +13,7 @@ import {
   Calendar,
   TrendingUp
 } from "lucide-react"
+import { ProfileManager } from "@/components/pages/admin/profile-manager"
 
 const DashboardOverview = () => {
   const stats = [
@@ -185,7 +186,7 @@ const DashboardOverview = () => {
 
 export  function AdminPage({data}) {
   const [activeTab, setActiveTab] = useState("dashboard")
-
+  console.log(activeTab)
   const renderContent = () => {
     switch (activeTab) {
       case "dashboard":
@@ -195,7 +196,9 @@ export  function AdminPage({data}) {
       case "projects":
         return <ProjectsManager />
       case "messages":
-        return <MessagesManager />
+        return <MessagesManager messagesGot={data.messages}/>
+      case "all-users":
+        return <ProfileManager />
       default:
         return <DashboardOverview />
     }

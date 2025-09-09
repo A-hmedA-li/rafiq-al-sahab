@@ -114,7 +114,7 @@ export function ServicesManager({servicesGot}) {
       setServices(
         services.map(s =>
           s.id === service.id
-            ? { ...service, updatedAt: new Date().toISOString().split("T")[0] }
+            ? { ...service, updatedAt: new Date()}
             : s
         )
       )
