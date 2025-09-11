@@ -23,13 +23,14 @@ import {
 } from "@/components/ui/select"
 import Link from "next/link"
 
+import { signUp } from "@/server/Users"
+
 export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
+    name: "",
     email: "",
     phone: "",
     password: "",
@@ -42,18 +43,22 @@ export default function SignUpPage() {
     e.preventDefault()
     setIsLoading(true)
 
-    // Validate passwords match
     if (formData.password !== formData.confirmPassword) {
       alert("كلمات المرور غير متطابقة")
       setIsLoading(false)
       return
     }
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 2000))
+    const res = await signUp(formData); 
+  
+    if (!res.success){
+        setIsLoading(false)
+        return 
+
+    }
 
     // Redirect to sign in
-    window.location.href = "/signin"
+   window.location.href = "/signin"
   }
 
   const handleInputChange = e => {
@@ -96,33 +101,21 @@ export default function SignUpPage() {
 
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-4">
-              <div className="grid grid-cols-2 gap-4">
+         
                 <div className="relative">
                   <User className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#404544]/50" />
                   <Input
                     type="text"
-                    name="firstName"
-                    placeholder="الاسم الأول"
-                    value={formData.firstName}
+                    name="name"
+                    placeholder="الاسم"
+                    value={formData.name}
                     onChange={handleInputChange}
                     className="pr-10 h-11 border-[#A5D5A9]/30 focus:border-[#78C487] rounded-xl text-sm"
                     required
                   />
                 </div>
-                <div className="relative">
-                  <User className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#404544]/50" />
-                  <Input
-                    type="text"
-                    name="lastName"
-                    placeholder="اسم العائلة"
-                    value={formData.lastName}
-                    onChange={handleInputChange}
-                    className="pr-10 h-11 border-[#A5D5A9]/30 focus:border-[#78C487] rounded-xl text-sm"
-                    required
-                  />
-                </div>
-              </div>
-
+               
+            
               <div className="relative">
                 <Mail className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#404544]/50" />
                 <Input
@@ -150,10 +143,10 @@ export default function SignUpPage() {
               </div>
 
               <Select onValueChange={handleSelectChange} required>
-                <SelectTrigger className="h-11 border-[#A5D5A9]/30 focus:border-[#78C487] rounded-xl text-sm">
+                <SelectTrigger className="h-11 border-[#A5D5A9]/30  focus:border-[#78C487] rounded-xl text-sm">
                   <SelectValue placeholder="اختر الدور الوظيفي" />
                 </SelectTrigger>
-                <SelectContent>
+                <SelectContent className="bg-white">
                   <SelectItem value="admin">مدير النظام</SelectItem>
                   <SelectItem value="manager">مدير</SelectItem>
                   <SelectItem value="developer">مطور</SelectItem>

@@ -78,6 +78,9 @@ const adminNavItems = [
     ]
   }
 ]
+const profile = {
+  id:'user'
+}
 
 export function AdminNavbar({ onTabChange, activeTab }) {
   const [isCollapsed, setIsCollapsed] = useState(false)
@@ -228,30 +231,35 @@ export function AdminNavbar({ onTabChange, activeTab }) {
         </div>
 
         {/* Footer */}
+        <button onClick={()=>handleItemClick(profile)} className="hover:bg-[#A5D5A9]/40">
         <div className="p-4 border-t border-[#A5D5A9]/20">
           <div className="flex items-center justify-between">
             {!isCollapsed && (
-              <div className="flex items-center space-x-3">
+            
+                  <div className="flex items-center space-x-3">
 
-                {
-                  session.data?.user?.image? 
-                    <img src={session.data.user.image} className="rounded-full w-10"/>
-                  :
+                    {
+                      session.data?.user?.image? 
+                        <img src={session.data.user.image} className="rounded-full w-10"/>
+                      :
 
-                <div className="w-8 h-8 bg-[#78C487] rounded-full flex items-center justify-center">
-                  <span className="text-white text-sm font-semibold">ن</span>
-                </div>
+                    <div className="w-8 h-8 bg-[#78C487] rounded-full flex items-center justify-center">
+                      <span className="text-white text-sm font-semibold">ن</span>
+                    </div>
 
-                } 
-                <div>
-                  <p className="text-sm font-medium text-[#404544] dark:text-white">
-                    {session.data?.user?.name}
-                  </p>
-                  <p className="text-xs text-[#404544]/70 dark:text-white/70">
-                    مدير النظام
-                  </p>
-                </div>
-              </div>
+                    } 
+                    <div>
+                    
+                        <p className="text-sm font-medium text-[#404544] dark:text-white">
+                          {session.data?.user?.name}
+                        </p>
+                        <p className="text-xs text-[#404544]/70 dark:text-white/70">
+                          مدير النظام
+                        </p>
+                      
+                    </div>
+                  </div>
+            
             )}
             <Button
               variant="ghost"
@@ -261,8 +269,10 @@ export function AdminNavbar({ onTabChange, activeTab }) {
             >
               <LogOut className="h-4 w-4" />
             </Button>
+            
           </div>
         </div>
+        </button>
       </motion.div>
 
       {/* Mobile Header */}

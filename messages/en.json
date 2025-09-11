@@ -246,6 +246,15 @@
       "description": "Advanced technical solutions specifically designed to grow your business and improve your customer experience"
     },
     "services": {
+      "1": {
+        "title": "Number 1 ",
+        "arabicTitle": "خدمة رقم 1 ايزي ميزي",
+        "description": "The \"easy mezy\"  is realy important",
+        "features": [
+          "as",
+          "as"
+        ]
+      },
       "16": {
         "title": "First Service",
         "arabicTitle": "أول خدمة معلم",

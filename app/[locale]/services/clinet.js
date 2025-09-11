@@ -28,7 +28,6 @@ export function ServicesPage({servicesGot}) {
   const t = useTranslations("ServicesPage")
    let services = []
 
-   console.log(servicesGot);
 
   servicesGot.forEach(item => {
     services.push({

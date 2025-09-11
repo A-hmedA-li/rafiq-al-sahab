@@ -186,7 +186,7 @@ const DashboardOverview = () => {
 
 export  function AdminPage({data}) {
   const [activeTab, setActiveTab] = useState("dashboard")
-  console.log(activeTab)
+
   const renderContent = () => {
     switch (activeTab) {
       case "dashboard":
@@ -198,7 +198,9 @@ export  function AdminPage({data}) {
       case "messages":
         return <MessagesManager messagesGot={data.messages}/>
       case "all-users":
-        return <ProfileManager />
+        return <ProfileManager userGot={data.user} />
+      case "user":
+        return <ProfileManager userGot={data.user} />
       default:
         return <DashboardOverview />
     }

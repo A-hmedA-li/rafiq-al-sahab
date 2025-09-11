@@ -11,6 +11,9 @@ const nextConfig = {
       allowedOrigins : ["localhost:3000" , "https://friendly-winner-v5gg4r9rpj9c69px-3000.app.github.dev"],
     },
   },
+  images: {
+    remotePatterns: [new URL('https://lh3.googleusercontent.com/**')],
+  },
 }
 
  

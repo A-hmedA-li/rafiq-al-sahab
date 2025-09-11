@@ -33,19 +33,18 @@ import {
 } from "@/components/ui/select"
 import Image from "next/image"
 
+
 const initialProfile = {
   id: "1",
-  firstName: "نزيه",
-  lastName: "حرفوش",
+  name: "نزيه",
+
   email: "nazeeh@rafiqalsahab.com",
   phone: "+971501234567",
-  avatar: "/placeholder.svg?height=150&width=150",
+  image: "/placeholder.svg?height=150&width=150",
   role: "مدير النظام",
-  department: "التكنولوجيا",
-  location: "دبي، الإمارات العربية المتحدة",
   bio:
     "خبير في الذكاء الاصطناعي والأتمتة مع أكثر من 10 سنوات من الخبرة في تطوير الحلول التقنية المبتكرة. أحب تبسيط التكنولوجيا المعقدة وجعلها في متناول الجميع.",
-  dateJoined: "2024-01-01",
+  createdAt: new Date(),
   lastLogin: "2024-01-20T10:30:00Z",
   isActive: true,
   preferences: {
@@ -56,21 +55,14 @@ const initialProfile = {
     marketingEmails: false,
     theme: "light"
   },
-  socialLinks: {
-    linkedin: "https://linkedin.com/in/nazeeh-harfoosh",
-    github: "https://github.com/nazeeh"
-  },
+
   skills: [
     "الذكاء الاصطناعي",
     "تطوير البرمجيات",
     "إدارة المشاريع",
     "الحوسبة السحابية"
   ],
-  achievements: [
-    "دكتوراه في علوم الحاسوب",
-    "50+ مشروع ناجح",
-    "خبير معتمد في AI"
-  ]
+
 }
 
 const languageOptions = [
@@ -91,8 +83,11 @@ const themeOptions = [
   { value: "system", label: "تلقائي" }
 ]
 
-export function ProfileManager() {
-  const [profile, setProfile] = useState(initialProfile)
+export function ProfileManager({userGot}) {
+
+  const initialProfile1 = {...initialProfile , ...userGot}
+  console.log(initialProfile1)
+  const [profile, setProfile] = useState(initialProfile1)
   const [security, setSecurity] = useState({
     currentPassword: "",
     newPassword: "",
@@ -111,13 +106,14 @@ export function ProfileManager() {
   const [isSaving, setIsSaving] = useState(false)
   const [newSkill, setNewSkill] = useState("")
 
+
   const handleSave = async () => {
     setIsSaving(true)
-    // Simulate API call
+
     await new Promise(resolve => setTimeout(resolve, 1000))
     setIsSaving(false)
     setIsEditing(false)
-    // Show success message
+    
   }
 
   const handlePasswordChange = async () => {
@@ -194,7 +190,7 @@ export function ProfileManager() {
             <CardContent className="p-6 text-center">
               <div className="relative inline-block mb-4">
                 <Image
-                  src={profile.avatar || "/placeholder.svg"}
+                  src={profile.image || "/placeholder.svg"}
                   alt={`${profile.firstName} ${profile.lastName}`}
                   width={120}
                   height={120}
@@ -212,9 +208,7 @@ export function ProfileManager() {
                 {profile.firstName} {profile.lastName}
               </h2>
               <p className="text-[#78C487] font-medium mb-2">{profile.role}</p>
-              <p className="text-sm text-[#404544]/70 dark:text-white/70 mb-4">
-                {profile.department}
-              </p>
+            
 
               <div className="space-y-2 text-sm text-[#404544]/70 dark:text-white/70">
                 <div className="flex items-center justify-center space-x-2">
@@ -227,7 +221,7 @@ export function ProfileManager() {
                 </div>
                 <div className="flex items-center justify-center space-x-2">
                   <MapPin className="h-4 w-4" />
-                  <span className="text-center">{profile.location}</span>
+                 
                 </div>
                 <div className="flex items-center justify-center space-x-2">
                   <Calendar className="h-4 w-4" />
@@ -300,12 +294,12 @@ export function ProfileManager() {
                   <div className="grid md:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                        الاسم الأول
+                        الاسم
                       </label>
                       <Input
-                        value={profile.firstName}
+                        value={profile.name}
                         onChange={e =>
-                          setProfile({ ...profile, firstName: e.target.value })
+                          setProfile({ ...profile, name: e.target.value })
                         }
                         disabled={!isEditing}
                         className={
@@ -313,21 +307,7 @@ export function ProfileManager() {
                         }
                       />
                     </div>
-                    <div>
-                      <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                        اسم العائلة
-                      </label>
-                      <Input
-                        value={profile.lastName}
-                        onChange={e =>
-                          setProfile({ ...profile, lastName: e.target.value })
-                        }
-                        disabled={!isEditing}
-                        className={
-                          !isEditing ? "bg-gray-50 dark:bg-gray-800" : ""
-                        }
-                      />
-                    </div>
+                   
                   </div>
 
                   <div className="grid md:grid-cols-2 gap-4">
@@ -364,21 +344,7 @@ export function ProfileManager() {
                     </div>
                   </div>
 
-                  <div>
-                    <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                      الموقع
-                    </label>
-                    <Input
-                      value={profile.location}
-                      onChange={e =>
-                        setProfile({ ...profile, location: e.target.value })
-                      }
-                      disabled={!isEditing}
-                      className={
-                        !isEditing ? "bg-gray-50 dark:bg-gray-800" : ""
-                      }
-                    />
-                  </div>
+                 
 
                   <div>
                     <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
@@ -471,80 +437,9 @@ export function ProfileManager() {
                   </CardContent>
                 </Card>
 
-                <Card>
-                  <CardHeader>
-                    <CardTitle>الإنجازات</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="space-y-3">
-                      {profile.achievements.map((achievement, index) => (
-                        <div
-                          key={index}
-                          className="flex items-center space-x-2"
-                        >
-                          <Check className="h-4 w-4 text-[#78C487]" />
-                          <span className="text-[#404544] dark:text-white">
-                            {achievement}
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </CardContent>
-                </Card>
               </div>
 
-              {/* Social Links */}
-              <Card>
-                <CardHeader>
-                  <CardTitle>الروابط الاجتماعية</CardTitle>
-                </CardHeader>
-                <CardContent className="space-y-4">
-                  <div>
-                    <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                      LinkedIn
-                    </label>
-                    <Input
-                      value={profile.socialLinks.linkedin || ""}
-                      onChange={e =>
-                        setProfile({
-                          ...profile,
-                          socialLinks: {
-                            ...profile.socialLinks,
-                            linkedin: e.target.value
-                          }
-                        })
-                      }
-                      disabled={!isEditing}
-                      placeholder="https://linkedin.com/in/username"
-                      className={
-                        !isEditing ? "bg-gray-50 dark:bg-gray-800" : ""
-                      }
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-[#404544] dark:text-white mb-2">
-                      GitHub
-                    </label>
-                    <Input
-                      value={profile.socialLinks.github || ""}
-                      onChange={e =>
-                        setProfile({
-                          ...profile,
-                          socialLinks: {
-                            ...profile.socialLinks,
-                            github: e.target.value
-                          }
-                        })
-                      }
-                      disabled={!isEditing}
-                      placeholder="https://github.com/username"
-                      className={
-                        !isEditing ? "bg-gray-50 dark:bg-gray-800" : ""
-                      }
-                    />
-                  </div>
-                </CardContent>
-              </Card>
+         
             </motion.div>
           )}
 

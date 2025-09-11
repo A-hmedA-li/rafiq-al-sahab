@@ -28,6 +28,7 @@ export function Navigation() {
     { href: "/about", label: t("about") },
     { href: "/booking", label: t("booking") },
     { href: "/contact", label: t("contact") },
+ 
   ]
 
   useEffect(() => {
@@ -192,13 +193,14 @@ function UserAuth({translation}) {
 
   if (!session) {
     return (
-      <Button 
-        onClick={() => signIn('google')}
-        variant="outline"
-        className="border-[#78C487] text-[#78C487] hover:bg-[#78C487] hover:text-white"
-      >
-        {translation.signIn}
-      </Button>
+      <div>
+        <Link 
+          href="/signin"
+          className="py-2 px-3 border rounded-md border-[#78C487] text-[#78C487] hover:bg-[#78C487] hover:text-white"
+        >
+          SignIn
+        </Link>
+      </div>
     )
   }
 

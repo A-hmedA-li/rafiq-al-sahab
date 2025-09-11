@@ -172,7 +172,7 @@ export function MessagesManager({messagesGot}) {
   
 
     const res = await CreateMaessageOrUpdate (change); 
-    console.log(res);
+ 
   }
 
   const handleStarToggle = messageId => {

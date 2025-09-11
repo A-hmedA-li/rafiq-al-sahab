@@ -67,7 +67,7 @@ export default function ContactPage() {
     setIsSubmitting(true)
 
     const s = await deleteMessage('cmfcsh2nm00005ib9t3g14876')
-    console.log(s);
+
     const res = CreateMaessageOrUpdate(formData);
 
     setIsSubmitting(false)
