@@ -29,10 +29,12 @@ export default function SignInPage() {
         password: formData.password, 
         rememberMe: formData.rememberMe
       })
+      
+      console.log(res)
 
       setIsLoading(false)
 
-      window.location.href = '/admin'
+      //window.location.href = '/admin'
     }
     catch(e){
       console.log('error in Sign in ') ; 
