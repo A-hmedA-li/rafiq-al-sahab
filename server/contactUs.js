@@ -5,7 +5,11 @@ import prisma from "@/lib/prisma"
 
 export async function getMessages() {
     try {
-        const messages = await prisma.contactUS.findMany() ; 
+        const messages = await prisma.contactUS.findMany({
+            orderBy: {
+                createdAt: 'desc',
+            }
+        }) ; 
         return {success: true , data: messages}; 
     } 
     catch(e){
@@ -15,11 +19,8 @@ export async function getMessages() {
 }
 export async function CreateMaessageOrUpdate(message){
     let data ; 
+  
     try{
-       
-
-      
-
        
         if (message["id"]){
             delete message['service']
@@ -45,13 +46,11 @@ export async function deleteMessage(id){
     
     try {
 
-        const s = await getMessages(); 
-        console.log(s);
-        return ;
+      
         const messages = await prisma.contactUS.delete(
             {where : {id:id}}
         ) ; 
-        console.log(messages)
+
         return {success: true , data: messages}; 
     } 
     catch(e){

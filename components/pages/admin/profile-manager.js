@@ -32,29 +32,10 @@ import {
   SelectValue
 } from "@/components/ui/select"
 import Image from "next/image"
+import { updateUser } from "@/server/Users"
 
 
 const initialProfile = {
-  id: "1",
-  name: "نزيه",
-
-  email: "nazeeh@rafiqalsahab.com",
-  phone: "+971501234567",
-  image: "/placeholder.svg?height=150&width=150",
-  role: "مدير النظام",
-  bio:
-    "خبير في الذكاء الاصطناعي والأتمتة مع أكثر من 10 سنوات من الخبرة في تطوير الحلول التقنية المبتكرة. أحب تبسيط التكنولوجيا المعقدة وجعلها في متناول الجميع.",
-  createdAt: new Date(),
-  lastLogin: "2024-01-20T10:30:00Z",
-  isActive: true,
-  preferences: {
-    language: "ar",
-    timezone: "Asia/Dubai",
-    emailNotifications: true,
-    pushNotifications: true,
-    marketingEmails: false,
-    theme: "light"
-  },
 
   skills: [
     "الذكاء الاصطناعي",
@@ -85,9 +66,8 @@ const themeOptions = [
 
 export function ProfileManager({userGot}) {
 
-  const initialProfile1 = {...initialProfile , ...userGot}
-  console.log(initialProfile1)
-  const [profile, setProfile] = useState(initialProfile1)
+  
+  const [profile, setProfile] = useState(userGot)
   const [security, setSecurity] = useState({
     currentPassword: "",
     newPassword: "",
@@ -110,7 +90,8 @@ export function ProfileManager({userGot}) {
   const handleSave = async () => {
     setIsSaving(true)
 
-    await new Promise(resolve => setTimeout(resolve, 1000))
+    const res = await updateUser(profile)
+   
     setIsSaving(false)
     setIsEditing(false)
     
@@ -207,7 +188,7 @@ export function ProfileManager({userGot}) {
               <h2 className="text-xl font-bold text-[#404544] dark:text-white mb-1">
                 {profile.firstName} {profile.lastName}
               </h2>
-              <p className="text-[#78C487] font-medium mb-2">{profile.role}</p>
+              <p className="text-[#78C487] font-medium mb-2">{profile.name}</p>
             
 
               <div className="space-y-2 text-sm text-[#404544]/70 dark:text-white/70">
@@ -219,15 +200,12 @@ export function ProfileManager({userGot}) {
                   <Phone className="h-4 w-4" />
                   <span>{profile.phone}</span>
                 </div>
-                <div className="flex items-center justify-center space-x-2">
-                  <MapPin className="h-4 w-4" />
-                 
-                </div>
+        
                 <div className="flex items-center justify-center space-x-2">
                   <Calendar className="h-4 w-4" />
                   <span>
                     انضم في{" "}
-                    {new Date(profile.dateJoined).toLocaleDateString("ar-AE")}
+                    {new Date(profile.createdAt).toLocaleDateString("ar-AE")}
                   </span>
                 </div>
               </div>
@@ -235,7 +213,7 @@ export function ProfileManager({userGot}) {
               <div className="mt-6 pt-4 border-t">
                 <p className="text-xs text-[#404544]/50 dark:text-white/50">
                   آخر تسجيل دخول:{" "}
-                  {new Date(profile.lastLogin).toLocaleDateString("ar-AE", {
+                  {new Date().toLocaleDateString("ar-AE", {
                     month: "short",
                     day: "numeric",
                     hour: "2-digit",

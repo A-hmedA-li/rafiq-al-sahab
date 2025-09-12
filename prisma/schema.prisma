@@ -45,7 +45,7 @@ model User {
   image         String?
   bio           String?
   isActive      Boolean  @default(true)
-  preferences   Preferences?
+  preferences   Preferences? 
   skills        String[]
   
   accounts      Account[]
@@ -64,7 +64,7 @@ model Preferences{
   marketingEmails     Boolean @default(false)
   theme               String  @default("light")
   userId              String  @unique
-  user                User    @relation(fields: [userId], references: [id])
+  user                User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
@@ -106,9 +106,9 @@ model ContactUS {
   annualRevenue String?
   projectBudget String?
   message       String
-  status        String
-  priority      String
-  isStarred     Boolean
+  status        String  @default("new")
+  priority      String  @default("high")
+  isStarred     Boolean @default(false)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 }

@@ -83,7 +83,7 @@ const profile = {
 }
 
 export function AdminNavbar({ onTabChange, activeTab }) {
-  const [isCollapsed, setIsCollapsed] = useState(false)
+  const [isCollapsed, setIsCollapsed] = useState(true)
   const [isMobileOpen, setIsMobileOpen] = useState(false)
   const [expandedItems, setExpandedItems] = useState([])
   const pathname = usePathname()
@@ -184,20 +184,18 @@ export function AdminNavbar({ onTabChange, activeTab }) {
           <div className="flex items-center justify-between">
             <Link href="/" className="flex items-center space-x-2 group">
               <motion.div
-                whileHover={{ rotate: 360 }}
+                whileHover={{ rotate: 20 }}
                 transition={{ duration: 0.6 }}
-                className="p-2 bg-[#78C487] rounded-full"
+                
               >
-                <Cloud className="h-6 w-6 text-white" />
+                <img src="/images/lgc.png"  className="w-25" />
               </motion.div>
               {!isCollapsed && (
                 <div>
-                  <span className="text-lg font-bold text-[#404544] dark:text-white">
+                  <span className="text-sm font-bold text-[#404544] dark:text-white">
                     رفيق السحاب
                   </span>
-                  <p className="text-xs text-[#404544]/70 dark:text-white/70">
-                    لوحة الإدارة
-                  </p>
+               
                 </div>
               )}
             </Link>
@@ -232,6 +230,15 @@ export function AdminNavbar({ onTabChange, activeTab }) {
 
         {/* Footer */}
         <button onClick={()=>handleItemClick(profile)} className="hover:bg-[#A5D5A9]/40">
+        {
+          isCollapsed?
+        <div className="w-full flex justify-center py-5 ">
+                  { session.data?.user?.image? 
+                        <img src={session.data.user.image} className="rounded-full w-10"/>
+                      :
+                        <img src="/images/igc.png" className="rounded-full w-10"/>
+                    } 
+        </div>:
         <div className="p-4 border-t border-[#A5D5A9]/20">
           <div className="flex items-center justify-between">
             {!isCollapsed && (
@@ -242,14 +249,12 @@ export function AdminNavbar({ onTabChange, activeTab }) {
                       session.data?.user?.image? 
                         <img src={session.data.user.image} className="rounded-full w-10"/>
                       :
-
-                    <div className="w-8 h-8 bg-[#78C487] rounded-full flex items-center justify-center">
-                      <span className="text-white text-sm font-semibold">ن</span>
-                    </div>
+                        <img src="/images/igc.png" className="rounded-full w-10"/>
+                   
 
                     } 
                     <div>
-                    
+
                         <p className="text-sm font-medium text-[#404544] dark:text-white">
                           {session.data?.user?.name}
                         </p>
@@ -272,7 +277,9 @@ export function AdminNavbar({ onTabChange, activeTab }) {
             
           </div>
         </div>
+        }
         </button>
+        
       </motion.div>
 
       {/* Mobile Header */}

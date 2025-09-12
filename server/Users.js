@@ -23,7 +23,7 @@ export async function signUp(data){
             throw new Error('you should agree to terms and servieces');
         const hashedPassword = await bcrypt.hash(password, 12)
        
-
+     
         const newUser = await prisma.user.create({
             data:{
                 name:   data.name,
@@ -32,16 +32,23 @@ export async function signUp(data){
                 emailVerified: new Date(), 
                 role: 'user', 
                 password: hashedPassword, 
-                image: '/images/lgc.png'
-            }
+                image: '/images/profile.png',
+                
+            },
+          
         }); 
-
-
+        const preferences = await prisma.preferences.create({
+            data:{userId: newUser.id}
+        })
+    
+        delete newUser['password']
+     
+        
  
         return {success: true , data:newUser}
     }
     catch(e){
-      
+        console.log(e)
         return {success:false , e:e.message}
     }
 }
@@ -51,12 +58,50 @@ export async function getUserById(id){
     try{
 
         const user = await prisma.user.findUnique({
-            where:{id:id}
+            where:{id:id}, 
+            include:{
+                preferences: {
+                    omit:{
+                        id:true 
+                    } 
+                }, 
+            },
+            omit:{
+                password:true
+            }
+            
         })
-
+        delete user['password']
+  
+   
         return {success: true , data:user}
     }catch(e){
 
          return {success:false , e:e.message} 
+    }
+}
+
+
+export async function updateUser(data){
+
+    try {
+
+ 
+        delete data['createdAt']
+        delete data['updatedAt']
+        delete data['preferences']
+        
+
+        const updatedUser = await prisma.user.update({
+            where:{id:data.id}, 
+            data: data
+        })
+       
+
+       return {success:true , data: "no data"}
+    }
+    catch(e){
+        console.log(e);
+        return {success:false, e:e.message}
     }
 }

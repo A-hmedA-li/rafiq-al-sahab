@@ -13,7 +13,7 @@ export default async function AdminPageHeader() {
   const services = await getServices();
   const messages = await getMessages();
   const userData = await getUserById(userSession.user.id)
-  console.log(userData)
+ 
   const data = {
     services : services, 
     messages: messages.data,

@@ -15,7 +15,8 @@ import {
 } from "lucide-react"
 import { ProfileManager } from "@/components/pages/admin/profile-manager"
 
-const DashboardOverview = () => {
+const DashboardOverview = ({count, msgs}) => {
+  console.log(msgs)
   const stats = [
     {
       title: "إجمالي المشاريع",
@@ -26,14 +27,14 @@ const DashboardOverview = () => {
     },
     {
       title: "الخدمات النشطة",
-      value: "8",
+      value: count.services.toString(),
       change: "+2",
       icon: BarChart3,
       color: "text-[#A5D5A9]"
     },
     {
       title: "الرسائل الجديدة",
-      value: "15",
+      value: count.messages.toString(),
       change: "+5",
       icon: MessageSquare,
       color: "text-blue-500"
@@ -137,23 +138,7 @@ const DashboardOverview = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {[
-                {
-                  name: "أحمد محمد",
-                  message: "أحتاج إلى نظام حجز لمطعمي",
-                  time: "منذ ساعة"
-                },
-                {
-                  name: "فاطمة علي",
-                  message: "استفسار عن المساعد الذكي",
-                  time: "منذ 3 ساعات"
-                },
-                {
-                  name: "محمد السالم",
-                  message: "طلب استشارة تقنية",
-                  time: "أمس"
-                }
-              ].map((msg, index) => (
+              {msgs.map((msg, index) => (
                 <div
                   key={index}
                   className="flex items-start space-x-3 p-3 bg-gray-50 dark:bg-gray-800 rounded-lg"
@@ -168,10 +153,15 @@ const DashboardOverview = () => {
                       {msg.name}
                     </p>
                     <p className="text-sm text-[#404544]/70 dark:text-white/70 line-clamp-1">
-                      {msg.message}
+                      {msg.massage}
                     </p>
                     <p className="text-xs text-[#404544]/50 dark:text-white/50 mt-1">
-                      {msg.time}
+                      {msg.time.toLocaleDateString("ar-AE", {
+                        month: "short",
+                        day: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit"
+                      })}
                     </p>
                   </div>
                 </div>
@@ -186,11 +176,34 @@ const DashboardOverview = () => {
 
 export  function AdminPage({data}) {
   const [activeTab, setActiveTab] = useState("dashboard")
+  let messageCount  = 0 ;
+  let recnetNewMessages = [];
+  data.messages.forEach(msg=>{
+    if (msg.status == 'new'){
+      messageCount +=1 ; 
+      
+      if (recnetNewMessages.length <= 5)
+       recnetNewMessages.push({
+        name:msg.name,
+        massage: msg.message,
+        time: msg.createdAt,
+       })
+    }
+  })
+  
 
+  
+  const count = {
+    services: data.services.length, 
+    messages: messageCount,
+  }
+
+
+  
   const renderContent = () => {
     switch (activeTab) {
       case "dashboard":
-        return <DashboardOverview />
+        return <DashboardOverview count={count} msgs={recnetNewMessages} />
       case "services":
         return <ServicesManager servicesGot={data.services} />
       case "projects":
