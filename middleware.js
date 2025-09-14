@@ -31,6 +31,8 @@ const protectedRoutes = ['/admin']
 
 export default async function middleware(req, params){
 
+  
+
   const intlResponse = createMiddleware(routing)
   let isProtected = false ; 
   for (let i in protectedRoutes){

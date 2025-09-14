@@ -65,6 +65,7 @@ export function ServicesManager({servicesGot}) {
   const [searchTerm, setSearchTerm] = useState("")
   const [displayError , setDisplayerror  ] = useState(false)
   const [errorMessage , setErrorMessage ] = useState('ولله Error يا غالي')
+  const [isImgDeleting , setIsImgDeleting ] = useState(false)
 
   const filteredServices = services.filter(
     service =>
@@ -95,12 +96,12 @@ export function ServicesManager({servicesGot}) {
   }
 
   const handleSave = async service => {
-    if (service['id'])
-      service.id = parseInt(service.id)
+
 
 
     const res = await CreateORUpdateService(service); 
 
+    service.id = res.data.id
     if (!res.success){
       setDisplayerror(true)
       console.error(res);
@@ -125,7 +126,7 @@ export function ServicesManager({servicesGot}) {
   const handleDelete = async id => {
     try{
       const res = await deleteService(parseInt(id)); 
-   
+      
     }
     catch(e){
       setDisplayerror(true)
@@ -138,7 +139,7 @@ export function ServicesManager({servicesGot}) {
 
   const toggleActive = async id => {
     let updated ; 
-     services.map(s =>{
+    const newServices = services.map(s =>{
             if (s.id === id){
               updated =  {
                   ...s,
@@ -154,27 +155,14 @@ export function ServicesManager({servicesGot}) {
       )
      
       const res = await CreateORUpdateService(updated) ; 
-      
+        
       if (!res.success){
         setDisplayerror(true) ;
         setErrorMessage("Error in toggling active state") 
         return ; 
       }
 
-    setServices(services.map(s =>{
-            if (s.id === id){
-              updated =  {
-                  ...s,
-                  isActive: !s.isActive,
-                  updatedAt: new Date()
-                }
-
-                return updated ; 
-              }
-            else
-            return s 
-        }
-      ))
+    setServices(newServices)
     
 
     
@@ -328,6 +316,7 @@ export function ServicesManager({servicesGot}) {
                           size="sm"
                           onClick={() => handleDelete(service.id)}
                           className="p-1"
+                          
                         >
                           <Trash2 className="h-4 w-4 text-red-500" />
                         </Button>

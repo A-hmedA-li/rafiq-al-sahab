@@ -151,10 +151,10 @@
       "morethan500": "500+ employees"
     },
     "revenue": {
-      "less1": "Less than $1M"
+      "less1": "Less than 1M AED"
     },
     "budget": {
-      "less1": "less than $20K"
+      "less1": "less than 20K AED"
     },
     "form": {
       "title": "Send Us a Message",
@@ -246,33 +246,28 @@
       "description": "Advanced technical solutions specifically designed to grow your business and improve your customer experience"
     },
     "services": {
-      "1": {
-        "title": "Number 1 ",
-        "arabicTitle": "خدمة رقم 1 ايزي ميزي",
-        "description": "The \"easy mezy\"  is realy important",
+      "36": {
+        "title": "asd",
+        "arabicTitle": "asd",
+        "description": "asdasdasd",
         "features": [
-          "as",
-          "as"
-        ]
-      },
-      "16": {
-        "title": "First Service",
-        "arabicTitle": "أول خدمة معلم",
-        "description": "A realy important descreption of the service",
-        "features": [
-          "شيس",
-          "شسي",
-          "يشيشسيشسيش"
-        ]
-      },
-      "26": {
-        "title": "but in Engligh",
-        "arabicTitle": "خدمة جديدة ",
-        "description": "description but good",
-        "features": [
-          "ads",
           "asd",
-          "asdaaaaaaaa"
+          "asd",
+          "asda"
+        ]
+      },
+      "37": {
+        "title": "asad",
+        "arabicTitle": "asd",
+        "description": "asd",
+        "features": []
+      },
+      "38": {
+        "title": "AI-Powered Personalization",
+        "arabicTitle": "العنوان بالعربية ",
+        "description": "البحر مالح والناس مصالح",
+        "features": [
+          "شسي"
         ]
       }
     },
@@ -540,5 +535,44 @@
       },
       "cta": "Meet the Team in Detail"
     }
+  },
+  "SignUpPage": {
+    "title": "Create New Account",
+    "subtitle": "Join the Cloud Companion team",
+    "passwordMismatch": "Passwords do not match",
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "phone": "Phone Number",
+      "rolePlaceholder": "Select Role",
+      "roles": {
+        "admin": "System Administrator",
+        "manager": "Manager",
+        "developer": "Developer",
+        "designer": "Designer",
+        "client": "Client"
+      },
+      "password": "Password",
+      "confirmPassword": "Confirm Password",
+      "agreeToTerms": "I agree to the <terms>Terms and Conditions</terms> and <privacy>Privacy Policy</privacy>",
+      "submit": "Create Account"
+    },
+    "loginPrompt": "Already have an account? <loginLink>Sign In</loginLink>",
+    "backToHome": "Back to Homepage"
+  },
+  "SignInPage": {
+    "title": "Sign In",
+    "subtitle": "Welcome back to Cloud Companion",
+    "form": {
+      "email": "Email",
+      "password": "Password",
+      "rememberMe": "Remember me",
+      "forgotPassword": "Forgot password?",
+      "submit": "Sign In",
+      "or": "Or",
+      "signInWithGoogle": "Sign in with Google"
+    },
+    "signupPrompt": "Don't have an account? <signupLink>Sign up</signupLink>",
+    "backToHome": "Back to Homepage"
   }
 }

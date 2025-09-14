@@ -22,10 +22,12 @@ import {
   SelectValue
 } from "@/components/ui/select"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 
 import { signUp } from "@/server/Users"
 
 export default function SignUpPage() {
+  const t = useTranslations("SignUpPage")
   const [showPassword, setShowPassword] = useState(false)
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
@@ -44,7 +46,7 @@ export default function SignUpPage() {
     setIsLoading(true)
 
     if (formData.password !== formData.confirmPassword) {
-      alert("كلمات المرور غير متطابقة")
+      alert(t("passwordMismatch"))
       setIsLoading(false)
       return
     }
@@ -54,7 +56,6 @@ export default function SignUpPage() {
     if (!res.success){
         setIsLoading(false)
         return 
-
     }
 
     // Redirect to sign in
@@ -87,15 +88,15 @@ export default function SignUpPage() {
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               transition={{ delay: 0.2, type: "spring", stiffness: 200 }}
-              className="mx-auto mb-4 p-3 bg-[#78C487] rounded-full w-fit"
+              className="mx-auto mb-4 p-3  rounded-full w-fit"
             >
-              <Cloud className="h-8 w-8 text-white" />
+              <img src="/images/lgc.png"  className="w-50"/>
             </motion.div>
             <CardTitle className="text-2xl font-bold text-[#404544] mb-2">
-              إنشاء حساب جديد
+              {t("title")}
             </CardTitle>
             <p className="text-[#404544]/70 text-sm">
-              انضم إلى فريق رفيق السحاب
+              {t("subtitle")}
             </p>
           </CardHeader>
 
@@ -107,7 +108,7 @@ export default function SignUpPage() {
                   <Input
                     type="text"
                     name="name"
-                    placeholder="الاسم"
+                    placeholder={t("form.name")}
                     value={formData.name}
                     onChange={handleInputChange}
                     className="pr-10 h-11 border-[#A5D5A9]/30 focus:border-[#78C487] rounded-xl text-sm"
@@ -121,7 +122,7 @@ export default function SignUpPage() {
                 <Input
                   type="email"
                   name="email"
-                  placeholder="البريد الإلكتروني"
+                  placeholder={t("form.email")}
                   value={formData.email}
                   onChange={handleInputChange}
                   className="pr-10 h-11 border-[#A5D5A9]/30 focus:border-[#78C487] rounded-xl text-sm"
@@ -134,7 +135,7 @@ export default function SignUpPage() {
                 <Input
                   type="tel"
                   name="phone"
-                  placeholder="رقم الهاتف"
+                  placeholder="+971 XX XXX XXXX"
                   value={formData.phone}
                   onChange={handleInputChange}
                   className="pr-10 h-11 border-[#A5D5A9]/30 focus:border-[#78C487] rounded-xl text-sm"
@@ -142,25 +143,25 @@ export default function SignUpPage() {
                 />
               </div>
 
-              <Select onValueChange={handleSelectChange} required>
+              {/* <Select onValueChange={handleSelectChange} required>
                 <SelectTrigger className="h-11 border-[#A5D5A9]/30  focus:border-[#78C487] rounded-xl text-sm">
-                  <SelectValue placeholder="اختر الدور الوظيفي" />
+                  <SelectValue placeholder={t("form.rolePlaceholder")} />
                 </SelectTrigger>
                 <SelectContent className="bg-white">
-                  <SelectItem value="admin">مدير النظام</SelectItem>
-                  <SelectItem value="manager">مدير</SelectItem>
-                  <SelectItem value="developer">مطور</SelectItem>
-                  <SelectItem value="designer">مصمم</SelectItem>
-                  <SelectItem value="client">عميل</SelectItem>
+                  <SelectItem value="admin">{t("form.roles.admin")}</SelectItem>
+                  <SelectItem value="manager">{t("form.roles.manager")}</SelectItem>
+                  <SelectItem value="developer">{t("form.roles.developer")}</SelectItem>
+                  <SelectItem value="designer">{t("form.roles.designer")}</SelectItem>
+                  <SelectItem value="client">{t("form.roles.client")}</SelectItem>
                 </SelectContent>
-              </Select>
+              </Select> */}
 
               <div className="relative">
                 <Lock className="absolute right-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-[#404544]/50" />
                 <Input
                   type={showPassword ? "text" : "password"}
                   name="password"
-                  placeholder="كلمة المرور"
+                  placeholder={t("form.password")}
                   value={formData.password}
                   onChange={handleInputChange}
                   className="pr-10 pl-10 h-11 border-[#A5D5A9]/30 focus:border-[#78C487] rounded-xl text-sm"
@@ -184,7 +185,7 @@ export default function SignUpPage() {
                 <Input
                   type={showConfirmPassword ? "text" : "password"}
                   name="confirmPassword"
-                  placeholder="تأكيد كلمة المرور"
+                  placeholder={t("form.confirmPassword")}
                   value={formData.confirmPassword}
                   onChange={handleInputChange}
                   className="pr-10 pl-10 h-11 border-[#A5D5A9]/30 focus:border-[#78C487] rounded-xl text-sm"
@@ -213,20 +214,24 @@ export default function SignUpPage() {
                   required
                 />
                 <label className="text-xs text-[#404544]/70 leading-relaxed">
-                  أوافق على{" "}
-                  <Link
-                    href="/terms"
-                    className="text-[#78C487] hover:underline"
-                  >
-                    الشروط والأحكام
-                  </Link>{" "}
-                  و{" "}
-                  <Link
-                    href="/privacy"
-                    className="text-[#78C487] hover:underline"
-                  >
-                    سياسة الخصوصية
-                  </Link>
+                  {t.rich("form.agreeToTerms", {
+                    terms: (chunks) => (
+                      <Link
+                        href="/terms"
+                        className="text-[#78C487] hover:underline"
+                      >
+                        {chunks}
+                      </Link>
+                    ),
+                    privacy: (chunks) => (
+                      <Link
+                        href="/privacy"
+                        className="text-[#78C487] hover:underline"
+                      >
+                        {chunks}
+                      </Link>
+                    )
+                  })}
                 </label>
               </div>
 
@@ -247,7 +252,7 @@ export default function SignUpPage() {
                   />
                 ) : (
                   <>
-                    <span>إنشاء الحساب</span>
+                    <span>{t("form.submit")}</span>
                     <ArrowRight className="h-4 w-4" />
                   </>
                 )}
@@ -256,13 +261,16 @@ export default function SignUpPage() {
 
             <div className="mt-6 text-center">
               <p className="text-[#404544]/70 text-sm">
-                لديك حساب بالفعل؟{" "}
-                <Link
-                  href="/signin"
-                  className="text-[#78C487] hover:text-[#78C487]/80 font-medium transition-colors"
-                >
-                  تسجيل الدخول
-                </Link>
+                {t.rich("loginPrompt", {
+                  loginLink: (chunks) => (
+                    <Link
+                      href="/signin"
+                      className="text-[#78C487] hover:text-[#78C487]/80 font-medium transition-colors"
+                    >
+                      {chunks}
+                    </Link>
+                  )
+                })}
               </p>
             </div>
           </CardContent>
@@ -278,7 +286,7 @@ export default function SignUpPage() {
             href="/"
             className="text-[#404544]/70 hover:text-[#78C487] text-sm transition-colors flex items-center justify-center space-x-2"
           >
-            <span>العودة إلى الموقع الرئيسي</span>
+            <span>{t("backToHome")}</span>
           </Link>
         </motion.div>
       </motion.div>

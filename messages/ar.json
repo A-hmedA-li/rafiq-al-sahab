@@ -247,33 +247,28 @@
       "description": "حلول تقنية متطورة مصممة خصيصاً لتنمية أعمالك وتحسين تجربة عملائك"
     },
     "services": {
-      "1": {
-        "title": "Number 1 ",
-        "arabicTitle": "خدمة رقم 1 ايزي ميزي",
-        "description": "The \"easy mezy\"  is realy important",
+      "36": {
+        "title": "asd",
+        "arabicTitle": "asd",
+        "description": "asdasdasd",
         "features": [
-          "as",
-          "as"
-        ]
-      },
-      "16": {
-        "title": "First Service",
-        "arabicTitle": "أول خدمة معلم",
-        "description": "A realy important descreption of the service",
-        "features": [
-          "شيس",
-          "شسي",
-          "يشيشسيشسيش"
-        ]
-      },
-      "26": {
-        "title": "but in Engligh",
-        "arabicTitle": "خدمة جديدة ",
-        "description": "description but good",
-        "features": [
-          "ads",
           "asd",
-          "asdaaaaaaaa"
+          "asd",
+          "asda"
+        ]
+      },
+      "37": {
+        "title": "asad",
+        "arabicTitle": "asd",
+        "description": "asd",
+        "features": []
+      },
+      "38": {
+        "title": "شسي",
+        "arabicTitle": "سشي",
+        "description": "شسيشس",
+        "features": [
+          "شسي"
         ]
       }
     },
@@ -541,5 +536,44 @@
       },
       "cta": "تعرف على الفريق بالتفصيل"
     }
+  },
+  "SignUpPage": {
+    "title": "إنشاء حساب جديد",
+    "subtitle": "انضم إلى فريق رفيق السحاب",
+    "passwordMismatch": "كلمات المرور غير متطابقة",
+    "form": {
+      "name": "الاسم",
+      "email": "البريد الإلكتروني",
+      "phone": "رقم الهاتف",
+      "rolePlaceholder": "اختر الدور الوظيفي",
+      "roles": {
+        "admin": "مدير النظام",
+        "manager": "مدير",
+        "developer": "مطور",
+        "designer": "مصمم",
+        "client": "عميل"
+      },
+      "password": "كلمة المرور",
+      "confirmPassword": "تأكيد كلمة المرور",
+      "agreeToTerms": "أوافق على <terms>الشروط والأحكام</terms> و <privacy>سياسة الخصوصية</privacy>",
+      "submit": "إنشاء الحساب"
+    },
+    "loginPrompt": "لديك حساب بالفعل؟ <loginLink>تسجيل الدخول</loginLink>",
+    "backToHome": "العودة إلى الموقع الرئيسي"
+  },
+  "SignInPage": {
+    "title": "تسجيل الدخول",
+    "subtitle": "مرحباً بعودتك إلى رفيق السحاب",
+    "form": {
+      "email": "البريد الإلكتروني",
+      "password": "كلمة المرور",
+      "rememberMe": "تذكرني",
+      "forgotPassword": "نسيت كلمة المرور؟",
+      "submit": "تسجيل الدخول",
+      "or": "أو",
+      "signInWithGoogle": "تسجيل الدخول باستخدام جوجل"
+    },
+    "signupPrompt": "ليس لديك حساب؟ <signupLink>إنشاء حساب</signupLink>",
+    "backToHome": "العودة إلى الموقع الرئيسي"
   }
 }

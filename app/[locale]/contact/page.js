@@ -36,27 +36,16 @@ import { deleteMessage } from "@/server/contactUs"
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
-    name: "a",
-    email: "a@a.com",
-    phone: "+79256602397",
-    message: "This is the Voice",
-    roleInOrg:"cola",
-    companyName: 'cola company', 
-    website:"https://cola.com", 
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+    roleInOrg:"",
+    companyName: '', 
+    website:"", 
     
     
   })
- 
-
-    const [isSubmitting, setIsSubmitting] = useState(false)
-
-    const [isSubmitted, setIsSubmitted] = useState(false)
-    const handleSubEvents = {
-      isSubmitted: isSubmitted, 
-      isSubmitting: isSubmitting, 
-      setIsSubmitted: setIsSubmitted, 
-      setIsSubmitting: setIsSubmitting
-    }
 
 
 
@@ -105,7 +94,7 @@ export default function ContactPage() {
       <div className="container mx-auto max-w-6xl px-4 pb-16">
 
 
-        <SubmitForm sendMes="form.submit" formData={formData} setFormData={setFormData} handleSubmit={handleSubmit} handleSubEvents={handleSubEvents}/>
+        <SubmitForm sendMes="form.submit" formData={formData} setFormData={setFormData} handleSubmit={handleSubmit}/>
          
           {/* Contact Info & Quick Actions */}
           <motion.div

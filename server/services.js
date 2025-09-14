@@ -5,6 +5,8 @@ import prisma from "@/lib/prisma"
 
 import { addServiceToTranslation , DeleteServiceFromTranslation } from "@/lib/translationUtil";
 import { saveImageFile, deleteImageFile } from "@/lib/images";
+
+
 export async function CreateORUpdateService(service) {
 
 
@@ -12,20 +14,35 @@ export async function CreateORUpdateService(service) {
     delete service['createdAt']
     delete service['updatedAt']
     let data ; 
+    let imageChanged = false ; 
 
-    if (!typeof(service.image) == 'string')
+   
+    if (service.image.slice(0,4) == 'data'){
         service.image = await saveImageFile(service.image, service.title , 'services' )
+        imageChanged = true ; 
+    }
     try{
-
-        if (service['id']){
+         console.log(service)
+        if (service['id'] ){
+            
+            service['id'] = parseInt(service['id']);
+            const oldrecord = await prisma.service.findUnique({
+                where :{id:service.id}
+            })
+            if (imageChanged)
+                deleteImageFile(oldrecord.image) ; 
+                
+            
             data = await prisma.service.update({
                 where: {id : service.id }, 
                 data: service
             })
 
+            
+
         }
         else{
-
+            
             data = await prisma.service.create({ 
                     data: service
                 })
@@ -63,9 +80,9 @@ export async function deleteService(id) {
     try{
         const service = await prisma.service.findUnique({where: {id:id}})
 
-
+        console.log('before')
         deleteImageFile(service.image) ; 
-
+        console.log('after')
 
         await prisma.service.delete({
             where: {
@@ -86,7 +103,26 @@ export async function deleteService(id) {
     }
 }
 
-export async function updateService(service) {
 
-    
+
+
+export async function getHomePageServices(){
+
+    try{
+        const data = await prisma.service.findMany({
+            where: {isOnMainPage : true},
+            select: {
+                image: true, 
+                title: true, 
+                description: true, 
+                color: true, 
+            }
+        })
+
+        console.log(data);
+        return {success:true , data:data}
+    }
+    catch(e){
+        return {success:true , e:e.message}
+    }
 }

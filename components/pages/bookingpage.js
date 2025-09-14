@@ -297,7 +297,7 @@ export default function BookingPage({bookedDict}) {
                   ))}
                 </CardContent>
               </Card>
-              <SubmitForm sendMes="form.confirmbooking" formData={formData} setFormData={setFormData} handleSubmit={handleBooking}/>
+              <SubmitForm sendMes="form.confirmbooking" formData={formData} setFormData={setFormData} handleSubmit={handleBooking} />
               {/* Contact Form */}
               {/* <Card className="shadow-xl">
                 <CardHeader>

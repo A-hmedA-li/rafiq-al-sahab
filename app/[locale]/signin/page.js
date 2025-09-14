@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import Link from "next/link"
+import { useTranslations } from "next-intl"
 
 import { signIn } from "next-auth/react"
 
 export default function SignInPage() {
+  const t = useTranslations("SignInPage")
   const [showPassword, setShowPassword] = useState(false)
   const [isLoading, setIsLoading] = useState(false)
   const [formData, setFormData] = useState({
@@ -74,10 +76,10 @@ export default function SignInPage() {
 
             </motion.div>
             <CardTitle className="text-2xl font-bold text-[#404544] mb-2">
-              مرحباً بك مرة أخرى
+              {t("title")}
             </CardTitle>
             <p className="text-[#404544]/70 text-sm">
-              سجل دخولك للوصول إلى لوحة التحكم
+              {t("subtitle")}
             </p>
           </CardHeader>
 
@@ -89,7 +91,7 @@ export default function SignInPage() {
                   <Input
                     type="email"
                     name="email"
-                    placeholder="البريد الإلكتروني"
+                    placeholder={t("form.email")}
                     value={formData.email}
                     onChange={handleInputChange}
                     className="pr-12 h-12 border-[#A5D5A9]/30 focus:border-[#78C487] rounded-xl"
@@ -102,7 +104,7 @@ export default function SignInPage() {
                   <Input
                     type={showPassword ? "text" : "password"}
                     name="password"
-                    placeholder="كلمة المرور"
+                    placeholder={t("form.password")}
                     value={formData.password}
                     onChange={handleInputChange}
                     className="pr-12 pl-12 h-12 border-[#A5D5A9]/30 focus:border-[#78C487] rounded-xl"
@@ -131,13 +133,13 @@ export default function SignInPage() {
                     onChange={handleInputChange}
                     className="rounded border-[#A5D5A9]/30 text-[#78C487] focus:ring-[#78C487]"
                   />
-                  <span className="text-sm text-[#404544]/70">تذكرني</span>
+                  <span className="text-sm text-[#404544]/70">{t("form.rememberMe")}</span>
                 </label>
                 <Link
                   href="/forgot-password"
                   className="text-sm text-[#78C487] hover:text-[#78C487]/80 transition-colors"
                 >
-                  نسيت كلمة المرور؟
+                  {t("form.forgotPassword")}
                 </Link>
               </div>
 
@@ -158,7 +160,7 @@ export default function SignInPage() {
                   />
                 ) : (
                   <>
-                    <span>تسجيل الدخول</span>
+                    <span>{t("form.submit")}</span>
                     <ArrowRight className="h-5 w-5" />
                   </>
                 )}
@@ -170,7 +172,7 @@ export default function SignInPage() {
                     <div className="w-full border-t border-[#A5D5A9]/30" />
                   </div>
                   <div className="relative flex justify-center text-sm">
-                    <span className="px-4 bg-white text-[#404544]/70">أو</span>
+                    <span className="px-4 bg-white text-[#404544]/70">{t("form.or")}</span>
                   </div>
                 </div>
 
@@ -184,20 +186,23 @@ export default function SignInPage() {
                   }}
                 >
                   <Chrome className="h-5 w-5 text-[#4285F4]" />
-                  <span className="text-[#404544]">تسجيل الدخول بواسطة Google</span>
+                  <span className="text-[#404544]">{t("form.signInWithGoogle")}</span>
                 </Button>
               </div>
             </form>
 
             <div className="mt-8 text-center">
               <p className="text-[#404544]/70 text-sm">
-                ليس لديك حساب؟{" "}
-                <Link
-                  href="/signup"
-                  className="text-[#78C487] hover:text-[#78C487]/80 font-medium transition-colors"
-                >
-                  إنشاء حساب جديد
-                </Link>
+                {t.rich("signupPrompt", {
+                  signupLink: (chunks) => (
+                    <Link
+                      href="/signup"
+                      className="text-[#78C487] hover:text-[#78C487]/80 font-medium transition-colors"
+                    >
+                      {chunks}
+                    </Link>
+                  )
+                })}
               </p>
             </div>
           </CardContent>
@@ -213,7 +218,7 @@ export default function SignInPage() {
             href="/"
             className="text-[#404544]/70 hover:text-[#78C487] text-sm transition-colors flex items-center justify-center space-x-2"
           >
-            <span>العودة إلى الموقع الرئيسي</span>
+            <span>{t("backToHome")}</span>
           </Link>
         </motion.div>
       </motion.div>
