@@ -22,7 +22,7 @@ export async function CreateORUpdateService(service) {
         imageChanged = true ; 
     }
     try{
-         console.log(service)
+   
         if (service['id'] ){
             
             service['id'] = parseInt(service['id']);
@@ -62,8 +62,7 @@ export async function CreateORUpdateService(service) {
         return { success: true, data: data }
 
     }catch(e){
-        console.log(e); 
-
+      
         return { success: false, e: e.message }
     }
 }
@@ -80,9 +79,9 @@ export async function deleteService(id) {
     try{
         const service = await prisma.service.findUnique({where: {id:id}})
 
-        console.log('before')
+   
         deleteImageFile(service.image) ; 
-        console.log('after')
+ 
 
         await prisma.service.delete({
             where: {
@@ -97,7 +96,7 @@ export async function deleteService(id) {
 
     }
     catch(e){
-        console.log(e) ;
+        (e) ;
         return { success: false, e: e.message }
         
     }
@@ -119,7 +118,7 @@ export async function getHomePageServices(){
             }
         })
 
-        console.log(data);
+    
         return {success:true , data:data}
     }
     catch(e){

@@ -35,7 +35,6 @@ const staggerContainer = {
 
 export default function HomePage({data}) {
   const t = useTranslations("HomePage")
-    console.log(data)
   let services = [
   {
     image:"/Web Designs/Rafiq Booking.gif",
@@ -62,6 +61,8 @@ export default function HomePage({data}) {
     color: "text-[#A5D5A9]"
   }
 ]
+
+services = data.services
 
 
 const portfolioItems = [
@@ -249,7 +250,7 @@ const milestones = [...Array(4)].map((item, i)=>{
       </section>
 
       {/* Portfolio Preview */}
-      <section className="py-16 px-4 bg-[#78C487]/5 dark:bg-[#404544]/20">
+      <section className="py-16 px-4 bg-[#78C487]/5 dark:bg-[#404544]/20 hidden">
         <div className="container mx-auto max-w-6xl">
           <motion.div
             initial="initial"

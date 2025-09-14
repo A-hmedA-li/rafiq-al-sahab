@@ -48,7 +48,7 @@ export async function signUp(data){
         return {success: true , data:newUser}
     }
     catch(e){
-        console.log(e)
+      
         return {success:false , e:e.message}
     }
 }
@@ -101,7 +101,7 @@ export async function updateUser(data){
        return {success:true , data: "no data"}
     }
     catch(e){
-        console.log(e);
+   
         return {success:false, e:e.message}
     }
 }

@@ -32,19 +32,19 @@ export default function SignInPage() {
         rememberMe: formData.rememberMe
       })
       
-      console.log(res)
+     
 
       setIsLoading(false)
 
-      //window.location.href = '/admin'
+    
     }
     catch(e){
       console.log('error in Sign in ') ; 
-      console.log(e) ;
+
     }
 
-    // Redirect to admin panel
-    // window.location.href = "/admin"
+   
+     window.location.href = "/"
   }
 
   const handleInputChange = e => {
@@ -56,7 +56,7 @@ export default function SignInPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#78C487]/10 via-white to-[#A5D5A9]/10 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-[#78C487]/10 via-white to-[#A5D5A9]/10 flex items-center justify-center p-4 dark:text-black">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}

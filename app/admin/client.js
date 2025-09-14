@@ -16,7 +16,7 @@ import {
 import { ProfileManager } from "@/components/pages/admin/profile-manager"
 
 const DashboardOverview = ({count, msgs}) => {
-  console.log(msgs)
+ 
   const stats = [
     {
       title: "إجمالي المشاريع",

@@ -7,7 +7,7 @@ const withNextIntl = createNextIntlPlugin();
 const nextConfig = {
   experimental: {
     serverActions: {
-      bodySizeLimit: '5mb',
+      bodySizeLimit: '10mb',
       allowedOrigins : ["localhost:3000" , "https://friendly-winner-v5gg4r9rpj9c69px-3000.app.github.dev"],
     },
   },
